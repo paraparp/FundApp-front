@@ -1,0 +1,10 @@
+<mat-toolbar color="grey">
+  <mat-toolbar-row>
+    <span>{{cartera.nombre}}</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-card>
+  <div *ngFor="let isin of isins">
+    <app-operaciones [isin]="isin"></app-operaciones>
+  </div>
+</mat-card>
