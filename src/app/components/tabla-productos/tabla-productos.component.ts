@@ -3,7 +3,7 @@ import { Cartera } from 'src/app/models/cartera.model';
 import { Operacion } from 'src/app/models/operacion.model';
 import { Producto } from 'src/app/models/producto.model';
 import { ProductosService } from 'src/app/services/productos.service';
-import { ImportXMLService } from 'src/app/services/import-xml.service';
+import { ImportXMLService, ProductDataUrl } from 'src/app/services/import-xml.service';
 import { DataSourceService } from 'src/app/services/dataSource.service';
 
 
@@ -26,22 +26,73 @@ export class TablaProductosComponent implements OnInit {
     public importxml: ImportXMLService
   ) { }
 
-  displayedColumns = ['nombre', 'isin', 'codigoBl', 'participaciones', 'precio', 'precioActual', 'valor'];
+  // displayedColumns = ['nombre', 'isin', 'codigoBl', 'participaciones', 'precio', 'precioActual', 'valor'];
+  displayedColumns = ['nombre', 'isin', 'participaciones', 'precio', 'precioActual', 'valor', 'valorActual', '%', 'fechaActualizacion'];
 
   productos: Producto[] = [];
   cartera: Cartera
   operaciones: Operacion[];
   valorSpan: string;
-
+  dataTable: ProductDataUrl[];
   idCartera = 1;
+
+  urlFT = 'https://markets.ft.com/data/funds/tearsheet/summary?s=';
 
 
 
   ngOnInit() {
     this.cargarCartera();
-    this.productos = this.cargarProductos();
-    //  this.importxml.extraerPrecio(this.cargarProductos()[3], 'precioActual')
+    this.dataTable = this.cargarDataTabla();
+    console.log(this.dataTable)
 
+  }
+
+  valorUrl(prod, valor) {
+
+    let htmlElement = ''
+
+    switch (valor) {
+      case 'precioAct':
+        htmlElement = "//span[@class='mod-ui-data-list__value']"
+        break;
+      case 'fechaAct':
+        htmlElement = "//div[@class='mod-disclaimer']"
+        break;
+      default:
+        break;
+    }
+
+
+
+    return this.importxml.extractDataFromUrlXPATH(
+      this.urlFT + prod.isin, htmlElement
+    );
+  }
+
+  calcularValorActualProducto(prod: ProductDataUrl) {
+
+    return prod.precioActual * this.getVolumen(prod.producto)
+
+  }
+
+  calcularVariacionValorProducto(prod: ProductDataUrl) {
+
+    return (this.calcularValorActualProducto(prod) - this.getTotalValorProducto(prod.producto)) / this.getTotalValorProducto(prod.producto);
+
+  }
+
+  cargarDataTabla() {
+    let dataTable: ProductDataUrl[] = [];
+    this.cargarProductos().forEach(prod => {
+      dataTable.push(this.importxml.extractDataProducto(this.urlFT, prod))
+
+    });
+
+    return dataTable;
+  }
+
+  extraerPrecio(prod, valor) {
+    return this.importxml.extraerPrecio(prod, valor);
   }
 
   findOperacionesPorCartera() {
@@ -69,23 +120,35 @@ export class TablaProductosComponent implements OnInit {
   }
 
 
-  cargarOperaciones(isin) {
-
-    return this.operaciones = this.data.getOperacionesByIsin(isin);
-  }
+  // cargarOperaciones(isin) {
+  //
+  //   return this.operaciones = this.data.getOperacionesByIsin(isin);
+  // }
 
 
   /** Gets the total cost of all transactions. */
-  getTotalVol() {
-    return this.operaciones.map(p => p.participaciones).reduce((acc, value) => acc + value, 0);
+  getTotalVol(operaciones: Operacion[]) {
+    return operaciones.map(p => p.participaciones).reduce((acc, value) => acc + value, 0);
   }
 
-  getTotalCost() {
-    return this.operaciones.map(p => p.getImporte()).reduce((acc, value) => acc + value, 0);
-  }
+  // getTotalCost() {
+  //   return this.operaciones.map(p => p.getImporte()).reduce((acc, value) => acc + value, 0);
+  // }
 
   getTotalValorProducto(prod: Producto) {
     return this.productoService.getValorTotalProducto(prod.isin, '1');
+  }
+
+  getValorActualTotal(prod: ProductDataUrl) {
+    let totalOp = 0;
+    this.cargarDataTabla().forEach(prod => {
+
+
+      totalOp += this.calcularValorActualProducto(prod);
+
+    });
+    return totalOp;
+
   }
 
   getTotalValorCartera() {

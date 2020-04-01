@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DataSourceService } from 'src/app/services/dataSource.service';
 import { Cartera } from 'src/app/models/cartera.model';
 import { Operacion } from 'src/app/models/operacion.model';
-import { DataSourceService } from 'src/app/services/dataSource.service';
-
 
 @Component({
-  selector: 'app-watchlist',
-  templateUrl: './watchlist.component.html',
-  styleUrls: ['./watchlist.component.css'],
+  selector: 'app-movimientos',
+  templateUrl: './movimientos.component.html',
+  styleUrls: ['./movimientos.component.css']
 })
-export class WatchlistComponent implements OnInit {
+export class MovimientosComponent implements OnInit {
+
 
   constructor(public data: DataSourceService) { }
 

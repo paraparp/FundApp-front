@@ -1,15 +1,57 @@
-@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+/* Add application styles & imports to this file! */
+/* Angular Material */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-html,
-body {
-  margin: 0;
+html, body {
   height: 100%;
 }
 
 body {
   margin: 0;
-  font-family: 'Roboto', 'Helvetica Neue', 'sans-serif';
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  /* background: #e91e63; */
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.navbar-color {
+  background-color: #e91e63;
+  color: white;
+}
+
+.router-link-active {
+  background-color: #e91e63;
+  font-size: 85%;
+  font-weight: bold;
+}
+
+.no-border {
+  border-radius: 10px;
+  background-color: #e91e63;
+}
+
+.toolbar-color {
+  background-color: #e91e63;
+  color: white;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.v-center {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.txt-bold {
+  font-weight: bold;
+}
+
+.selected {
+  background-color: gainsboro;
+}
+
+h3.section {
+  font-size: 70%;
+  color: ghostwhite;
+}

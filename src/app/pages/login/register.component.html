@@ -1,0 +1,105 @@
+ <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+
+   <mat-card-title>Registro</mat-card-title>
+
+   <mat-card-content>
+
+     <form [formGroup]="regform" (ngSubmit)="registrarUsuario(regform.value)">
+
+       <div class="form-group">
+         <div class="col-xs-12">
+           <mat-form-field>
+             <input matInput class="form-control" placeholder="Username" formControlName="username">
+             <mat-error>
+               <span *ngIf="!regform.get('username').valid && regform.get('username').touched">Introduce un nombre de usuario</span>
+             </mat-error>
+           </mat-form-field>
+         </div>
+       </div>
+
+       <div class="form-group">
+         <div class="form-row col-xs-12">
+           <div class="col">
+             <mat-form-field>
+               <input matInput class="form-control" placeholder="Nombre" formControlName="firstname">
+               <mat-error>
+                 <span *ngIf="!regform.get('firstname').valid && regform.get('firstname').touched">Introduce un nombre</span>
+               </mat-error>
+             </mat-form-field>
+           </div>
+
+           <div class="col">
+             <mat-form-field>
+               <input matInput class="form-control" placeholder="Apellidos" formControlName="lastname">
+               <mat-error>
+                 <span *ngIf="!regform.get('lastname').valid && regform.get('lastname').touched">Introduce un apellidos</span>
+               </mat-error>
+             </mat-form-field>
+           </div>
+         </div>
+       </div>
+
+       <div class="form-group">
+         <div class="col-xs-12">
+           <mat-form-field>
+             <input matInput class="form-control" placeholder="Email" formControlName="email">
+             <mat-error>
+               <span *ngIf="!regform.get('email').valid && regform.get('email').touched">Introduce un email</span>
+             </mat-error>
+           </mat-form-field>
+         </div>
+       </div>
+
+       <div class="form-group">
+         <div class="col-xs-12">
+           <mat-form-field>
+             <input matInput class="form-control" placeholder="Password" formControlName="password" type="password">
+             <mat-error>
+               <span *ngIf="!regform.get('password').valid && regform.get('password').touched">Introduce un password</span>
+             </mat-error>
+           </mat-form-field>
+         </div>
+       </div>
+
+       <div class="form-group">
+         <div class="col-xs-12">
+           <mat-form-field>
+             <input matInput class="form-control" placeholder="Confirma password" formControlName="password" type="password">
+             <mat-error>
+               <span *ngIf="!regform.get('password').valid && regform.get('password').touched">Introduce un password</span>
+               <span *ngIf="regform.errors?.sonIguales && !regform.pristine"> Las contraseñas deben de ser iguales</span>
+             </mat-error>
+           </mat-form-field>
+         </div>
+       </div>
+
+       <mat-card-actions>
+         <div class="form-group">
+           <div class="col-xs-12">
+             <button mat-stroked-button [disabled]="!regform.valid" color="accent" class="btn-block">Resgistrarse</button>
+           </div>
+         </div>
+
+         <div class="form-group text-center m-t-20">
+           <div class="col-xs-12">
+             <button mat-stroked-button routerLink="/oauth2/authorize/google" color="accent" class="btn-block">
+               Registrate con Google
+               <img src="http://pngimg.com/uploads/google/google_PNG19635.png" style="height:30px">
+             </button>
+           </div>
+         </div>
+
+       </mat-card-actions>
+       <div class="register-option">
+         <div class=" col-xs-12 text-center">
+           ¿Tienes una cuenta? <a routerLink="/login" class="text-info m-l-5"><b>Ingresa ahora</b></a>
+         </div>
+       </div>
+     </form>
+
+   </mat-card-content>
+
+
+
+
+ </div>

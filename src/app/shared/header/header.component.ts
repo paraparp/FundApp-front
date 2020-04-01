@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 
 
@@ -8,5 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+
+  constructor(public loginService: AuthenticationService) {
+  }
+  username: string = '';
+
+  ngOnInit() {
+
+    this.username = sessionStorage.getItem('username')
+  }
+
 
 }

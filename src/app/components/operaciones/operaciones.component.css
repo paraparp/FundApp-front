@@ -13,3 +13,8 @@ table {
 tr.mat-footer-row {
   font-weight: bold;
 }
+
+th.mat-sort-header-sorted {
+  color: black;
+  font-weight: bold;
+}

@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Operacion } from 'src/app/models/operacion.model';
-import { Cartera } from 'src/app/models/cartera.model';
 import { ProductosService } from 'src/app/services/productos.service';
 import { DataSourceService } from 'src/app/services/dataSource.service';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-operaciones',
@@ -11,36 +12,27 @@ import { DataSourceService } from 'src/app/services/dataSource.service';
 })
 export class OperacionesComponent implements OnInit {
 
-  @Input() public isin: string = '';
+  @Input() public operaciones: Operacion[] = [];
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(public data: DataSourceService, public productoService: ProductosService) { }
 
   displayedColumns = ['producto', 'participaciones', 'precio', 'importe', 'plataforma', 'fechaAdquisicion', 'cartera'];
-
-
-  cartera: Cartera;
-  operaciones: Operacion[] = [];;
-
-
+  dataSource;
 
   ngOnInit() {
-    this.cargarCartera();
-    this.cargarOperaciones();
-
+    this.dataSource = new MatTableDataSource(this.operaciones);
+    if (this.sort) // check it is defined.
+    {
+      this.dataSource.sort = this.sort;
+    }
   }
 
-  cargarOperaciones() {
-    this.operaciones = this.data.getOperacionesByIsin(this.isin);
-  }
-  cargarCartera() {
-    this.cartera = this.data.getCartera()[0];
 
-  }
-
-  getPrecioMedio() {
-
-    return this.productoService.precioMedioProductoEnCartera(this.isin, '1');
-  }
+  // getPrecioMedio() {
+  //
+  //   return this.productoService.precioMedioProductoEnCartera(this.isin, '1');
+  // }
 
   /** Gets the total cost of all transactions. */
   getTotalVol() {

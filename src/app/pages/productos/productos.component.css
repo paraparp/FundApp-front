@@ -1,4 +1,4 @@
-/* .example-container {
+.example-container {
   display: flex;
   flex-direction: column;
   max-height: 500px;
@@ -24,4 +24,4 @@
 
 .element-row.expanded {
   border-bottom-color: transparent;
-} */
+}

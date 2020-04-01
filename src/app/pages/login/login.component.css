@@ -1,0 +1,43 @@
+.centered {
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-stroked-button {
+  border: 1px solid currentColor;
+  line-height: 34px;
+  background: #FFF7FA;
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0px;
+}
+
+.mat-form-field {
+  width: 100%;
+  min-width: 100px;
+}
+
+.button {
+  display: flex;
+  justify-content: flex;
+}
+
+.login-wrapper .form {
+  min-width: 100%;
+  max-width: 300px;
+  width: 100%;
+}
+
+div.register-option {
+  font-size: 80%;
+}

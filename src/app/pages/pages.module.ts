@@ -18,6 +18,10 @@ import { PrimegnModule } from '../shared/primegn/primegn.module';
 import { TableModule } from 'primeng/table';
 import { SharedModule } from '../shared/shared.module';
 import { PagesComponent } from './pages.component';
+import { MovimientosComponent } from './movimientos/movimientos.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './login/register.component';
+
 
 
 
@@ -31,6 +35,10 @@ import { PagesComponent } from './pages.component';
     OperacionesComponent,
     TablaComponent,
     TablaProductosComponent,
+    MovimientosComponent,
+    LoginComponent,
+    RegisterComponent,
+
 
   ],
   imports: [
@@ -48,7 +56,8 @@ import { PagesComponent } from './pages.component';
 
     OperacionesComponent,
     WatchlistComponent,
-    UserComponent
+    UserComponent,
+    MovimientosComponent
 
   ],
   providers: [],

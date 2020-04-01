@@ -1,6 +1,6 @@
 import { Cartera } from './cartera.model';
 import { Producto } from './producto.model';
-import { DataSourceService } from '../dataSource/dataSource.service';
+import { DataSourceService } from '../services/dataSource.service';
 
 export class ProductoTabla extends Producto {
 

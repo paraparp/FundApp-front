@@ -6,7 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { MaterialModule } from './material/material.module';
 import { PrimegnModule } from './primegn/primegn.module';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -14,6 +14,7 @@ import { PrimegnModule } from './primegn/primegn.module';
   imports: [
     CommonModule,
     RouterModule,
+    FlexLayoutModule,
     MaterialModule,
     PrimegnModule,
 
