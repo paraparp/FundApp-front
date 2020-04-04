@@ -16,7 +16,7 @@
     <span fxFlex></span>
 
     <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-      <div *ngIf="loginService.isUserLoggedIn()">
+      <div *ngIf="auth.isUserLoggedIn()">
 
 
         <button mat-button routerLink="/user" routerLinkActive="router-link-active no-border">User</button>
@@ -26,12 +26,15 @@
 
         <button mat-button routerLink="/login" routerLinkActive="router-link-active">
           <i class="material-icons md-48">face</i>
-          {{username}}
+          {{auth.usuario.username}}
         </button>
-        <button (click)="loginService.logOut()" routerLink="/login" mat-button routerLink="/login" routerLinkActive="active-link">Logout </button>
+        <button (click)="auth.logOut()" routerLink="/login" mat-button routerLink="/login" routerLinkActive="active-link">Logout </button>
       </div>
-      <button *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" mat-button routerLink="/login" routerLinkActive="active-link">Log In </button>
-      <button *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" mat-button routerLink="/login" routerLinkActive="active-link">Register </button>
+      <div *ngIf="!auth.isUserLoggedIn()">
+        <button routerLink="/login" mat-button routerLink="/login" routerLinkActive="active-link">Log In </button>
+        <button routerLink="/login" mat-button routerLink="/login" routerLinkActive="active-link">Register </button>
+
+      </div>
     </div>
 
   </mat-toolbar>

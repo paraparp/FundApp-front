@@ -10,7 +10,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class HeaderComponent {
 
-  constructor(public loginService: AuthenticationService) {
+  constructor(public auth: AuthenticationService) {
   }
   username: string = '';
 

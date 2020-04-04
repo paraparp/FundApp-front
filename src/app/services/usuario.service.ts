@@ -4,7 +4,8 @@ import { URL_SERVICIOS } from '../config/config';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,16 @@ import { map } from 'rxjs/operators';
 export class UsuarioService {
 
   constructor(public router: Router, public http: HttpClient) { }
+
+
+  private isNotAuth(e): boolean {
+
+    if (e.status == 401 || e.status == 403) {
+      this.router.navigate(['/login']);
+      return true;
+    }
+    return true;
+  }
 
   crearUsuario(usuario: Usuario) {
 
@@ -22,19 +33,40 @@ export class UsuarioService {
         map((resp: any) => {
           Swal.fire('Usuario creado', usuario.username, 'success');
           return resp.usuario;
+        }),
+        catchError(e => {
+          if (this.isNotAuth(e)) {
+            return throwError(e);
+          }
         })
       );
   }
 
-  usuarios() {
+  findUsuarios() {
 
     let url = URL_SERVICIOS + '/users';
 
-    return this.http.get(url);
+    return this.http.get(url).pipe(
+      catchError(e => {
+        this.isNotAuth(e);
+        return throwError(e);
+      })
+    );
 
   }
 
+  findUsuariosById(idUser: String) {
 
+    let url = URL_SERVICIOS + '/users/' + idUser;
+
+    return this.http.get(url).pipe(
+      catchError(e => {
+        this.isNotAuth(e);
+        return throwError(e);
+      })
+    );
+
+  }
   //
   // login(usuario: Usuario, recordar: boolean = false) {
   //

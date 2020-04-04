@@ -21,6 +21,8 @@ import { PagesComponent } from './pages.component';
 import { MovimientosComponent } from './movimientos/movimientos.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
+import { ContactComponent } from '../components/contact/contact.component';
+import { ElementsComponent } from '../components/elements/elements.component';
 
 
 
@@ -38,6 +40,8 @@ import { RegisterComponent } from './login/register.component';
     MovimientosComponent,
     LoginComponent,
     RegisterComponent,
+    ContactComponent,
+    ElementsComponent,
 
 
   ],

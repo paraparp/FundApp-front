@@ -6,6 +6,7 @@ import { Cartera } from 'src/app/models/cartera.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { Producto } from 'src/app/models/producto.model';
 import { DataSourceService } from 'src/app/services/dataSource.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 export interface Transaction {
   item: string;
@@ -19,7 +20,7 @@ export interface Transaction {
 })
 export class UserComponent implements OnInit {
 
-  constructor(public data: DataSourceService) { }
+  constructor(public data: DataSourceService, public userService: UsuarioService) { }
 
   cartera: Cartera;
   operaciones: Operacion[];
@@ -32,10 +33,19 @@ export class UserComponent implements OnInit {
     this.operaciones = this.data.getOperaciones();
     this.productos = this.data.getProductos();
     this.usuarios = this.data.getUsuarios();
+
+    this.userService.findUsuarios().subscribe((resp: any) => {
+      console.log(resp)
+      this.usuarios = resp;
+    })
+
+
   }
 
 
   displayedColumns = ['producto', 'participaciones', 'precio', 'importe', 'plataforma', 'fechaAdquisicion'];
+
+
 
 
 
