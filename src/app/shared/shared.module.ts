@@ -7,6 +7,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { MaterialModule } from './material/material.module';
 import { PrimegnModule } from './primegn/primegn.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   declarations: [
     HeaderComponent,
     BreadcrumbsComponent,
+    FooterComponent,
 
   ],
   exports: [

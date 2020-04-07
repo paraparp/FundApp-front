@@ -15,13 +15,14 @@ const pagesRoutes: Routes = [
     component: PagesComponent,
     //canActivate: [LoginGuardGuard],
     children: [
-      { path: 'watchlist', component: WatchlistComponent, data: { titulo: 'Watchlist' }, canActivate: [AuthGuardService] },
+      { path: 'watchlist', component: WatchlistComponent, data: { titulo: 'Portfolio' }, canActivate: [AuthGuardService] },
       { path: 'user', component: UserComponent, data: { titulo: 'User' }, canActivate: [AuthGuardService] },
-      { path: 'productos', component: ProductosComponent, data: { titulo: 'Productos' }, canActivate: [AuthGuardService] },
-      { path: 'movimientos', component: MovimientosComponent, data: { titulo: 'Movimientos' }, canActivate: [AuthGuardService] },
+      { path: 'productos', component: ProductosComponent, data: { titulo: 'Symbols' }, canActivate: [AuthGuardService] },
+      { path: 'movimientos', component: MovimientosComponent, data: { titulo: 'Lots' }, canActivate: [AuthGuardService] },
       { path: 'login', component: LoginComponent, data: { titulo: 'Login' } },
       { path: 'register', component: RegisterComponent, data: { titulo: 'Register' } },
-
+      { path: 'watchlist/:id', component: WatchlistComponent, data: { titulo: 'Portfolio' } },
+      { path: 'movimientos/:id', component: MovimientosComponent, data: { titulo: 'Portfolio' } },
       { path: '', redirectTo: '/login', pathMatch: 'full' }
 
     ]

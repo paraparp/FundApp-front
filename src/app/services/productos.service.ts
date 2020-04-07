@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { Usuario } from '../models/usuario.model';
-import { Cartera } from '../models/cartera.model';
-import { Producto } from '../models/producto.model';
-import { Operacion } from '../models/operacion.model';
 import { DataSourceService } from './dataSource.service';
+import { Portfolio } from '../models/portfolio.model';
+import { User } from '../models/user.model';
+import { Lot } from '../models/lot.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +13,8 @@ export class ProductosService {
 
   constructor(public data: DataSourceService) { }
 
-  cartera: Cartera;
-  productos: Producto[];
+  cartera: Portfolio;
+  productos: Symbol[];
 
   volumenProducto: number;
   totalOp: number;
@@ -23,7 +22,7 @@ export class ProductosService {
 
   findOperacionesPorCartera(idCartera: string) {
 
-    let operaciones: Operacion[] = [];
+    let operaciones: Lot[] = [];
 
     this.data.getOperaciones().forEach(op => {
       if (op.cartera.id === idCartera) {
@@ -36,15 +35,15 @@ export class ProductosService {
     return operaciones;
   }
 
-  findCarteraByUser(user: Usuario) {
+  findCarteraByUser(user: User) {
 
-    this.data.getCartera().forEach(cartera => {
-      if (cartera.usuario === user) {
-
-        return cartera;
-
-      }
-    });
+    // this.data.getCartera().forEach(cartera => {
+    //   if (cartera.usuario === user) {
+    //
+    //     return cartera;
+    //
+    //   }
+    // });
   }
 
   precioMedioProductoEnCartera(isin: string, idCartera: string) {

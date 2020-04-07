@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Usuario } from '../models/usuario.model';
+
 import { User } from '../models/user.model';
 
 
@@ -30,7 +30,6 @@ export class AuthenticationService {
   public get token(): string {
 
     if (this._token != null) {
-
       return this._token;
     } else if (this._user == null && sessionStorage.getItem('username') != null) {
       this._token = sessionStorage.getItem('token');
@@ -40,18 +39,12 @@ export class AuthenticationService {
 
   }
 
-  authenticate(username, password) {
-    if (username === "dobarqueiro" && password === "1234") {
-      sessionStorage.setItem('username', username)
-      return true;
-    } else {
-      return false;
-    }
-  }
+
 
   guardarUser(accessToken: any) {
     let payload = this.obtenerDatosToken(accessToken)
     this._user = new User();
+    this._user.id = payload.id;
     this._user.username = payload.user_name;
     this._user.firstname = payload.firstname;
     this._user.lastname = payload.lastname;
@@ -59,7 +52,7 @@ export class AuthenticationService {
     this._user.roles = payload.authorities;
     sessionStorage.setItem('user', JSON.stringify(this._user));
 
-    console.log(payload)
+
   }
 
 
@@ -67,7 +60,7 @@ export class AuthenticationService {
   guardarToken(accessToken: any) {
     this._token = accessToken;
     sessionStorage.setItem('token', accessToken);
-
+    console.log(this._token)
   }
 
 
@@ -78,7 +71,7 @@ export class AuthenticationService {
     return null;
   }
 
-  login(user: Usuario): Observable<any> {
+  login(user: User): Observable<any> {
 
     let url = 'http://localhost:8080/oauth/token';
 
@@ -92,8 +85,7 @@ export class AuthenticationService {
     params.set('grant_type', 'password');
     params.set('username', user.username);
     params.set('password', user.password);
-    console.log(params.toString())
-    console.log(url)
+
     console.log(user)
     return this.http.post(url, params.toString(), { headers: httpHeaders });
 
@@ -103,13 +95,8 @@ export class AuthenticationService {
   isUserLoggedIn() {
     let payload = this.obtenerDatosToken(this.token);
     if (payload != null && payload.user_name && payload.user_name.length > 0) {
-      console.log(payload)
-      console.log("Logueado")
       return true
     }
-
-    console.log("No Log")
-
     return false;
   }
 
@@ -117,7 +104,8 @@ export class AuthenticationService {
     this._user = null;
     this._token = null;
     sessionStorage.clear();
-    console.log("Borrado el ss")
+
+
   }
 
 

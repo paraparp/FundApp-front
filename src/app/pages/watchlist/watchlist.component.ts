@@ -1,7 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Cartera } from 'src/app/models/cartera.model';
-import { Operacion } from 'src/app/models/operacion.model';
-import { DataSourceService } from 'src/app/services/dataSource.service';
+
+
+import { Lot } from 'src/app/models/lot.model';
+import { Portfolio } from 'src/app/models/portfolio.model';
+import { PortfolioService } from 'src/app/services/portfolio.service';
+import { ActivatedRoute } from '@angular/router';
+import { PortfolioSymbols } from 'src/app/models/portfolio-symbols.model';
+import { ImportXMLService } from 'src/app/services/import-xml.service';
 
 
 @Component({
@@ -11,27 +16,53 @@ import { DataSourceService } from 'src/app/services/dataSource.service';
 })
 export class WatchlistComponent implements OnInit {
 
-  constructor(public data: DataSourceService) { }
+  constructor(
+    private portfolioService: PortfolioService,
+    private activatedRoute: ActivatedRoute,
+    private impXML: ImportXMLService
+  ) { }
 
-  cartera: Cartera;
-  operaciones: Operacion[] = [];
+  name = ''
+  portfolio: Portfolio;
+  lots: Lot[] = [];
+  portfolioSymbols;
+
+  displayedColumns = ['name', 'volume', 'price', 'cost', 'lastPrice', 'value'
+    // 'isin', 'participaciones', 'precio', 'precioActual', 'valor', 'valorActual', '%', 'fechaActualizacion'
+  ];
+
 
   ngOnInit() {
-    this.cargarCartera();
-    console.log(this.cargarOperaciones());
-    this.operaciones = this.cargarOperaciones();
+
+    this.getPortfolio();
+    this.portfolioSymbols = this.getPortfolioSymbols();
+
+    console.log(this.portfolioSymbols)
 
   }
 
-  cargarOperaciones() {
-
-    return this.operaciones = this.data.getOperaciones();
-
+  getPortfolio() {
+    this.activatedRoute.paramMap.subscribe(params => {
+      let id = +params.get('id')
+      this.portfolioService.getPortfolio(id).subscribe(portfolio => {
+        this.portfolio = portfolio;
+        this.name = portfolio.name;
+        this.lots = portfolio.lots;
+      })
+    })
   }
-  cargarCartera() {
 
-    this.cartera = this.data.getCartera()[0];
-
+  getPortfolioSymbols() {
+    this.activatedRoute.paramMap.subscribe(params => {
+      let id = +params.get('id')
+      this.portfolioService.getPortfolioSymbols(id).subscribe(resp => {
+        this.portfolioSymbols = resp;
+      })
+    })
   }
 
+  getLastPrice(url) {
+
+    return this.impXML.extraerPrecio(url, 'precioActual');
+  }
 }

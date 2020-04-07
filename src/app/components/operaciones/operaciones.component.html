@@ -1,53 +1,47 @@
- <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+ <table mat-table [dataSource]="lots" matSort class="mat-elevation-z8">
 
 
 
-
-   <ng-container matColumnDef="producto">
-     <th mat-header-cell *matHeaderCellDef mat-sort-header> Producto </th>
-     <td mat-cell *matCellDef="let op"> {{op.producto.nombre }} </td>
+   <ng-container matColumnDef="symbol">
+     <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
+     <td mat-cell *matCellDef="let op"> {{op.symbol.name }} </td>
      <!-- No ordena porque es una propiedas de otra objeto -->
      <td mat-footer-cell *matFooterCellDef> </td>
    </ng-container>
 
-   <ng-container matColumnDef="participaciones">
-     <th mat-header-cell *matHeaderCellDef mat-sort-header> Participaciones </th>
-     <td mat-cell *matCellDef="let op"> {{op.participaciones}} </td>
-     <td mat-footer-cell *matFooterCellDef> {{getTotalVol() | number}} </td>
+   <ng-container matColumnDef="volume">
+     <th mat-header-cell *matHeaderCellDef mat-sort-header> volume </th>
+     <td mat-cell *matCellDef="let op"> {{op.volume}} </td>
+     <td mat-footer-cell *matFooterCellDef> </td>
    </ng-container>
 
-   <ng-container matColumnDef="precio">
-     <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
-     <td mat-cell *matCellDef="let op"> {{op.precio | number }} {{op.moneda}} </td>
+   <ng-container matColumnDef="price">
+     <th mat-header-cell *matHeaderCellDef mat-sort-header> price </th>
+     <td mat-cell *matCellDef="let op"> {{op.price | number }} </td>
      <td mat-footer-cell *matFooterCellDef>
        <!-- {{ getPrecioMedio() }} -->
      </td>
    </ng-container>
 
-   <ng-container matColumnDef="importe">
-     <th mat-header-cell *matHeaderCellDef mat-sort-header> Importe </th>
-     <td mat-cell *matCellDef="let op"> {{op.getImporte() | number }} {{op.moneda}} </td>
-     <td mat-footer-cell *matFooterCellDef> {{getTotalCost()| number }} EUR </td>
+   <ng-container matColumnDef="totalValue">
+     <th mat-header-cell *matHeaderCellDef mat-sort-header> totalValue </th>
+     <td mat-cell *matCellDef="let op"> {{op.totalValue | number }}</td>
+     <td mat-footer-cell *matFooterCellDef> {{ getTotalValue() | number}} </td>
    </ng-container>
 
-   <ng-container matColumnDef="plataforma">
-     <th mat-header-cell *matHeaderCellDef mat-sort-header> Plataforma </th>
-     <td mat-cell *matCellDef="let op"> {{op.plataforma}} </td>
+   <ng-container matColumnDef="broker">
+     <th mat-header-cell *matHeaderCellDef mat-sort-header> broker </th>
+     <td mat-cell *matCellDef="let op"> {{op.broker}} </td>
      <td mat-footer-cell *matFooterCellDef> </td>
    </ng-container>
 
-   <ng-container matColumnDef="fechaAdquisicion">
+   <!-- <ng-container matColumnDef="fechaAdquisicion">
      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
      <td mat-cell *matCellDef="let op"> {{op.fechaAdquisicion | date : 'dd/MM/yyyy'}} </td>
      <td mat-footer-cell *matFooterCellDef> </td>
-   </ng-container>
+   </ng-container> -->
 
 
-   <ng-container matColumnDef="cartera">
-     <th mat-header-cell *matHeaderCellDef mat-sort-header> Cartera </th>
-     <td mat-cell *matCellDef="let op"> {{op.cartera.nombre}} </td>
-     <td mat-footer-cell *matFooterCellDef> </td>
-   </ng-container>
 
 
 

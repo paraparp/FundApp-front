@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Producto } from '../models/producto.model';
+import { Symbol } from '../models/symbol.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +10,12 @@ export class ImportXMLService {
 
 
 
-  extraerPrecio(producto: Producto, valor: string) {
+  extraerPrecio(url: string, valor: string) {
 
 
     if (valor === 'precioActual') {
 
-      return this.extractDataFromUrl(producto.url, 'priceText__1853e8a5')
+      return this.extractDataFromUrl(url, 'priceText__1853e8a5')
     }
     else {
       return 0;
@@ -52,7 +52,7 @@ export class ImportXMLService {
     return res.stringValue;
   }
 
-  extractDataProducto(url: string, producto: Producto) {
+  extractDataProducto(url: string, producto: Symbol) {
 
     var req = new XMLHttpRequest();
     req.open("GET", url + producto.isin, false);
@@ -76,7 +76,7 @@ export class ImportXMLService {
 
 export class ProductDataUrl {
 
-  producto: Producto;
+  producto: Symbol;
   precioActual: any;
   fechaActualizacion: string;
 

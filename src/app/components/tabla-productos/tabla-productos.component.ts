@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Cartera } from 'src/app/models/cartera.model';
-import { Operacion } from 'src/app/models/operacion.model';
-import { Producto } from 'src/app/models/producto.model';
+
+
 import { ProductosService } from 'src/app/services/productos.service';
 import { ImportXMLService, ProductDataUrl } from 'src/app/services/import-xml.service';
 import { DataSourceService } from 'src/app/services/dataSource.service';
-
+import { OnInit, Component, Input } from '@angular/core';
+import { Lot } from 'src/app/models/lot.model';
+import { Portfolio } from 'src/app/models/portfolio.model';
+import { Symbol } from 'src/app/models/symbol.model';
 
 
 
@@ -18,10 +19,9 @@ import { DataSourceService } from 'src/app/services/dataSource.service';
 })
 export class TablaProductosComponent implements OnInit {
 
-  //  @Input() public isin: string = '';
+  @Input() public portfolioSymbols;
 
   constructor(
-    public data: DataSourceService,
     public productoService: ProductosService,
     public importxml: ImportXMLService
   ) { }
@@ -29,23 +29,37 @@ export class TablaProductosComponent implements OnInit {
   // displayedColumns = ['nombre', 'isin', 'codigoBl', 'participaciones', 'precio', 'precioActual', 'valor'];
   displayedColumns = ['nombre', 'isin', 'participaciones', 'precio', 'precioActual', 'valor', 'valorActual', '%', 'fechaActualizacion'];
 
-  productos: Producto[] = [];
-  cartera: Cartera
-  operaciones: Operacion[];
+  productos: Symbol[] = [];
+  cartera: Portfolio;
+  operaciones: Lot[];
   valorSpan: string;
   dataTable: ProductDataUrl[];
-  idCartera = 1;
+
+
 
   urlFT = 'https://markets.ft.com/data/funds/tearsheet/summary?s=';
 
 
 
   ngOnInit() {
-    this.cargarCartera();
-    this.dataTable = this.cargarDataTabla();
-    console.log(this.dataTable)
 
+    //
+    // const map = this.lots.reduce((map, lot) => map.set(lot.symbol.id, lot), new Map());
+    //
+    //
+    // console.log(map)
+    //
+    // this.dataTable = this.cargarDataTabla();
+
+
+
+    console.log("   --->    " + this.portfolioSymbols)
   }
+
+
+
+
+
 
   valorUrl(prod, valor) {
 
@@ -81,15 +95,15 @@ export class TablaProductosComponent implements OnInit {
 
   }
 
-  cargarDataTabla() {
-    let dataTable: ProductDataUrl[] = [];
-    this.cargarProductos().forEach(prod => {
-      dataTable.push(this.importxml.extractDataProducto(this.urlFT, prod))
-
-    });
-
-    return dataTable;
-  }
+  // cargarDataTabla() {
+  //   let dataTable: ProductDataUrl[] = [];
+  //   this.cargarProductos().forEach(prod => {
+  //     dataTable.push(this.importxml.extractDataProducto(this.urlFT, prod))
+  //
+  //   });
+  //
+  //   return dataTable;
+  // }
 
   extraerPrecio(prod, valor) {
     return this.importxml.extraerPrecio(prod, valor);
@@ -100,22 +114,15 @@ export class TablaProductosComponent implements OnInit {
     return this.productoService.findOperacionesPorCartera('1');
   }
 
-  cargarProductos() {
-    return this.productos = this.data.getProductos();
-  }
 
 
-  cargarCartera() {
-    return this.cartera = this.data.getCartera()[0];
 
-  }
-
-  getPrecioMedio(prod: Producto) {
+  getPrecioMedio(prod: Symbol) {
 
     return this.productoService.precioMedioProductoEnCartera(prod.isin, '1');
   }
 
-  getVolumen(prod: Producto) {
+  getVolumen(prod: Symbol) {
     return this.productoService.participacionesPorProducto(prod.isin, '1');
   }
 
@@ -127,32 +134,30 @@ export class TablaProductosComponent implements OnInit {
 
 
   /** Gets the total cost of all transactions. */
-  getTotalVol(operaciones: Operacion[]) {
-    return operaciones.map(p => p.participaciones).reduce((acc, value) => acc + value, 0);
+  getTotalVol(operaciones: Lot[]) {
+    // return operaciones.map(p => p.participaciones).reduce((acc, value) => acc + value, 0);
   }
 
   // getTotalCost() {
   //   return this.operaciones.map(p => p.getImporte()).reduce((acc, value) => acc + value, 0);
   // }
 
-  getTotalValorProducto(prod: Producto) {
+  getTotalValorProducto(prod: Symbol) {
     return this.productoService.getValorTotalProducto(prod.isin, '1');
   }
 
-  getValorActualTotal(prod: ProductDataUrl) {
-    let totalOp = 0;
-    this.cargarDataTabla().forEach(prod => {
+  // getValorActualTotal(prod: ProductDataUrl) {
+  //   let totalOp = 0;
+  //   this.cargarDataTabla().forEach(prod => {
+  //
+  //
+  //     totalOp += this.calcularValorActualProducto(prod);
+  //
+  //   });
+  //   return totalOp;
+  //
+  // }
 
 
-      totalOp += this.calcularValorActualProducto(prod);
-
-    });
-    return totalOp;
-
-  }
-
-  getTotalValorCartera() {
-    return this.productoService.getTotalValorCartera('1');
-  }
 
 }

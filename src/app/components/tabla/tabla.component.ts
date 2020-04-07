@@ -4,8 +4,8 @@ import { ProductosService } from 'src/app/services/productos.service';
 import { ImportXMLService } from 'src/app/services/import-xml.service';
 
 import { DataSourceService } from 'src/app/services/dataSource.service';
-import { Operacion } from 'src/app/models/operacion.model';
-import { Producto } from 'src/app/models/producto.model';
+import { Symbol } from 'src/app/models/symbol.model';
+import { Lot } from 'src/app/models/lot.model';
 
 
 
@@ -18,9 +18,9 @@ import { Producto } from 'src/app/models/producto.model';
 })
 export class TablaComponent implements OnInit {
 
-  operaciones: Operacion[]
+  operaciones: Lot[]
 
-  productos: Producto[];
+  productos: Symbol[];
 
 
   data: TreeNode[];
@@ -36,9 +36,9 @@ export class TablaComponent implements OnInit {
 
 
   ngOnInit() {
-
-    this.operaciones = this.dataSource.getOperaciones();
-    this.productos = this.dataSource.getProductos();
+    //
+    // this.operaciones = this.dataSource.getOperaciones();
+    // this.productos = this.dataSource.getProductos();
 
     // this.data = <TreeNode[]>this.dataSource.getOperaciones();
 
@@ -60,7 +60,7 @@ export class TablaComponent implements OnInit {
 
       let prodTabla: TreeNode = {
         data: { id: prod.id, precio: this.productoService.precioMedioProductoEnCartera(prod.isin, '0') },
-        children: <TreeNode[]>this.operaciones.filter(o => o.producto.id === prod.id),
+        children: <TreeNode[]>this.operaciones.filter(o => o.symbol.id === prod.id),
 
       };
       tabla.push(prodTabla)
@@ -89,8 +89,8 @@ export class OperacionTabla {
 
 export class ProductoTabla2 {
 
-  data: Producto;
+  data: Symbol;
 
-  children: Operacion[];
+  children: Lot[];
 
 }

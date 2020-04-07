@@ -1,41 +1,46 @@
 import { Injectable } from '@angular/core';
-import { Usuario } from '../models/usuario.model';
 import { URL_SERVICIOS } from '../config/config';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  constructor(public router: Router, public http: HttpClient) { }
+  // private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  constructor(private router: Router, private http: HttpClient) { }
+
+  // private authHeader() {
+  //
+  //   let token = this.auth.token;
+  //
+  //   if (token != null) {
+  //     return this.httpHeaders.append('Authorization', 'Bearer ' + token)
+  //   }
+  //
+  //   return this.httpHeaders;
+  // }
 
 
-  private isNotAuth(e): boolean {
 
-    if (e.status == 401 || e.status == 403) {
-      this.router.navigate(['/login']);
-      return true;
-    }
-    return true;
-  }
-
-  crearUsuario(usuario: Usuario) {
+  crearUsuario(user: User) {
 
     let url = URL_SERVICIOS + '/users';
 
-    return this.http.post(url, usuario)
+    return this.http.post(url, user)
       .pipe(
         map((resp: any) => {
-          Swal.fire('Usuario creado', usuario.username, 'success');
+          Swal.fire('Usuario creado', user.username, 'success');
           return resp.usuario;
         }),
         catchError(e => {
-          if (this.isNotAuth(e)) {
+          if (e.status == 400) {
             return throwError(e);
           }
         })
@@ -48,23 +53,26 @@ export class UsuarioService {
 
     return this.http.get(url).pipe(
       catchError(e => {
-        this.isNotAuth(e);
-        return throwError(e);
+        if (e.status == 400) {
+          return throwError(e);
+        }
       })
     );
 
   }
 
-  findUsuariosById(idUser: String) {
+  findUsuariosById(idUser) {
 
     let url = URL_SERVICIOS + '/users/' + idUser;
 
-    return this.http.get(url).pipe(
-      catchError(e => {
-        this.isNotAuth(e);
-        return throwError(e);
-      })
-    );
+    return this.http.get(url)
+      .pipe(
+        catchError(e => {
+          if (e.status == 400) {
+            return throwError(e);
+          }
+        })
+      );
 
   }
   //

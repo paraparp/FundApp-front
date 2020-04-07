@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Operacion } from 'src/app/models/operacion.model';
 import { ProductosService } from 'src/app/services/productos.service';
 import { DataSourceService } from 'src/app/services/dataSource.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Lot } from 'src/app/models/lot.model';
 
 @Component({
   selector: 'app-operaciones',
@@ -12,20 +12,22 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class OperacionesComponent implements OnInit {
 
-  @Input() public operaciones: Operacion[] = [];
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @Input() public lots: Lot[];
+  // @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(public data: DataSourceService, public productoService: ProductosService) { }
 
-  displayedColumns = ['producto', 'participaciones', 'precio', 'importe', 'plataforma', 'fechaAdquisicion', 'cartera'];
+  displayedColumns = ['symbol', 'volume', 'price', 'totalValue', 'broker'];
   dataSource;
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.operaciones);
-    if (this.sort) // check it is defined.
-    {
-      this.dataSource.sort = this.sort;
-    }
+    console.log(this.lots)
+    //
+    // this.dataSource = new MatTableDataSource(this.lots);
+    // if (this.sort) // check it is defined.
+    // {
+    //   this.dataSource.sort = this.sort;
+    // }
   }
 
 
@@ -35,12 +37,12 @@ export class OperacionesComponent implements OnInit {
   // }
 
   /** Gets the total cost of all transactions. */
-  getTotalVol() {
-    return this.operaciones.map(p => p.participaciones).reduce((acc, value) => acc + value, 0);
+  getTotalValue() {
+    return this.lots.map(p => p.totalValue).reduce((acc, totalValue) => acc + totalValue, 0);
   }
 
   getTotalCost() {
-    return this.operaciones.map(p => p.getImporte()).reduce((acc, value) => acc + value, 0);
+    return this.lots.map(p => p.getImporte()).reduce((acc, value) => acc + value, 0);
   }
 
 }

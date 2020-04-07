@@ -1,14 +1,44 @@
-<mat-toolbar class="toolbar-color py-5 mb-4">
-  <span class="center">{{cartera.nombre}}</span>
-</mat-toolbar>
+<!-- <mat-toolbar class="toolbar-color py-5 mb-4">
+  <span class="center">{{user.username}}</span>
+</mat-toolbar> -->
 
 
-<div *ngFor="let u of usuarios">
 
-  {{u.username}}
+
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="portfolios" class="full-width-table" matSort aria-label="Elements">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let portfolio">{{portfolio.name}}</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+      <td mat-cell *matCellDef="let portfolio">{{portfolio.description}}</td>
+    </ng-container>
+    <ng-container matColumnDef="list">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>List</th>
+      <td mat-cell *matCellDef="let portfolio">
+
+        <button mat-stroked-button [routerLink]="['/watchlist/', portfolio.id]" routerLinkActive="router-link-active no-border">
+          <mat-icon>assessment</mat-icon>
+        </button>
+
+        <button mat-stroked-button [routerLink]="['/movimientos/', portfolio.id]" routerLinkActive="router-link-active no-border">
+          <mat-icon>assessment</mat-icon>
+        </button>
+
+
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let portfolio; columns: displayedColumns;"></tr>
+  </table>
+
 
 </div>
-
-<mat-card>
-
-</mat-card>

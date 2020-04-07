@@ -1,13 +1,12 @@
 
 import { Component, OnInit } from '@angular/core';
-import { Operacion } from 'src/app/models/operacion.model';
 
-import { Cartera } from 'src/app/models/cartera.model';
-import { Usuario } from 'src/app/models/usuario.model';
-import { Producto } from 'src/app/models/producto.model';
-import { DataSourceService } from 'src/app/services/dataSource.service';
+
+
 import { UsuarioService } from 'src/app/services/usuario.service';
-
+import { User } from 'src/app/models/user.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Portfolio } from 'src/app/models/portfolio.model';
 export interface Transaction {
   item: string;
   cost: number;
@@ -20,41 +19,46 @@ export interface Transaction {
 })
 export class UserComponent implements OnInit {
 
-  constructor(public data: DataSourceService, public userService: UsuarioService) { }
-
-  cartera: Cartera;
-  operaciones: Operacion[];
-  usuarios: Usuario[];
-  productos: Producto[];
 
 
-  ngOnInit(): void {
-    this.cartera = this.data.getCartera()[0];
-    this.operaciones = this.data.getOperaciones();
-    this.productos = this.data.getProductos();
-    this.usuarios = this.data.getUsuarios();
+  constructor(private auth: AuthenticationService, private userService: UsuarioService) {
+  }
+  username: string = '';
 
-    this.userService.findUsuarios().subscribe((resp: any) => {
-      console.log(resp)
-      this.usuarios = resp;
+  user: User;
+
+  portfolios: Portfolio[];
+
+
+  ngOnInit() {
+    this.userService.findUsuariosById(this.auth.usuario.id).subscribe((resp: any) => {
+
+      this.user = resp
+
+      this.portfolios = resp.portfolios;
+      console.log(this.user)
+
+      console.log(this.portfolios)
+
+
     })
 
 
   }
 
 
-  displayedColumns = ['producto', 'participaciones', 'precio', 'importe', 'plataforma', 'fechaAdquisicion'];
+  displayedColumns = ['name', 'description', 'list'];
 
 
 
 
 
-  /** Gets the total cost of all transactions. */
-  getTotalVol() {
-    return this.operaciones.map(p => p.participaciones).reduce((acc, value) => acc + value, 0);
-  }
-
-  getTotalCost() {
-    return this.operaciones.map(p => p.getImporte()).reduce((acc, value) => acc + value, 0);
-  }
+  // /** Gets the total cost of all transactions. */
+  // getTotalVol() {
+  //   return this.operaciones.map(p => p.volume).reduce((acc, value) => acc + value, 0);
+  // }
+  //
+  // getTotalCost() {
+  //   return this.operaciones.map(p => p.getImporte()).reduce((acc, value) => acc + value, 0);
+  // }
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 
-import { Cartera } from 'src/app/models/cartera.model';
 import { DataSourceService } from 'src/app/services/dataSource.service';
+import { Portfolio } from 'src/app/models/portfolio.model';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class ProductosComponent implements OnInit {
   }
 
 
-  cartera: Cartera;
+  cartera: Portfolio;
 
   cargarCartera() {
     this.cartera = this.data.getCartera()[0];

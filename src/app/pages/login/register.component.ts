@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormGroupDirective, NgForm } from '@angular/forms';
-import { Usuario } from 'src/app/models/usuario.model';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { User } from 'src/app/models/user.model';
 
 
 @Component({
@@ -50,27 +50,17 @@ export class RegisterComponent implements OnInit {
 
 
 
-  registrarUsuario(usuario: Usuario) {
+  registrarUsuario(user: User) {
 
     if (this.regform.invalid) {
       return;
     }
 
-    usuario = new Usuario(
-      this.regform.value.username,
-      this.regform.value.firstname,
-      this.regform.value.lastname,
-      this.regform.value.email,
-      this.regform.value.password
-    );
-
-    console.log(usuario);
-    this.usuarioService.crearUsuario(usuario)
+    console.log(user);
+    this.usuarioService.crearUsuario(user)
       .subscribe(
         resp => {
-          this.router.navigate(['user']),
-            console.log(this.auth.authenticate(this.username, this.password))
-
+          this.router.navigate(['user'])
         }
       )
 

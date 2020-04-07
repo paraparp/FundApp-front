@@ -16,6 +16,8 @@ export class HeaderComponent {
 
   ngOnInit() {
 
+
+
     this.username = sessionStorage.getItem('username')
   }
 
