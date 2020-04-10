@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  login(user): void {
+  login(user: User): void {
     this.auth.login(user).subscribe(resp => {
 
       this.auth.guardarUser(resp.access_token);

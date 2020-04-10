@@ -34,7 +34,7 @@ export class ImportXMLService {
     var xmlDoc = parser.parseFromString(req.responseText, "text/html");
     var res = xmlDoc.evaluate(`//span[@class="${classSpan}"]`, xmlDoc, null, XPathResult.STRING_TYPE, null);
 
-
+    //span[@class="priceText__1853e8a5"
     return res.stringValue;
   }
 

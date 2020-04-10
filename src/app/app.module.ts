@@ -17,19 +17,7 @@ import { ServiceModule } from './services/service.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertComponent } from './components/alert/alert.component';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
+
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
@@ -44,10 +32,7 @@ registerLocaleData(localePy, 'fr');
 @NgModule({
   declarations: [
     AppComponent,
-    AlertComponent,
-
-
-
+    AlertComponent
 
   ],
   imports: [
@@ -58,19 +43,6 @@ registerLocaleData(localePy, 'fr');
     PagesModule,
     ServiceModule,
     BrowserAnimationsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatRadioModule,
-    MatCardModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
 
   ],
   providers: [
@@ -87,6 +59,7 @@ registerLocaleData(localePy, 'fr');
     }
   ],
   bootstrap: [AppComponent]
+
 
 })
 export class AppModule { }

@@ -12,7 +12,8 @@ import { ImportXMLService } from 'src/app/services/import-xml.service';
 @Component({
   selector: 'app-watchlist',
   templateUrl: './watchlist.component.html',
-  styleUrls: ['./watchlist.component.css'],
+  styleUrls: ['./watchlist.component.css'
+  ],
 })
 export class WatchlistComponent implements OnInit {
 
@@ -27,9 +28,7 @@ export class WatchlistComponent implements OnInit {
   lots: Lot[] = [];
   portfolioSymbols;
 
-  displayedColumns = ['name', 'volume', 'price', 'cost', 'lastPrice', 'value'
-    // 'isin', 'participaciones', 'precio', 'precioActual', 'valor', 'valorActual', '%', 'fechaActualizacion'
-  ];
+  displayedColumns = ['name', 'volume', 'price', 'cost', 'lastPrice', 'value', 'updated'];
 
 
   ngOnInit() {
@@ -38,6 +37,8 @@ export class WatchlistComponent implements OnInit {
     this.portfolioSymbols = this.getPortfolioSymbols();
 
     console.log(this.portfolioSymbols)
+
+    alert(this.getTotalValue() + " -- " + this.getTotalCost())
 
   }
 
@@ -61,8 +62,26 @@ export class WatchlistComponent implements OnInit {
     })
   }
 
-  getLastPrice(url) {
+  isUpdated(updatedAt): boolean {
 
-    return this.impXML.extraerPrecio(url, 'precioActual');
+    var today = new Date();
+    var yesterDay = today.getDate() - 1;
+    var day = updatedAt.split(" ")[1];
+    if (yesterDay == parseInt(day)) {
+      return true
+    }
+    return false
   }
+
+
+  getTotalValue() {
+    return this.portfolioSymbols.map(p => p.totalValue).reduce((acc, totalValue) => acc + totalValue, 0);
+  }
+
+  getTotalCost() {
+    return this.portfolioSymbols.map(p => p.getImporte()).reduce((acc, value) => acc + value, 0);
+  }
+
+
+
 }

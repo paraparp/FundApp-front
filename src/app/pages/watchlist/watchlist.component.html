@@ -6,8 +6,9 @@
 
 <!-- <app-tabla-productos [portfolioSymbols]="portfolioSymbols"></app-tabla-productos>
  -->
+<mat-spinner class="center" *ngIf="!portfolioSymbols"></mat-spinner>
+<table *ngIf="portfolioSymbols" mat-table [dataSource]="portfolioSymbols" class="mat-elevation-z8">
 
-<table mat-table [dataSource]="portfolioSymbols" class="mat-elevation-z8">
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -41,11 +42,15 @@
 
   <ng-container matColumnDef="lastPrice">
     <th mat-header-cell *matHeaderCellDef> Last Price </th>
-    <td mat-cell *matCellDef="let s"> {{getLastPrice(s.symbol.url) }} </td>
+    <td mat-cell *matCellDef="let s"> {{s.lastPrice}} </td>
     <td mat-footer-cell *matFooterCellDef> </td>
   </ng-container>
 
-
+  <ng-container matColumnDef="updated">
+    <th mat-header-cell *matHeaderCellDef> Update </th>
+    <td [ngStyle]="{'color': isUpdated(s.updatedAt)? 'green' : 'red'}" mat-cell *matCellDef="let s"> {{s.updatedAt}} </td>
+    <td mat-footer-cell *matFooterCellDef> </td>
+  </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

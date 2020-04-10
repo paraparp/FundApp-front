@@ -23,6 +23,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 import { ContactComponent } from '../components/contact/contact.component';
 import { ElementsComponent } from '../components/elements/elements.component';
+import { ModalComponent } from '../components/modal/modal.component';
 
 
 
@@ -42,6 +43,8 @@ import { ElementsComponent } from '../components/elements/elements.component';
     RegisterComponent,
     ContactComponent,
     ElementsComponent,
+    ModalComponent,
+
 
 
   ],
@@ -65,6 +68,9 @@ import { ElementsComponent } from '../components/elements/elements.component';
 
   ],
   providers: [],
-  schemas: []
+  schemas: [],
+  entryComponents: [
+    ModalComponent
+  ]
 })
 export class PagesModule { }
