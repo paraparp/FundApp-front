@@ -74,13 +74,14 @@
        </div>
 
        <mat-card-actions>
+
          <div class="form-group">
            <div class="col-xs-12">
              <button mat-stroked-button [disabled]="!regform.valid" color="accent" class="btn-block">Resgistrarse</button>
            </div>
          </div>
 
-         <div class="form-group text-center m-t-20">
+         <div class="form-group">
            <div class="col-xs-12">
              <button mat-stroked-button routerLink="/oauth2/authorize/google" color="accent" class="btn-block">
                Registrate con Google
@@ -90,11 +91,13 @@
          </div>
 
        </mat-card-actions>
+
        <div class="register-option">
          <div class=" col-xs-12 text-center">
            ¿Tienes una cuenta? <a routerLink="/login" class="text-info m-l-5"><b>Ingresa ahora</b></a>
          </div>
        </div>
+
      </form>
 
    </mat-card-content>

@@ -2,6 +2,7 @@ import { Portfolio } from './portfolio.model';
 import { Symbol } from './symbol.model';
 export class Lot {
 
+  constructor() { }
 
   id: string;
   symbol: Symbol;

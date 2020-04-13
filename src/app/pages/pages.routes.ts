@@ -23,6 +23,7 @@ const pagesRoutes: Routes = [
       { path: 'register', component: RegisterComponent, data: { titulo: 'Register' } },
       { path: 'watchlist/:id', component: WatchlistComponent, data: { titulo: 'Portfolio' } },
       { path: 'movimientos/:id', component: MovimientosComponent, data: { titulo: 'Portfolio' } },
+      { path: 'productos/:id', component: ProductosComponent, data: { titulo: 'Productos' } },
       { path: '', redirectTo: '/login', pathMatch: 'full' }
 
     ]

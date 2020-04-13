@@ -2,8 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 
 
-
-import { UsuarioService } from 'src/app/services/usuario.service';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Portfolio } from 'src/app/models/portfolio.model';
@@ -11,7 +9,6 @@ import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import Swal from 'sweetalert2';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -23,7 +20,6 @@ export class UserComponent implements OnInit {
 
   constructor(
     private auth: AuthenticationService,
-    private userService: UsuarioService,
     private portfolioService: PortfolioService,
     public dialog: MatDialog
   ) { }
@@ -36,46 +32,53 @@ export class UserComponent implements OnInit {
   displayedColumns = ['name', 'description', 'cost', 'list', 'edit'];
 
   ngOnInit() {
+    this.user = this.auth.usuario;
     this.loadPortfolios();
   }
 
   loadPortfolios() {
-    this.userService.findUsuariosById(this.auth.usuario.id).subscribe((resp: any) => {
-      this.user = resp
-      this.portfolios = resp.portfolios;
+    this.portfolioService.getPortfolioByUser(this.auth.usuario.id).subscribe((resp: any) => {
+      this.portfolios = resp;
     })
   }
 
 
-  openDialog(create: boolean, portfolio: Portfolio): void {
-    console.log(portfolio)
+  openDialog(create: boolean, portfolioTab: Portfolio): void {
+
+    console.log('entrada open ' + portfolioTab)
+
     const dialogRef = this.dialog.open(ModalComponent, {
-      width: '300px',
-      data: { portfolio: portfolio }
+      width: '400px',
+      data: { portfolio: portfolioTab }
     });
-
+    //NEW
     if (create) {
-      dialogRef.afterClosed().subscribe((result: Portfolio) => {
-        this.portfolio = result
+      console.log("CREATE")
+      dialogRef.afterClosed().subscribe((newPortfolio: Portfolio) => {
 
-        if (result != null) {
-          this.portfolio.idUser = this.user.id
-          this.portfolioService.save(this.portfolio).subscribe(portfolio => {
+        if (newPortfolio != null) {
+          newPortfolio.idUser = this.user.id
+          this.portfolioService.save(newPortfolio).subscribe(portfolio => {
             this.loadPortfolios();
+            console.log(newPortfolio)
           });
         }
       });
-    } else {
-      dialogRef.afterClosed().subscribe((result: Portfolio) => {
-        this.portfolio = result
-
-        this.portfolioService.edit(this.portfolio).subscribe(portfolio => {
-          this.portfolio.idUser = this.user.id
+    }
+    //EDIT
+    else {
+      console.log("EDIT")
+      dialogRef.afterClosed().subscribe((editedPortfolio: Portfolio) => {
+        console.log(editedPortfolio);
+        this.portfolioService.edit(editedPortfolio).subscribe(editedPortfolio => {
+          console.log(editedPortfolio);
           this.loadPortfolios();
+
         });
       });
     }
-    console.log(create)
+
+    console.log("Create : " + create)
   }
 
   delete(portfolio: Portfolio) {

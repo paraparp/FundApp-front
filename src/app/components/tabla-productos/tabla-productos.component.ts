@@ -53,7 +53,6 @@ export class TablaProductosComponent implements OnInit {
 
 
 
-    console.log("   --->    " + this.portfolioSymbols)
   }
 
 

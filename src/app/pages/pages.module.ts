@@ -24,6 +24,8 @@ import { RegisterComponent } from './login/register.component';
 import { ContactComponent } from '../components/contact/contact.component';
 import { ElementsComponent } from '../components/elements/elements.component';
 import { ModalComponent } from '../components/modal/modal.component';
+import { TableEditComponent } from '../components/table-edit/table-edit.component';
+import { DialogComponent } from '../components/dialog/dialog.component';
 
 
 
@@ -44,6 +46,8 @@ import { ModalComponent } from '../components/modal/modal.component';
     ContactComponent,
     ElementsComponent,
     ModalComponent,
+    TableEditComponent,
+    DialogComponent
 
 
 

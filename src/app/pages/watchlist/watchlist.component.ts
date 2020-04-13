@@ -20,7 +20,7 @@ export class WatchlistComponent implements OnInit {
   constructor(
     private portfolioService: PortfolioService,
     private activatedRoute: ActivatedRoute,
-    private impXML: ImportXMLService
+
   ) { }
 
   name = ''

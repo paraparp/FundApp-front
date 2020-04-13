@@ -1,0 +1,32 @@
+<div class="basic-container">
+
+
+
+  <mat-form-field>
+
+    <mat-select placeholder="Symbol" [(ngModel)]="symbolT">
+      <mat-option style=" color: black" *ngFor="let s of symbols" [value]="symbolT">
+        {{s.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Price" [(ngModel)]="priceT">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Broker" [(ngModel)]="brokerT">
+  </mat-form-field>
+
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="closeDialog()">Close</button>
+    <!-- <button mat-button (click)="save()" cdkFocusInitial>Ok</button> -->
+    <button mat-button [mat-dialog-close]="{symbol:symbolT, price: priceT, broker: brokerT}" cdkFocusInitial>Ok</button>
+
+
+  </div>
+</div>
+
+{{lot.symbol.name}}

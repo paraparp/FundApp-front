@@ -1,8 +1,14 @@
- <mat-toolbar class="toolbar-color py-5 mb-4">
-   <span>{{cartera.name}}</span>
- </mat-toolbar>
+<mat-toolbar class="toolbar-color py-5 mb-4">
+  <span class="center">{{portfolio?.name}}</span>
+  <div class="mat-elevation-z4 button">
+    <button mat-stroked-button class="bar" (click)="openDialog()">
+      Add Portfolio
+    </button>
+  </div>
 
- <mat-card>
+</mat-toolbar>
+<app-table-edit [lots]="lots"></app-table-edit>
+<mat-card>
 
-   <app-tabla-productos></app-tabla-productos>
- </mat-card>
+  <!-- <app-tabla-productos></app-tabla-productos> -->
+</mat-card>

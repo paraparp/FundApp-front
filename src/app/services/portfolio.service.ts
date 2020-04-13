@@ -22,6 +22,12 @@ export class PortfolioService {
     return this.http.get<Portfolio>(url)
   }
 
+
+  getPortfolioByUser(idUser: number) {
+    let url = URL_SERVICIOS + '/portfolios/user/' + idUser;
+    return this.http.get<Portfolio>(url)
+  }
+
   getPortfolioSymbols(id: number) {
     let url = URL_SERVICIOS + '/portfolios/watchlist/' + id;
 

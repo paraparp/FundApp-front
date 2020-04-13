@@ -3,7 +3,7 @@ export class Symbol {
   id: string;
   isin: string;
   codigoBl: string;
-  nombre: string;
+  name: string;
   url: string
 
 }

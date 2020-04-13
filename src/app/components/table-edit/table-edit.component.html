@@ -1,0 +1,30 @@
+<div class="basic-container">
+  <table mat-table [dataSource]="lots" class="mat-elevation-z8 ">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>name </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol.name}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> price </th>
+      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="broker">
+      <th mat-header-cell *matHeaderCellDef> broker </th>
+      <td mat-cell *matCellDef="let element"> {{element.broker}} </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row (click)="openDialog(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[3, 5, 10]">
+  </mat-paginator>
+</div>

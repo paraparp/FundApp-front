@@ -1,62 +1,52 @@
- <!-- <h1 mat-dialog-title>Want to receive our emails?</h1>
- <div mat-dialog-content>
-   <p>Create a Portfolio</p>
-   <mat-form-field>
-     <input matInput [(ngModel)]="portfolio.name">
-   </mat-form-field>
- </div>
- <div mat-dialog-actions>
-   <button mat-button (click)="onNoClick()">No</button>
-   <button mat-button mat-dialog-close (click)="setPortfolio(portfolio)" cdkFocusInitial>Yes</button>
- </div> -->
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
 
 
+  <mat-card-title>Portfolio</mat-card-title>
+
+  <mat-card-content>
+
+    <form [formGroup]="pForm">
+
+      <div class="form-group">
+        <div class="col-xs-12">
+          <mat-form-field>
+            <input matInput [(ngModel)]="portfolio.name" class="form-control" formControlName="name" placeholder="Name">
+            <mat-error>
+              <span *ngIf="!pForm.get('name').valid && pForm.get('name').touched">Introduce un nombre</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-12">
+          <mat-form-field>
+            <input matInput [(ngModel)]="portfolio.description" class="form-control" formControlName="description" placeholder="Description">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-card-actions>
+
+        <div class="form-group">
+          <div class="col-xs-12">
+            <button (click)="savePortfolio()" [disabled]="!pForm.valid" mat-raised-button mat-dialog-close color="accent" class="btn-block">Save</button>
+          </div>
+        </div>
 
 
- <mat-card-title>Login</mat-card-title>
- <mat-card-content style="margin-top: 5%">
+        <div class="form-group">
+          <div class="col-xs-12">
+            <button type="submint" mat-stroked-button mat-dialog-close (click)="onNoClick()" color="accent" class="btn-block">
+              Cancel
+            </button>
+          </div>
+        </div>
 
-   <form [formGroup]="pForm" (ngSubmit)="savePortfolio(pForm.value)">
-     <div class="form-group m-t-20">
-       <div class="col-xs-12">
+      </mat-card-actions>
 
-         <div class="form-group">
-           <div class="col-xs-12">
-             <mat-form-field>
-               <input name="name" matInput class="form-control" formControlName="name" placeholder="name">
-               <mat-error>
-                 <span *ngIf="!pForm.get('name').valid && pForm.get('name').touched">Introduce un nombre</span>
-               </mat-error>
-             </mat-form-field>
-           </div>
-         </div>
+    </form>
 
-         <div class="form-group">
-           <div class="col-xs-12">
-             <mat-form-field>
-               <input name="description" matInput class="form-control" formControlName="description" placeholder="description">
-             </mat-form-field>
-           </div>
-         </div>
+  </mat-card-content>
 
-         <div class="form-group">
-           <div class="form-group">
-             <div class="col-xs-12">
-               <button type="submint" [disabled]="!pForm.valid" mat-raised-button mat-dialog-close color="accent" class="btn-block">Save</button>
-             </div>
-           </div>
-         </div>
-
-       </div>
-     </div>
-   </form>
-
-   <div class="form-group">
-     <div class="col-xs-12">
-       <button type="submint" mat-stroked-button mat-dialog-close (click)="onNoClick()" color="accent" class="btn-block">
-         Cancel
-       </button>
-     </div>
-   </div>
-
- </mat-card-content>
+</div>

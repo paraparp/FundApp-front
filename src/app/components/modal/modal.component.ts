@@ -11,14 +11,14 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class ModalComponent implements OnInit {
 
-
   portfolio: Portfolio;
+
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
+    console.log("data -> " + this.data)
 
-    this.portfolio = data.porfolio
   }
 
   pForm: FormGroup;
@@ -29,19 +29,22 @@ export class ModalComponent implements OnInit {
       name: new FormControl('', [Validators.required, Validators.minLength(4)]),
       description: new FormControl('')
     });
-
-
-  }
-
-  close(portfolio: Portfolio) {
+    console.log("data -> " + this.data)
+    console.log("preasig -> " + this.data.portfolio)
+    if (this.data.portfolio != null) {
+      this.portfolio = this.data.portfolio;
+    } else {
+      this.portfolio = new Portfolio();
+    }
+    console.log("asignacion " + this.portfolio);
 
   }
   onNoClick(): void {
     this.dialogRef.close(null);
   }
 
-  savePortfolio(portfolio: Portfolio): void {
-    this.dialogRef.close(portfolio);
+  savePortfolio(): void {
+    this.dialogRef.close(this.portfolio);
   }
 
 }

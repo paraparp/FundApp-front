@@ -20,7 +20,7 @@ import { AuthenticationService } from './authentication.service';
     ProductosService,
     DataSourceService,
     UsuarioService,
-    AuthenticationService
+    AuthenticationService,
   ]
 })
 export class ServiceModule { }

@@ -32,7 +32,7 @@ registerLocaleData(localePy, 'fr');
 @NgModule({
   declarations: [
     AppComponent,
-    AlertComponent
+    AlertComponent,
 
   ],
   imports: [

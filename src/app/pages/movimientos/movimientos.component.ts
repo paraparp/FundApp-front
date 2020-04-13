@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DataSourceService } from 'src/app/services/dataSource.service';
-import { Portfolio } from 'src/app/models/portfolio.model';
 import { Lot } from 'src/app/models/lot.model';
-import { PortfolioService } from 'src/app/services/portfolio.service';
 import { ActivatedRoute } from '@angular/router';
+import { LotService } from 'src/app/services/lot.service';
+import { PortfolioService } from 'src/app/services/portfolio.service';
+import { Portfolio } from 'src/app/models/portfolio.model';
 
 
 @Component({
@@ -13,29 +13,22 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MovimientosComponent implements OnInit {
 
-
   constructor(
+    private lotService: LotService,
     private portfolioService: PortfolioService,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute
+  ) { }
 
-  name = ''
+  lots: Lot[]
   portfolio: Portfolio;
-  lots: Lot[] = [];
 
   ngOnInit() {
-    this.getPortfolio();
-  }
 
-
-  getPortfolio() {
     this.activatedRoute.paramMap.subscribe(params => {
       let id = +params.get('id')
-      this.portfolioService.getPortfolio(id).subscribe(portfolio => {
-        this.portfolio = portfolio;
-        this.name = portfolio.name
-        this.lots = portfolio.lots
-      })
-    })
 
+      this.portfolioService.getPortfolio(id).subscribe(portfolio => this.portfolio = portfolio)
+      this.lotService.getLotsByPortfolio(id).subscribe(lots => this.lots = lots as Lot[])
+    })
   }
 }
