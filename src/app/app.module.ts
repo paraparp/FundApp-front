@@ -26,7 +26,7 @@ import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 
 
 // registrar los locales con el nombre que quieras utilizar a la hora de proveer
-registerLocaleData(localePy, 'fr');
+registerLocaleData(localePy, 'es');
 
 
 @NgModule({
@@ -46,7 +46,7 @@ registerLocaleData(localePy, 'fr');
 
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'fr' },
+    { provide: LOCALE_ID, useValue: 'es' },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

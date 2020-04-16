@@ -5,8 +5,9 @@ import { Lot } from 'src/app/models/lot.model';
 import { Portfolio } from 'src/app/models/portfolio.model';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import { ActivatedRoute } from '@angular/router';
-import { PortfolioSymbols } from 'src/app/models/portfolio-symbols.model';
-import { ImportXMLService } from 'src/app/services/import-xml.service';
+import { SymbolLot } from 'src/app/models/symbol-lot.model';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
@@ -20,26 +21,32 @@ export class WatchlistComponent implements OnInit {
   constructor(
     private portfolioService: PortfolioService,
     private activatedRoute: ActivatedRoute,
-
   ) { }
+
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+
 
   name = ''
   portfolio: Portfolio;
   lots: Lot[] = [];
-  portfolioSymbols;
+  portfolioSymbs: SymbolLot[];
+  panelOpenState = true;
 
-  displayedColumns = ['name', 'volume', 'price', 'cost', 'lastPrice', 'value', 'updated'];
-
+  displayedColumns = ['name', 'representation', 'volume', 'price', 'lastPrice', 'cost', 'value', 'variation', '%', 'updated'];
+  dataSource;
 
   ngOnInit() {
 
     this.getPortfolio();
-    this.portfolioSymbols = this.getPortfolioSymbols();
+    this.getPortfolioSymbs();
+    this.dataSource = new MatTableDataSource(this.portfolioSymbs);
+    this.dataSource.sort = this.sort;
+  }
 
-    console.log(this.portfolioSymbols)
-
-    alert(this.getTotalValue() + " -- " + this.getTotalCost())
-
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   getPortfolio() {
@@ -49,15 +56,20 @@ export class WatchlistComponent implements OnInit {
         this.portfolio = portfolio;
         this.name = portfolio.name;
         this.lots = portfolio.lots;
+
+
       })
     })
   }
 
-  getPortfolioSymbols() {
+  getPortfolioSymbs() {
     this.activatedRoute.paramMap.subscribe(params => {
       let id = +params.get('id')
-      this.portfolioService.getPortfolioSymbols(id).subscribe(resp => {
-        this.portfolioSymbols = resp;
+      this.portfolioService.getPortfolioSymbs(id).subscribe(resp => {
+        this.portfolioSymbs = resp;
+        //Se asig na el volor en cartera %
+        this.portfolioSymbs.forEach(lot => lot.percentInPortfolio = (lot.value / this.getTotalValue()))
+
       })
     })
   }
@@ -74,14 +86,22 @@ export class WatchlistComponent implements OnInit {
   }
 
 
+
   getTotalValue() {
-    return this.portfolioSymbols.map(p => p.totalValue).reduce((acc, totalValue) => acc + totalValue, 0);
+    return this.portfolioSymbs.map(lot => lot.value).reduce((acc, value) => acc + value, 0)
   }
 
   getTotalCost() {
-    return this.portfolioSymbols.map(p => p.getImporte()).reduce((acc, value) => acc + value, 0);
+    return this.portfolioSymbs.map(lot => lot.cost).reduce((acc, value) => acc + value, 0)
+  }
+  getTotalVariation() {
+    return (this.getTotalValue() - this.getTotalCost()) / this.getTotalCost()
   }
 
 
+  today() {
+
+    return new Date();
+  }
 
 }

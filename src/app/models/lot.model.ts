@@ -1,11 +1,12 @@
 import { Portfolio } from './portfolio.model';
-import { Symbol } from './symbol.model';
+import { Symb } from './symbol.model';
 export class Lot {
 
-  constructor() { }
+  constructor() {
+  }
 
-  id: string;
-  symbol: Symbol;
+  id: number;
+  symbol: Symb;
   portfolio: Portfolio;
   volume: number;
   price: number;
@@ -13,12 +14,5 @@ export class Lot {
   broker: string;
   date: Date;
   totalValue: number;
-
-
-
-  getImporte() {
-    return this.price * this.volume;
-  }
-
 
 }

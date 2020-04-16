@@ -4,6 +4,7 @@ import { DataSourceService } from './dataSource.service';
 import { Portfolio } from '../models/portfolio.model';
 import { User } from '../models/user.model';
 import { Lot } from '../models/lot.model';
+import { Symb } from '../models/symbol.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ProductosService {
   constructor(public data: DataSourceService) { }
 
   cartera: Portfolio;
-  productos: Symbol[];
+  productos: Symb[];
 
   volumenProducto: number;
   totalOp: number;

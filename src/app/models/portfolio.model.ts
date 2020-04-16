@@ -11,7 +11,7 @@ export class Portfolio {
     this.description = '';
   }
 
-  id: string;
+  id: number;
   name: string;
   description: string;
   idUser: number;

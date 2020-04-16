@@ -1,8 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Lot } from 'src/app/models/lot.model';
-import { SymbolService } from 'src/app/services/symbols.service';
-import { Symbol } from 'src/app/models/symbol.model';
+import { SymbService } from 'src/app/services/symbols.service';
+import { Symb } from 'src/app/models/symbol.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-dialog',
@@ -11,30 +12,47 @@ import { Symbol } from 'src/app/models/symbol.model';
 })
 export class DialogComponent implements OnInit {
 
-  priceT: any;
-  brokerT: any;
-  symbolT: Symbol;
-  symbols: Symbol[];
+
+  // name: any;
+  volume: number;
+  date: Date;
+  price: number;
+  broker: any;
+  symbol: Symb = new Symb();
+  symbols: Symb[];
+  originalLot: Lot;
+
+  dateFormCtrl = new FormControl(new Date());
 
   constructor(
-    private symbolService: SymbolService,
+    private symbolService: SymbService,
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public lot: Lot,
   ) {
-    this.symbolT = this.lot.symbol;
-    this.priceT = this.lot.price;
-    this.brokerT = this.lot.broker;
-
+    this.symbol = this.lot.symbol
+    this.price = this.lot.price;
+    this.volume = this.lot.volume;
+    this.broker = this.lot.broker;
+    this.date = new Date(this.lot.date)
   }
 
 
   ngOnInit() {
-    this.symbolService.getSymbols().subscribe(resp => this.symbols = resp)
+    // console.log(this.lot.symbol.id, this.lot.symbol.name);
+    this.symbolService.getSymbs().subscribe(resp => this.symbols = resp)
   }
 
   closeDialog() {
     this.dialogRef.close();
   }
 
+  save(): void {
+    this.lot.volume = this.volume
+    this.lot.broker = this.broker
+    this.lot.price = this.price
+    this.lot.symbol = this.symbol
+    this.lot.date = this.date
+    this.dialogRef.close(this.lot);
+  }
 
 }

@@ -20,3 +20,15 @@ table {
   bottom: 24px;
   right: 24px;
 }
+
+mat-option {
+  color: black
+}
+
+.mat-datepicker-toggle {
+  color: grey;
+}
+
+input {
+  color: grey
+}

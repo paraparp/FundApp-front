@@ -31,29 +31,48 @@ export class ProductosComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activatedRoute.paramMap.subscribe(params => {
-      let id = +params.get('id')
-      this.portfolioService.getPortfolio(id).subscribe(portfolio => this.portfolio = portfolio)
-      this.lotService.getLotsByPortfolio(id).subscribe(lots => this.lots = lots as Lot[])
-    })
+
+
+    this.loadData();
+
   }
 
   openDialog() {
-    console.log("Row clicked");
+
     const dialog = this._dialog.open(DialogComponent, {
       width: "450px",
       disableClose: true,
-      data: this.lot
+      data: new Lot
     });
-
     dialog.afterClosed().subscribe(newLot => {
-
-      if (newLot) {
-        newLot =
-          this.lotService.edit(newLot).subscribe()
+      if (newLot.symbol) {
+        newLot.idPortfolio = this.portfolio.id
+        this.lotService.edit(newLot).subscribe(newLot => {
+          this.loadData()
+          console.log(newLot)
+        })
       }
     });
   }
 
+  loadData() {
+    this.activatedRoute.paramMap.subscribe(params => {
+      let id = +params.get('id')
+      this.portfolioService.getPortfolio(id).subscribe(portfolio => this.portfolio = portfolio)
+      this.lotService.getLotsByPortfolio(id).subscribe(lots => this.lots = lots as Lot[])
 
+
+    })
+  }
+
+
+
+
+
+  getTotalCost() {
+    console.log(this.lots.map(lot => lot.price * lot.volume).reduce((acc, value) => acc + value, 0))
+  }
+  getTotalValue() {
+    this.lots.map(lot => lot.price * lot.volume).reduce((acc, value) => acc + value, 0)
+  }
 }

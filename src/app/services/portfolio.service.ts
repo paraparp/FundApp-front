@@ -7,6 +7,7 @@ import { Portfolio } from '../models/portfolio.model';
 import { catchError, map } from 'rxjs/operators';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SymbolLot } from '../models/symbol-lot.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,10 +29,10 @@ export class PortfolioService {
     return this.http.get<Portfolio>(url)
   }
 
-  getPortfolioSymbols(id: number) {
+  getPortfolioSymbs(id: number) {
     let url = URL_SERVICIOS + '/portfolios/watchlist/' + id;
 
-    return this.http.get(url)
+    return this.http.get<SymbolLot[]>(url)
   }
 
   save(portfolio: Portfolio) {

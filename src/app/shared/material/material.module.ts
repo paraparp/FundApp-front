@@ -7,7 +7,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { MatCardModule } from '@angular/material/card'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatChipsModule } from '@angular/material/chips'
-import { MatCommonModule } from '@angular/material/core'
+import { MatCommonModule, MatNativeDateModule } from '@angular/material/core'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatDividerModule } from '@angular/material/divider'
@@ -53,6 +53,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle'
     MatChipsModule,
     MatCommonModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatDialogModule,
     MatDividerModule,
     MatExpansionModule,
@@ -94,6 +95,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle'
     MatChipsModule,
     MatCommonModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatDialogModule,
     MatDividerModule,
     MatExpansionModule,
@@ -122,6 +124,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle'
     CdkTableModule,
     BrowserAnimationsModule
   ],
-  providers: []
+  providers: [MatDatepickerModule]
 })
 export class MaterialModule { }

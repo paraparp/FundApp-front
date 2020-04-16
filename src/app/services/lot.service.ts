@@ -29,7 +29,7 @@ export class LotService {
     return this.http.patch<Lot>(url, lot).pipe(
       map((resp: any) => {
 
-        this.snackBar.open('Lot edited: OK!', 'Close', {
+        this.snackBar.open(`Lot: "${resp.symbol.name}" at ${resp.broker} edited: OK!`, 'Close', {
           duration: 4000,
         });
       }))
@@ -39,9 +39,9 @@ export class LotService {
     let url = URL_SERVICIOS + '/lots/';
     console.log(url)
     return this.http.put<Lot>(url, lot).pipe(
-      map((resp: any) => {
+      map((resp: Lot) => {
 
-        this.snackBar.open('Lot saved: OK!', 'Close', {
+        this.snackBar.open(`Lot: "${resp.symbol.name}" at ${resp.broker} saved: OK!`, 'Close', {
           duration: 4000,
         });
       }))

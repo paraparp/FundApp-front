@@ -1,9 +1,11 @@
-export class Symbol {
+export class Symb {
 
-  id: string;
+  id: number;
   isin: string;
   codigoBl: string;
   name: string;
   url: string
+  lastPrice: number;
+  lastDate: string
 
 }

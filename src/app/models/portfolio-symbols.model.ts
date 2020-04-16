@@ -1,9 +1,10 @@
 import { Lot } from './lot.model';
+import { Symb } from './symbol.model';
 
-export class PortfolioSymbols {
+export class PortfolioSymbs {
 
 
-  symbol: Symbol;
+  symbol: Symb;
   lastPrice: number;
   lastDate: Date;
   idPortfolio: string;

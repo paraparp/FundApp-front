@@ -4,7 +4,7 @@ import { ProductosService } from 'src/app/services/productos.service';
 import { ImportXMLService } from 'src/app/services/import-xml.service';
 
 import { DataSourceService } from 'src/app/services/dataSource.service';
-import { Symbol } from 'src/app/models/symbol.model';
+import { Symb } from 'src/app/models/symbol.model';
 import { Lot } from 'src/app/models/lot.model';
 
 
@@ -20,7 +20,7 @@ export class TablaComponent implements OnInit {
 
   operaciones: Lot[]
 
-  productos: Symbol[];
+  productos: Symb[];
 
 
   data: TreeNode[];
@@ -89,7 +89,7 @@ export class OperacionTabla {
 
 export class ProductoTabla2 {
 
-  data: Symbol;
+  data: Symb;
 
   children: Lot[];
 

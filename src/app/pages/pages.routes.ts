@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 
 import { AuthGuardService } from '../services/auth-guard.service';
+import { ElementsComponent } from '../components/elements/elements.component';
 
 const pagesRoutes: Routes = [
   {
@@ -17,8 +18,8 @@ const pagesRoutes: Routes = [
     children: [
       { path: 'watchlist', component: WatchlistComponent, data: { titulo: 'Portfolio' }, canActivate: [AuthGuardService] },
       { path: 'user', component: UserComponent, data: { titulo: 'User' }, canActivate: [AuthGuardService] },
-      { path: 'productos', component: ProductosComponent, data: { titulo: 'Symbols' }, canActivate: [AuthGuardService] },
-      { path: 'movimientos', component: MovimientosComponent, data: { titulo: 'Lots' }, canActivate: [AuthGuardService] },
+      { path: 'productos', component: ProductosComponent, data: { titulo: 'Symbs' }, canActivate: [AuthGuardService] },
+      { path: 'elements', component: ElementsComponent, data: { titulo: 'Lots' }, canActivate: [AuthGuardService] },
       { path: 'login', component: LoginComponent, data: { titulo: 'Login' } },
       { path: 'register', component: RegisterComponent, data: { titulo: 'Register' } },
       { path: 'watchlist/:id', component: WatchlistComponent, data: { titulo: 'Portfolio' } },

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Symbol } from '../models/symbol.model';
+import { Symb } from '../models/symbol.model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +52,7 @@ export class ImportXMLService {
     return res.stringValue;
   }
 
-  extractDataProducto(url: string, producto: Symbol) {
+  extractDataProducto(url: string, producto: Symb) {
 
     var req = new XMLHttpRequest();
     req.open("GET", url + producto.isin, false);
@@ -76,7 +76,7 @@ export class ImportXMLService {
 
 export class ProductDataUrl {
 
-  producto: Symbol;
+  producto: Symb;
   precioActual: any;
   fechaActualizacion: string;
 

@@ -6,7 +6,7 @@ import { DataSourceService } from 'src/app/services/dataSource.service';
 import { OnInit, Component, Input } from '@angular/core';
 import { Lot } from 'src/app/models/lot.model';
 import { Portfolio } from 'src/app/models/portfolio.model';
-import { Symbol } from 'src/app/models/symbol.model';
+import { Symb } from 'src/app/models/symbol.model';
 
 
 
@@ -19,7 +19,7 @@ import { Symbol } from 'src/app/models/symbol.model';
 })
 export class TablaProductosComponent implements OnInit {
 
-  @Input() public portfolioSymbols;
+  @Input() public portfolioSymbs;
 
   constructor(
     public productoService: ProductosService,
@@ -29,7 +29,7 @@ export class TablaProductosComponent implements OnInit {
   // displayedColumns = ['nombre', 'isin', 'codigoBl', 'participaciones', 'precio', 'precioActual', 'valor'];
   displayedColumns = ['nombre', 'isin', 'participaciones', 'precio', 'precioActual', 'valor', 'valorActual', '%', 'fechaActualizacion'];
 
-  productos: Symbol[] = [];
+  productos: Symb[] = [];
   cartera: Portfolio;
   operaciones: Lot[];
   valorSpan: string;
@@ -116,12 +116,12 @@ export class TablaProductosComponent implements OnInit {
 
 
 
-  getPrecioMedio(prod: Symbol) {
+  getPrecioMedio(prod: Symb) {
 
     return this.productoService.precioMedioProductoEnCartera(prod.isin, '1');
   }
 
-  getVolumen(prod: Symbol) {
+  getVolumen(prod: Symb) {
     return this.productoService.participacionesPorProducto(prod.isin, '1');
   }
 
@@ -141,7 +141,7 @@ export class TablaProductosComponent implements OnInit {
   //   return this.operaciones.map(p => p.getImporte()).reduce((acc, value) => acc + value, 0);
   // }
 
-  getTotalValorProducto(prod: Symbol) {
+  getTotalValorProducto(prod: Symb) {
     return this.productoService.getValorTotalProducto(prod.isin, '1');
   }
 

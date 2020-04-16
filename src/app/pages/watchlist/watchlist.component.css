@@ -6,3 +6,50 @@
 table {
   width: 100%;
 }
+
+.centered {
+  font-style: italic;
+  text-align: center;
+}
+
+div.left {
+  text-align: left
+}
+
+.mediumbold {
+  font-size: 110%;
+  font-weight: 450;
+}
+
+/* td.main {
+  text-align: left
+} */
+td.mat-footer-cell {
+  font-weight: bold;
+  font-size: 115%;
+  font-family: 'Roboto';
+  background-color: rgba(0, 0, 0, .05)
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.subline {
+  font-size: 60%;
+  font-style: italic;
+}
+
+th.mat-header-cell, td.mat-cell {
+  text-align: center;
+  /* border: 5px solid #EEEEEE; */
+}
+
+th.mat-sort-header {
+  text-align: center;
+}
+
+tr.mat-row:hover {
+  font-weight: bold;
+  background-color: #EEEEEE;
+}

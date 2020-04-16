@@ -1,32 +1,41 @@
-<div class="basic-container">
+ <div class="basic-container">
+
+
+   <mat-form-field>
+     <mat-select [(ngModel)]="symbol" placeholder="Symbol">
+       <mat-option style="color: black" *ngFor="let symbol of symbols" [value]="symbol" [matTooltipPosition]="'left'" matTooltipClass="testClass" matTooltip={{symbol.isin}}>
+         {{symbol.name}}
+       </mat-option>
+     </mat-select>
+   </mat-form-field>
+
+   <mat-form-field>
+     <input matInput placeholder="Price" [(ngModel)]="price" required>
+   </mat-form-field>
+
+   <mat-form-field>
+     <input matInput placeholder="Volume" [(ngModel)]="volume" required>
+   </mat-form-field>
+
+
+   <mat-form-field>
+     <input matInput placeholder="Broker" [(ngModel)]="broker">
+   </mat-form-field>
+
+
+   <mat-form-field>
+     <input style="color: black" matInput [matDatepicker]="picker" disabled [(ngModel)]="date" placeholder="Date">
+     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+     <mat-datepicker #picker disabled="false"></mat-datepicker>
+   </mat-form-field>
 
 
 
-  <mat-form-field>
-
-    <mat-select placeholder="Symbol" [(ngModel)]="symbolT">
-      <mat-option style=" color: black" *ngFor="let s of symbols" [value]="symbolT">
-        {{s.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field>
-    <input matInput placeholder="Price" [(ngModel)]="priceT">
-  </mat-form-field>
-
-  <mat-form-field>
-    <input matInput placeholder="Broker" [(ngModel)]="brokerT">
-  </mat-form-field>
+   <div mat-dialog-actions>
+     <button mat-button (click)="closeDialog()">Close</button>
+     <button mat-button (click)="save()" cdkFocusInitial>Ok</button>
+     <!-- <button mat-button [mat-dialog-close]="{symbol:symbolT, price: priceT, broker: brokerT}" cdkFocusInitial>Ok</button> -->
 
 
-  <div mat-dialog-actions>
-    <button mat-button (click)="closeDialog()">Close</button>
-    <!-- <button mat-button (click)="save()" cdkFocusInitial>Ok</button> -->
-    <button mat-button [mat-dialog-close]="{symbol:symbolT, price: priceT, broker: brokerT}" cdkFocusInitial>Ok</button>
-
-
-  </div>
-</div>
-
-{{lot.symbol.name}}
+   </div>
+ </div>

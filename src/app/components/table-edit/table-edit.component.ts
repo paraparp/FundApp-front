@@ -16,7 +16,7 @@ export class TableEditComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() public lots: Lot[];
 
-  displayedColumns = ["name", "price", "broker"];
+  displayedColumns = ["name", "price", "volume", "broker", "date"];
   dataSource: MatTableDataSource<Lot>;
 
   constructor(private _dialog: MatDialog, private lotService: LotService) { }
@@ -28,25 +28,18 @@ export class TableEditComponent implements OnInit {
   }
 
   openDialog(row: Lot) {
-    console.log("Row clicked", row);
+
+    console.log(row)
     const dialog = this._dialog.open(DialogComponent, {
       width: "450px",
-      // Can be closed only by clicking the close button
       disableClose: true,
       data: row
     });
 
     dialog.afterClosed().subscribe(editedLot => {
-
+      console.log(editedLot)
       if (editedLot) {
-        row.symbol = editedLot.symbol
-        row.broker = editedLot.broker
-        row.price = editedLot.price
-        console.log("The dialog was closed");
-        console.log(editedLot);
-        this.lotService.edit(row).subscribe(resp => {
-          this.dataSource._updateChangeSubscription()
-        })
+        this.lotService.edit(editedLot).subscribe(resp => this.dataSource._updateChangeSubscription())
       }
     });
   }

@@ -22,12 +22,12 @@ export class OperacionesComponent implements OnInit {
   }
 
   /** Gets the total cost of all transactions. */
-  getTotalValue() {
-    return this.lots.map(p => p.totalValue).reduce((acc, totalValue) => acc + totalValue, 0);
-  }
-
-  getTotalCost() {
-    return this.lots.map(p => p.getImporte()).reduce((acc, value) => acc + value, 0);
-  }
+  // getTotalValue() {
+  //   return this.lots.map(p => p.totalValue).reduce((acc, totalValue) => acc + totalValue, 0);
+  // }
+  //
+  // getTotalCost() {
+  //   return this.lots.map(p => p.getCost()).reduce((acc, value) => acc + value, 0);
+  // }
 
 }
