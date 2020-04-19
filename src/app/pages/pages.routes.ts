@@ -2,7 +2,7 @@ import { PagesComponent } from './pages.component';
 import { Routes, RouterModule } from '@angular/router';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 import { UserComponent } from './user/user.component';
-import { ProductosComponent } from './productos/productos.component';
+import { TransactionsComponent } from './transactions/transactions.component';
 import { MovimientosComponent } from './movimientos/movimientos.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
@@ -18,13 +18,13 @@ const pagesRoutes: Routes = [
     children: [
       { path: 'watchlist', component: WatchlistComponent, data: { titulo: 'Portfolio' }, canActivate: [AuthGuardService] },
       { path: 'user', component: UserComponent, data: { titulo: 'User' }, canActivate: [AuthGuardService] },
-      { path: 'productos', component: ProductosComponent, data: { titulo: 'Symbs' }, canActivate: [AuthGuardService] },
+      { path: 'transactions', component: TransactionsComponent, data: { titulo: 'Symbs' }, canActivate: [AuthGuardService] },
       { path: 'elements', component: ElementsComponent, data: { titulo: 'Lots' }, canActivate: [AuthGuardService] },
       { path: 'login', component: LoginComponent, data: { titulo: 'Login' } },
       { path: 'register', component: RegisterComponent, data: { titulo: 'Register' } },
       { path: 'watchlist/:id', component: WatchlistComponent, data: { titulo: 'Portfolio' } },
       { path: 'movimientos/:id', component: MovimientosComponent, data: { titulo: 'Portfolio' } },
-      { path: 'productos/:id', component: ProductosComponent, data: { titulo: 'Productos' } },
+      { path: 'transactions/:id', component: TransactionsComponent, data: { titulo: 'Transactions' } },
       { path: '', redirectTo: '/login', pathMatch: 'full' }
 
     ]

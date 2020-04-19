@@ -13,6 +13,6 @@ export class Lot {
   currency: string = 'EUR';
   broker: string;
   date: Date;
-  totalValue: number;
+  cost: number = 0.0;
 
 }

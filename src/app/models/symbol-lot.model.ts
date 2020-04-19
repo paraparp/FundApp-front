@@ -7,6 +7,7 @@ export class SymbolLot {
   price: number
   volume: number
   cost: number
-  percentInPortfolio: number
+  percentInPortfolio: number;
+
 
 }

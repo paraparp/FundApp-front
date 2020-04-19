@@ -5,13 +5,10 @@ import { FormsModule } from '@angular/forms';
 
 import { PAGES_ROUTES } from './pages.routes';
 
-import { ProductosComponent } from './productos/productos.component';
+import { TransactionsComponent } from './transactions/transactions.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 import { UserComponent } from './user/user.component';
 
-import { OperacionesComponent } from '../components/operaciones/operaciones.component';
-import { TablaComponent } from '../components/tabla/tabla.component';
-import { TablaProductosComponent } from '../components/tabla-productos/tabla-productos.component';
 import { MaterialModule } from '../shared/material/material.module';
 import { PrimegnModule } from '../shared/primegn/primegn.module';
 
@@ -26,9 +23,10 @@ import { ElementsComponent } from '../components/elements/elements.component';
 import { ModalComponent } from '../components/modal/modal.component';
 import { TableEditComponent } from '../components/table-edit/table-edit.component';
 import { DialogComponent } from '../components/dialog/dialog.component';
-
-
-
+import { TableSymbolsPortfolioComponent } from '../components/table-symbols-portfolio/table-symbols-portfolio.component';
+import { ChartComponent } from '../components/chart/chart.component';
+import { ChartsModule } from 'ng2-charts';
+import { Chart2Component } from '../components/chart0/chart2.component';
 
 
 @NgModule({
@@ -36,10 +34,7 @@ import { DialogComponent } from '../components/dialog/dialog.component';
     PagesComponent,
     WatchlistComponent,
     UserComponent,
-    ProductosComponent,
-    OperacionesComponent,
-    TablaComponent,
-    TablaProductosComponent,
+    TransactionsComponent,
     MovimientosComponent,
     LoginComponent,
     RegisterComponent,
@@ -47,9 +42,10 @@ import { DialogComponent } from '../components/dialog/dialog.component';
     ElementsComponent,
     ModalComponent,
     TableEditComponent,
-    DialogComponent
-
-
+    DialogComponent,
+    TableSymbolsPortfolioComponent,
+    ChartComponent,
+    Chart2Component,
 
   ],
   imports: [
@@ -59,13 +55,12 @@ import { DialogComponent } from '../components/dialog/dialog.component';
     SharedModule,
     MaterialModule,
     PrimegnModule,
-    TableModule
-
+    TableModule,
+    ChartsModule
 
   ],
   exports: [
 
-    OperacionesComponent,
     WatchlistComponent,
     UserComponent,
     MovimientosComponent

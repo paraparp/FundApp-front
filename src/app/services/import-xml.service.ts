@@ -52,7 +52,7 @@ export class ImportXMLService {
     return res.stringValue;
   }
 
-  extractDataProducto(url: string, producto: Symb) {
+  extractDataTransaction(url: string, producto: Symb) {
 
     var req = new XMLHttpRequest();
     req.open("GET", url + producto.isin, false);
@@ -65,9 +65,9 @@ export class ImportXMLService {
     let precioActual = xmlDoc.evaluate("//span[@class='mod-ui-data-list__value']", xmlDoc, null, XPathResult.STRING_TYPE, null).stringValue;
     let fechaActualizacion = xmlDoc.evaluate("//div[@class='mod-disclaimer']", xmlDoc, null, XPathResult.STRING_TYPE, null).stringValue;
 
-    let datoProductoUrl: ProductDataUrl = { producto, precioActual, fechaActualizacion };
+    let datoTransactionUrl: ProductDataUrl = { producto, precioActual, fechaActualizacion };
 
-    return datoProductoUrl;
+    return datoTransactionUrl;
   }
 
 

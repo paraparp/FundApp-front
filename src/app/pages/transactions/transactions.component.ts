@@ -10,12 +10,12 @@ import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
-  selector: 'app-productos',
-  templateUrl: './productos.component.html',
-  styleUrls: ['./productos.component.css']
+  selector: 'app-transactions',
+  templateUrl: './transactions.component.html',
+  styleUrls: ['./transactions.component.css']
 
 })
-export class ProductosComponent implements OnInit {
+export class TransactionsComponent implements OnInit {
 
   constructor(
     private _dialog: MatDialog,
@@ -28,12 +28,20 @@ export class ProductosComponent implements OnInit {
   lot: Lot = new Lot();
   lots: Lot[]
   portfolio: Portfolio;
+  dateGroup;
 
-  ngOnInit(): void {
+  ngOnInit() {
+
+    this.activatedRoute.paramMap.subscribe(params => {
+      let id = +params.get('id')
+      this.getPortfolio(id)
+      this.getLots(id)
+    })
+
+  }
 
 
-
-    this.loadData();
+  ngOnChanges() {
 
   }
 
@@ -48,31 +56,20 @@ export class ProductosComponent implements OnInit {
       if (newLot.symbol) {
         newLot.idPortfolio = this.portfolio.id
         this.lotService.edit(newLot).subscribe(newLot => {
-          this.loadData()
-          console.log(newLot)
+          // this.loadData()
         })
       }
     });
   }
 
-  loadData() {
-    this.activatedRoute.paramMap.subscribe(params => {
-      let id = +params.get('id')
-      this.portfolioService.getPortfolio(id).subscribe(portfolio => this.portfolio = portfolio)
-      this.lotService.getLotsByPortfolio(id).subscribe(lots => this.lots = lots as Lot[])
+  getLots(id) {
+    return this.portfolioService.getPortfolio(id).subscribe(portfolio => this.portfolio = portfolio)
+  }
 
-
-    })
+  getPortfolio(id) {
+    return this.lotService.getLotsByPortfolio(id).subscribe((lots: Lot[]) => this.lots = lots)
   }
 
 
 
-
-
-  getTotalCost() {
-    console.log(this.lots.map(lot => lot.price * lot.volume).reduce((acc, value) => acc + value, 0))
-  }
-  getTotalValue() {
-    this.lots.map(lot => lot.price * lot.volume).reduce((acc, value) => acc + value, 0)
-  }
 }

@@ -6,10 +6,10 @@ import { Injectable } from '@angular/core'
 export class DataSourceService {
 
 
-  // producto1 = new Producto('1', 'IE00B03HCZ61', 'VANGLVI:ID', 'Vanguard Global Stock Index Fund', 'https://www.bloomberg.com/quote/VANGLVI:ID');
-  // producto2 = new Producto('2', 'IE0007987690', 'VANEIEI:ID', 'Vanguard European Stock Index Fund', 'https://www.bloomberg.com/quote/VANEIEI:ID');
-  // producto3 = new Producto('3', 'IE0031786142', 'VANEMSI:ID', 'Vanguard Emerging Markets Stock Index Fund', 'https://www.bloomberg.com/quote/VANEMSI:ID');
-  // producto4 = new Producto('4', 'IE00BDRK7T12', 'VANEMSI:ID', 'iShares Japan Index Fund (IE) D Acc EUR', ' https://www.bloomberg.com/quote/BGIJDEA:ID');
+  // producto1 = new Transaction('1', 'IE00B03HCZ61', 'VANGLVI:ID', 'Vanguard Global Stock Index Fund', 'https://www.bloomberg.com/quote/VANGLVI:ID');
+  // producto2 = new Transaction('2', 'IE0007987690', 'VANEIEI:ID', 'Vanguard European Stock Index Fund', 'https://www.bloomberg.com/quote/VANEIEI:ID');
+  // producto3 = new Transaction('3', 'IE0031786142', 'VANEMSI:ID', 'Vanguard Emerging Markets Stock Index Fund', 'https://www.bloomberg.com/quote/VANEMSI:ID');
+  // producto4 = new Transaction('4', 'IE00BDRK7T12', 'VANEMSI:ID', 'iShares Japan Index Fund (IE) D Acc EUR', ' https://www.bloomberg.com/quote/BGIJDEA:ID');
   //
   // usuario1 = new Usuario('dobarquerio', "Rodrigo", "Parapar", "dobarqueiro@gmail.com", "1234");
   //
@@ -28,7 +28,7 @@ export class DataSourceService {
   constructor() {
   }
 
-  getProductos() {
+  getTransactions() {
     return []
   }
 

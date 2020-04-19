@@ -21,8 +21,7 @@ import { AlertComponent } from './components/alert/alert.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
-
-
+import { ChartComponent } from './components/chart/chart.component';
 
 
 // registrar los locales con el nombre que quieras utilizar a la hora de proveer

@@ -117,3 +117,66 @@ button.bar {
 div.register-option {
   font-size: 80%;
 }
+
+/* watchlist table */
+.example-container {
+  height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  table-layout: auto;
+  white-space: wrap;
+}
+
+.centered {
+  font-style: italic;
+  text-align: center;
+}
+
+div.left {
+  text-align: left
+}
+
+.mediumbold {
+  font-size: 110%;
+  font-weight: 450;
+}
+
+/* td.main {
+  text-align: left
+} */
+td.mat-footer-cell {
+  font-weight: bold;
+  font-size: 115%;
+  font-family: 'Roboto';
+  background-color: rgba(0, 0, 0, .05)
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.subline {
+  font-size: 60%;
+  font-style: italic;
+}
+
+th.mat-header-cell, td.mat-cell {
+  text-align: center;
+  /* border: 5px solid #EEEEEE; */
+}
+
+th.mat-sort-header {
+  text-align: center;
+}
+
+tr.mat-row:hover {
+  font-weight: bold;
+  background-color: #EEEEEE;
+}
+
+.percentage {
+  font-size: 80%;
+}

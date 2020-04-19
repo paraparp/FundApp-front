@@ -7,5 +7,6 @@ export class Symb {
   url: string
   lastPrice: number;
   lastDate: string
+  category: any;
 
 }
