@@ -15,11 +15,10 @@ import { PrimegnModule } from '../shared/primegn/primegn.module';
 import { TableModule } from 'primeng/table';
 import { SharedModule } from '../shared/shared.module';
 import { PagesComponent } from './pages.component';
-import { MovimientosComponent } from './movimientos/movimientos.component';
+import { SymbolsComponent } from './symbols/symbols.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
-import { ContactComponent } from '../components/contact/contact.component';
-import { ElementsComponent } from '../components/elements/elements.component';
+
 import { ModalComponent } from '../components/modal/modal.component';
 import { TableEditComponent } from '../components/table-edit/table-edit.component';
 import { DialogComponent } from '../components/dialog/dialog.component';
@@ -27,6 +26,10 @@ import { TableSymbolsPortfolioComponent } from '../components/table-symbols-port
 import { ChartComponent } from '../components/chart/chart.component';
 import { ChartsModule } from 'ng2-charts';
 import { Chart2Component } from '../components/chart0/chart2.component';
+import { TableSymbolsComponent } from '../components/table-symbols/table-symbols.component';
+import { ContactComponent } from '../components/contact/contact.component';
+import { DialogSymbolComponent } from '../components/dialog-symbol/dialog-symbol.component';
+import { TablePortfoliosComponent } from '../components/table-portfolios/table-portfolios.component';
 
 
 @NgModule({
@@ -35,17 +38,19 @@ import { Chart2Component } from '../components/chart0/chart2.component';
     WatchlistComponent,
     UserComponent,
     TransactionsComponent,
-    MovimientosComponent,
+    SymbolsComponent,
     LoginComponent,
     RegisterComponent,
     ContactComponent,
-    ElementsComponent,
     ModalComponent,
     TableEditComponent,
     DialogComponent,
     TableSymbolsPortfolioComponent,
     ChartComponent,
     Chart2Component,
+    TableSymbolsComponent,
+    DialogSymbolComponent,
+    TablePortfoliosComponent
 
   ],
   imports: [
@@ -63,7 +68,7 @@ import { Chart2Component } from '../components/chart0/chart2.component';
 
     WatchlistComponent,
     UserComponent,
-    MovimientosComponent
+    SymbolsComponent
 
   ],
   providers: [],

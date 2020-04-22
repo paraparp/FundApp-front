@@ -22,7 +22,6 @@ export class WatchlistComponent implements OnInit {
   ) { }
 
 
-
   name = ''
   portfolio: Portfolio;
   lots: Lot[] = [];

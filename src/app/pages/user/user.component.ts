@@ -29,7 +29,6 @@ export class UserComponent implements OnInit {
   portfolios: Portfolio[];
   portfolio: Portfolio;
 
-  displayedColumns = ['name', 'description', 'cost', 'list', 'edit'];
 
   ngOnInit() {
     this.user = this.auth.usuario;
@@ -43,43 +42,30 @@ export class UserComponent implements OnInit {
   }
 
 
-  openDialog(create: boolean, portfolioTab: Portfolio): void {
+  openDialog(portfolioTab: Portfolio): void {
 
-    console.log('entrada open ' + portfolioTab)
-
+    console.log(portfolioTab)
     const dialogRef = this.dialog.open(ModalComponent, {
-      width: '400px',
+      width: '300px',
       data: { portfolio: portfolioTab }
     });
     //NEW
-    if (create) {
-      console.log("CREATE")
+    if (portfolioTab == null) {
       dialogRef.afterClosed().subscribe((newPortfolio: Portfolio) => {
-
         if (newPortfolio != null) {
           newPortfolio.idUser = this.user.id
-          this.portfolioService.save(newPortfolio).subscribe(portfolio => {
-            this.loadPortfolios();
-            console.log(newPortfolio)
-          });
+          this.portfolioService.save(newPortfolio).subscribe(() => this.loadPortfolios());
         }
       });
     }
     //EDIT
     else {
-      console.log("EDIT")
       dialogRef.afterClosed().subscribe((editedPortfolio: Portfolio) => {
-        console.log(editedPortfolio);
-        this.portfolioService.edit(editedPortfolio).subscribe(editedPortfolio => {
-          console.log(editedPortfolio);
-          this.loadPortfolios();
-
-        });
+        this.portfolioService.edit(editedPortfolio).subscribe(() => this.loadPortfolios());
       });
     }
-
-    console.log("Create : " + create)
   }
+
 
   delete(portfolio: Portfolio) {
 
@@ -93,23 +79,9 @@ export class UserComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((deleted) => {
       if (deleted) {
-        this.portfolioService.delete(portfolio).subscribe((resp: any) => {
-          this.loadPortfolios();
-        });
+        this.portfolioService.delete(portfolio).subscribe(() => this.loadPortfolios());
       }
     })
-
-
-
   }
 
-
-  // /** Gets the total cost of all transactions. */
-  // getTotalVol() {
-  //   return this.operaciones.map(p => p.volume).reduce((acc, value) => acc + value, 0);
-  // }
-  //
-  // getTotalCost() {
-  //   return this.operaciones.map(p => p.getImporte()).reduce((acc, value) => acc + value, 0);
-  // }
 }

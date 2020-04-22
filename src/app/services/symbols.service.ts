@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class SymbService {
+export class SymbolsService {
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
 
@@ -22,6 +22,12 @@ export class SymbService {
     return this.http.get<Symb[]>(url)
   }
 
+  searchByIsin(isin: string) {
+    let url = URL_SERVICIOS + '/symbols/search/' + isin;
+    console.log(url)
+    return this.http.get<Symb>(url)
+  }
+
 
   edit(symbol: Symb) {
     let url = URL_SERVICIOS + '/symbols/';
@@ -29,7 +35,7 @@ export class SymbService {
     return this.http.patch<Symb>(url, symbol).pipe(
       map((resp: any) => {
 
-        this.snackBar.open('Symb edited: OK!', 'Close', {
+        this.snackBar.open('Symbol edited: OK!', 'Close', {
           duration: 4000,
         });
       }))
@@ -38,10 +44,10 @@ export class SymbService {
   save(symbol: Symb) {
     let url = URL_SERVICIOS + '/symbols/';
     console.log(url)
-    return this.http.put<Symb>(url, symbol).pipe(
+    return this.http.post<Symb>(url, symbol).pipe(
       map((resp: any) => {
 
-        this.snackBar.open('Symb saved: OK!', 'Close', {
+        this.snackBar.open('New symbol added: ' + symbol.name, null, {
           duration: 4000,
         });
       }))

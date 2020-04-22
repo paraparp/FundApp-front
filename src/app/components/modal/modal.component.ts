@@ -13,12 +13,9 @@ export class ModalComponent implements OnInit {
 
   portfolio: Portfolio;
 
-
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-    console.log("data -> " + this.data)
-
   }
 
   pForm: FormGroup;
@@ -29,18 +26,16 @@ export class ModalComponent implements OnInit {
       name: new FormControl('', [Validators.required, Validators.minLength(4)]),
       description: new FormControl('')
     });
-    console.log("data -> " + this.data)
-    console.log("preasig -> " + this.data.portfolio)
+
     if (this.data.portfolio != null) {
       this.portfolio = this.data.portfolio;
     } else {
       this.portfolio = new Portfolio();
     }
-    console.log("asignacion " + this.portfolio);
-
   }
+
   onNoClick(): void {
-    this.dialogRef.close(null);
+    this.dialogRef.close();
   }
 
   savePortfolio(): void {

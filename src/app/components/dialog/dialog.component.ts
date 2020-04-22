@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Lot } from 'src/app/models/lot.model';
-import { SymbService } from 'src/app/services/symbols.service';
+import { SymbolsService } from 'src/app/services/symbols.service';
 import { Symb } from 'src/app/models/symbol.model';
 import { FormControl } from '@angular/forms';
 
@@ -25,7 +25,7 @@ export class DialogComponent implements OnInit {
   dateFormCtrl = new FormControl(new Date());
 
   constructor(
-    private symbolService: SymbService,
+    private symbolService: SymbolsService,
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public lot: Lot,
   ) {

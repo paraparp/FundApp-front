@@ -1,0 +1,39 @@
+<div class="container">
+
+  <mat-form-field>
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="Search by ISIN" [(ngModel)]="value">
+
+    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </mat-form-field>
+
+
+
+
+  <div *ngIf="exist" class="alert alert-dark" role="alert">
+    {{symbol.name}} ({{symbol.isin}})
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+    No symbol with this <strong> ISIN </strong>
+  </div>
+
+  <div *ngIf="searching" class="py-3">
+    <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+  </div>
+
+  <button *ngIf="exist" (click)="save()" mat-raised-button color="accent" class="btn-block">
+    Add Symbol : {{value}}
+  </button>
+  <button *ngIf="!exist" mat-stroked-button (click)="search(value)" color="accent" class="btn-block">
+    Search
+  </button>
+  <button mat-stroked-button (click)="save()" color="accent" class="btn-block">
+    Close
+  </button>
+
+
+</div>

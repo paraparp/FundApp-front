@@ -1,0 +1,24 @@
+<mat-card>
+  <div class="mat-elevation-z10 ">
+    <mat-toolbar class="toolbar-color  mb-2">
+      <span class="center">Symbols</span>
+      <div class="mat-elevation-z4 button">
+        <button mat-stroked-button class="bar" (click)="openDialog()">
+          Add symbol
+        </button>
+      </div>
+
+    </mat-toolbar>
+  </div>
+</mat-card>
+
+<mat-card>
+  <app-table-symbols [symbols]="symbols"></app-table-symbols>
+</mat-card>
+<!-- <mat-card>
+
+
+
+  <app-contact></app-contact>
+
+</mat-card> -->
