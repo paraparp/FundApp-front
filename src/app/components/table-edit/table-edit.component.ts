@@ -17,29 +17,25 @@ export class TableEditComponent {
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Input() lots: Lot[] = [];
+  @Input() lots: Lot[];
 
   displayedColumns = ["name", "price", "volume", "cost", "broker", "date"];
   dataSource: MatTableDataSource<Lot>;
-  yeah: { date: string; lots: any; }[];
+
 
   constructor(private _dialog: MatDialog, private lotService: LotService) {
   }
 
   ngOnChanges() {
     this.dataSource = new MatTableDataSource(this.lots)
-
-    this.dataSource.sort = this.sort;
-    this.dataSource.sortingDataAccessor = (data, sortHeaderId: string) => {
-      return this.getPropertyByPath(data, sortHeaderId);
-    };
+    this.dataSource.filterPredicate = (data, filter) => {
+      const dataStr = data.symbol.name.toLowerCase() + data.broker.toLowerCase();
+      return dataStr.indexOf(filter) != -1;
+    }
     this.dataSource.paginator = this.paginator;
-
-
   }
 
   groupBySymbol() {
-
     //Group by symbol
     let group = this.lots.reduce((r, a) => {
       r[a.symbol.id] = [...r[a.symbol.id] || [], a];
@@ -69,7 +65,6 @@ export class TableEditComponent {
 
     const group2 = [];
     groupArrays.map(((lot) => {
-
       group2.push({
         date: lot.date,
         cost: lot.cost.reduce((acc, value) => acc + value, 0)
@@ -84,11 +79,9 @@ export class TableEditComponent {
     return pathString.split('.').reduce((o, i) => o[i], obj);
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue;
   }
-
 
   openDialog(row: Lot) {
 
@@ -102,7 +95,7 @@ export class TableEditComponent {
     dialog.afterClosed().subscribe(editedLot => {
       console.log(editedLot)
       if (editedLot) {
-        this.lotService.edit(editedLot).subscribe(resp => this.dataSource._updateChangeSubscription())
+        this.lotService.edit(editedLot).subscribe(() => this.dataSource._updateChangeSubscription())
       }
     });
   }

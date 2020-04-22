@@ -1,8 +1,8 @@
 <mat-form-field>
-  <mat-label>Find</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="...">
-</mat-form-field>
+  <mat-label>Search</mat-label>
 
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
 
 <table *ngIf="portfolioSymbs" mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8 fadeIn">
 
@@ -20,7 +20,6 @@
   <ng-container matColumnDef="representation">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Represent </th>
     <td class="percentage" mat-cell *matCellDef="let s">
-
       {{s.percentInPortfolio | percent:'1.2'}}
       <mat-progress-bar color="warn" [value]="s.percentInPortfolio * 100"></mat-progress-bar>
 

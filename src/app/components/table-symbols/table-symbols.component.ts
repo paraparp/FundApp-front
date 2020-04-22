@@ -14,7 +14,7 @@ export class TableSymbolsComponent implements OnInit {
 
 
 
-  constructor(private symbolsService: SymbolsService) { }
+  constructor() { }
 
 
 

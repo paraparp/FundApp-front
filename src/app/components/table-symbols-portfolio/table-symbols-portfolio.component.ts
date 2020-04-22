@@ -20,6 +20,7 @@ export class TableSymbolsPortfolioComponent implements OnInit {
   dataSource: MatTableDataSource<SymbolLot>;
 
   constructor() {
+
   }
   ngOnInit(): void {
 
@@ -31,10 +32,16 @@ export class TableSymbolsPortfolioComponent implements OnInit {
 
 
     this.dataSource = new MatTableDataSource(this.portfolioSymbs)
-    this.dataSource.sort = this.sort;
-    this.dataSource.sortingDataAccessor = (data, sortHeaderId: string) => {
-      return this.getPropertyByPath(data, sortHeaderId);
-    };
+    // this.dataSource.sort = this.sort;
+    // this.dataSource.sortingDataAccessor = (data, sortHeaderId: string) => {
+    //   return this.getPropertyByPath(data, sortHeaderId);
+    // };
+
+
+    this.dataSource.filterPredicate = (data, filter) => {
+      const dataStr = data.symbol.name.toLowerCase() + data.symbol.lastDate.toLowerCase();
+      return dataStr.indexOf(filter) != -1;
+    }
   }
 
 
@@ -42,18 +49,34 @@ export class TableSymbolsPortfolioComponent implements OnInit {
     return pathString.split('.').reduce((o, i) => o[i], obj);
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue;
   }
-  isUpdated(updatedAt): boolean {
 
-    var today = new Date();
-    var yesterDay = today.getDate() - 1;
-    var day = updatedAt.split(" ")[1];
-    if (yesterDay == parseInt(day)) {
-      return true
+  // applyFilter(event: Event) {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   // this.dataSource.filter = filterValue.trim().toLowerCase();
+  //
+  //   this.dataSource.filterPredicate = (data, filterValue) => {
+  //     const dataStr = data.symbol.name.toLowerCase() + data.symbol.lastDate.toLowerCase();
+  //     return dataStr.indexOf(filterValue) != -1;
+  //   }
+
+  // this.dataSource = new MatTableDataSource(this.portfolioSymbs.filter(
+  //   (data: SymbolLot) => data.symbol.name.toLowerCase().includes(filterValue.toLowerCase())
+  // ))
+  // }
+
+
+  isUpdated(updatedAt): boolean {
+    if (updatedAt != null) {
+      var yesterDay = new Date().getDate() - 1;
+      var day = updatedAt.split(" ")[1];
+      if (yesterDay == parseInt(day)) {
+        return true
+      }
     }
+
     return false
   }
 
@@ -61,7 +84,6 @@ export class TableSymbolsPortfolioComponent implements OnInit {
   getTotalValue() {
     return this.portfolioSymbs.map(lot => lot.value).reduce((acc, value) => acc + value, 0)
   }
-
   getTotalCost() {
     return this.portfolioSymbs.map(lot => lot.cost).reduce((acc, value) => acc + value, 0)
   }
@@ -69,9 +91,7 @@ export class TableSymbolsPortfolioComponent implements OnInit {
     return (this.getTotalValue() - this.getTotalCost()) / this.getTotalCost()
   }
 
-
   today() {
-
     return new Date();
   }
 
