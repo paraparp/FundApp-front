@@ -17,24 +17,51 @@ export class TableEditComponent {
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @Input() lots: Lot[];
+  @Input() public lots: Lot[];
 
-  displayedColumns = ["name", "price", "volume", "cost", "broker", "date"];
+  displayedColumns = ["name", "price", "volume", "cost", "broker", "date", 'edit'];
   dataSource: MatTableDataSource<Lot>;
-
 
   constructor(private _dialog: MatDialog, private lotService: LotService) {
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.dataSource = new MatTableDataSource(this.lots)
+    this.dataSource.sort = this.sort;
+    //Filter
     this.dataSource.filterPredicate = (data, filter) => {
       const dataStr = data.symbol.name.toLowerCase() + data.broker.toLowerCase();
       return dataStr.indexOf(filter) != -1;
     }
+    //Paginator
     this.dataSource.paginator = this.paginator;
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue;
+  }
+
+  getPropertyByPath(obj: Object, pathString: string) {
+    return pathString.split('.').reduce((o, i) => o[i], obj);
+  }
+
+
+  openDialog(row: Lot) {
+    const dialog = this._dialog.open(DialogComponent, {
+      width: "450px",
+      disableClose: true,
+      data: row
+    });
+    dialog.afterClosed().subscribe(editedLot => {
+      if (editedLot) {
+        this.lotService.edit(editedLot).subscribe(() => this.dataSource._updateChangeSubscription())
+      }
+    });
+  }
+
+
+
+  //Agrupacion test
   groupBySymbol() {
     //Group by symbol
     let group = this.lots.reduce((r, a) => {
@@ -73,30 +100,5 @@ export class TableEditComponent {
 
     return group2;
 
-  }
-
-  getPropertyByPath(obj: Object, pathString: string) {
-    return pathString.split('.').reduce((o, i) => o[i], obj);
-  }
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue;
-  }
-
-  openDialog(row: Lot) {
-
-    console.log(row)
-    const dialog = this._dialog.open(DialogComponent, {
-      width: "450px",
-      disableClose: true,
-      data: row
-    });
-
-    dialog.afterClosed().subscribe(editedLot => {
-      console.log(editedLot)
-      if (editedLot) {
-        this.lotService.edit(editedLot).subscribe(() => this.dataSource._updateChangeSubscription())
-      }
-    });
   }
 }

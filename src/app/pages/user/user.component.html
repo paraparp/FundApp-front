@@ -1,13 +1,15 @@
-<mat-toolbar class="toolbar-color py-5 mb-4">
-  <span class="center">{{user?.username}}</span>
+<mat-toolbar class="toolbar-color">
+
+  <h2 class="light subcolor">Portfolios</h2>
+
+  <span class="fill-space"></span>
+
   <div class="mat-elevation-z4 button">
-    <button mat-stroked-button class="bar" (click)="openDialog(null)">
-      Add Portfolio
-    </button>
+    <button mat-stroked-button class="bar" (click)="openDialog(null)"> New</button>
   </div>
+
 </mat-toolbar>
 
+<br>
 
-<div class="mat-elevation-z8 fadeIn">
-  <app-table-portfolios [portfolios]="portfolios" (delete)="delete($event)" (dialog)="openDialog($event)"> </app-table-portfolios>
-</div>
+<app-table-portfolios [portfolios]="portfolios" (delete)="delete($event)" (dialog)="openDialog($event)"> </app-table-portfolios>

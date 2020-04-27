@@ -25,11 +25,12 @@ import { DialogComponent } from '../components/dialog/dialog.component';
 import { TableSymbolsPortfolioComponent } from '../components/table-symbols-portfolio/table-symbols-portfolio.component';
 import { ChartComponent } from '../components/chart/chart.component';
 import { ChartsModule } from 'ng2-charts';
-import { Chart2Component } from '../components/chart0/chart2.component';
+import { Chart2Component } from '../components/chart2/chart2.component';
 import { TableSymbolsComponent } from '../components/table-symbols/table-symbols.component';
 import { ContactComponent } from '../components/contact/contact.component';
 import { DialogSymbolComponent } from '../components/dialog-symbol/dialog-symbol.component';
 import { TablePortfoliosComponent } from '../components/table-portfolios/table-portfolios.component';
+
 
 
 @NgModule({
@@ -50,7 +51,7 @@ import { TablePortfoliosComponent } from '../components/table-portfolios/table-p
     Chart2Component,
     TableSymbolsComponent,
     DialogSymbolComponent,
-    TablePortfoliosComponent
+    TablePortfoliosComponent,
 
   ],
   imports: [

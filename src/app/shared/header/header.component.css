@@ -1,27 +1,42 @@
-/* .companyName {
-  font-size: 150%;
+div.title {
+  -webkit-tap-highlight-color: transparent;
+  fill: #fff;
+  /* font-family: "Source Sans Pro", sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeSpeed;
+  text-align: left !important;
+  white-space: nowrap;
+  cursor: pointer;
+  color: inherit;
+  box-sizing: inherit;
+  border: 0;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  user-select: auto !important;
+  font-size: 25px;
+  letter-spacing: -1px;
+  font-weight: 600;
+  pointer-events: all;
 }
 
-div {
-  overflow: inherit;
+.light {
+  -webkit-tap-highlight-color: transparent;
+  fill: #fff;
+  /* font-family: "Source Sans Pro", sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeSpeed;
+  text-align: left !important;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 25px;
+  letter-spacing: -1px;
+  box-sizing: inherit;
+  border: 0;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  font-weight: 300 !important;
+  user-select: auto !important;
+  pointer-events: all;
 }
-
-a {
-  text-decoration: none;
-  font-size: 80%;
-  white-space: normal;
-}
-
-button {
-  font-size: 110%;
-  min-width: min-content;
-}
-
-.example-icon {
-  padding: 0 14px;
-}
-
-.example-spacer {
-  flex: 1 1 auto;
-}
-*/

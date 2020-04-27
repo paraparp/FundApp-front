@@ -1,7 +1,6 @@
 /* Add application styles & imports to this file! */
 /* Angular Material */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
 /* @import '~@angular/material/prebuilt-themes/pink-bluegrey.css'; */
 /* @import '@angular/material/prebuilt-themes/purple-green.css'; */
 html, body {
@@ -11,7 +10,17 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  /* background: bluegrey; */
+  background-color: white;
+  min-height: 100%;
+}
+
+.subcolor {
+  color: aquamarine;
+}
+
+.span-sub {
+  color: aquamarine;
+  background-color: black;
 }
 
 div.login-wrapper {
@@ -19,27 +28,27 @@ div.login-wrapper {
 }
 
 .navbar-color {
-  background-color: #e91e63;
-  color: white;
+  background-color: #000000;
+  color: lightgrey;
+  /* position: fixed; */
 }
 
 .router-link-active {
-  background-color: #e91e63;
-  font-size: 85%;
-  font-weight: bold;
+  background-color: #000000;
+  font-size: 75%;
 }
 
 .no-border {
   border-radius: 10px;
-  background-color: #e91e63;
+  background-color: #000000;
 }
 
 .toolbar-color {
   background-color: #4d4d4d;
-  color: white;
+  color: lightgrey;
 }
 
-.center {
+.h-center {
   margin-left: auto;
   margin-right: auto;
 }
@@ -55,6 +64,12 @@ div.login-wrapper {
 
 .selected {
   background-color: gainsboro;
+}
+
+h2.light {
+  outline: none;
+  padding: 24px 8px;
+  font-weight: 200 !important;
 }
 
 h3.section {
@@ -73,9 +88,11 @@ h3.section {
 }
 
 /* .mat-stroked-button {
-  border: 1px solid currentColor;
+  border: 1px ;
   line-height: 34px;
-  background: #FFF7FA;
+  color: aquamarine;
+  background-color: black;
+  ;
 } */
 mat-card-title,
 mat-card-content {
@@ -99,13 +116,30 @@ mat-option {
   min-width: 100px;
 }
 
-.button {
-  display: flex;
-  justify-content: flex;
+.title {
+  color: white;
+}
+
+/* ---------------------Button -------------------------- */
+button:hover {
+  background-color: aquamarine;
+  color: white;
 }
 
 button.bar {
-  background-color: #e91e63;
+  background-color: #000000;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 70%;
+  cursor: pointer;
+  font-weight: 300 !important;
+}
+
+.fill-space {
+  flex: 1 1 auto;
 }
 
 .login-wrapper .form {
@@ -144,9 +178,10 @@ div.left {
   font-weight: 450;
 }
 
-/* td.main {
-  text-align: left
-} */
+td.main {
+  text-align: right
+}
+
 td.mat-footer-cell {
   font-weight: bold;
   font-size: 115%;
@@ -159,29 +194,33 @@ td.mat-footer-cell {
 }
 
 .subline {
-  font-size: 60%;
+  font-size: 70%;
   font-style: italic;
 }
 
 th.mat-header-cell, td.mat-cell {
   text-align: center;
-  /* border: 5px solid #EEEEEE; */
+  border: 1px solid #EEEEEE;
 }
 
-th.mat-sort-header {
+td.mat-cell {
+  font-weight: 300 !important;
+}
+
+/* th.mat-sort-header {
   text-align: center;
-}
-
+} */
 tr.mat-row:hover {
-  font-weight: bold;
-  background-color: #EEEEEE;
+  /* font-weight: bold; */
+  background-color: #f2f2f2;
+  cursor: pointer;
 }
 
 .percentage {
   font-size: 80%;
 }
 
-/* FADEIN */
+/* --------------- FADEIN  ----------------------*/
 .fadeIn {
   -webkit-animation: fadein 1s;
   /* Safari, Chrome and Opera > 12.1 */
@@ -246,4 +285,35 @@ tr.mat-row:hover {
   to {
     opacity: 1;
   }
+}
+
+/* ---------- matStyle ------------------------ */
+/* Styles for tab labels */
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: aquamarine;
+}
+
+/* Styles for tab labels */
+::ng-deep .mat-tab {
+  background-color: aquamarine;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary, .mat-ink-bar {
+  background: aquamarine;
+  height: 2px;
+}
+
+.mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: grey !important;
+}
+
+.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: grey !important;
+}
+
+.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: aquamarine !important;
 }

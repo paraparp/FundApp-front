@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ChangeDetectorRef } from '@angular/core';
 
 import { SymbolLot } from 'src/app/models/symbol-lot.model';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -10,40 +10,45 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './table-symbols-portfolio.component.html',
   styleUrls: ['./table-symbols-portfolio.component.css']
 })
-export class TableSymbolsPortfolioComponent implements OnInit {
+export class TableSymbolsPortfolioComponent {
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() public portfolioSymbs: SymbolLot[];
 
-  displayedColumns = ['name', 'representation', 'volume', 'price', 'lastPrice', 'cost', 'value', 'variation', 'updated'];
+  totalCost;
+  totalValue;
+
+  displayedColumns = ['name', 'representation', 'volume', 'price', 'lastPrice', 'cost', 'value', 'variation'];
   dataSource: MatTableDataSource<SymbolLot>;
 
-  constructor() {
-
-  }
-  ngOnInit(): void {
-
-  }
-  ngOnChanges() {
-
-    //Añadimos el porcentaje en cartera
-    this.portfolioSymbs.forEach(lot => lot.percentInPortfolio = (lot.value / this.getTotalValue()))
+  constructor(private cdref: ChangeDetectorRef) { }
 
 
-    this.dataSource = new MatTableDataSource(this.portfolioSymbs)
-    // this.dataSource.sort = this.sort;
-    // this.dataSource.sortingDataAccessor = (data, sortHeaderId: string) => {
-    //   return this.getPropertyByPath(data, sortHeaderId);
-    // };
+  ngAfterViewInit(): void {
+    //Sort
+    this.sort.sort(<MatSortable>{ id: 'percentInPortfolio', start: 'desc' });
+    this.dataSource.sort = this.sort;
+    this.dataSource.sortingDataAccessor = (data, sortHeaderId: string) => {
+      return this.getPropertyByPath(data, sortHeaderId);
+    };
 
-
+    //Filter
     this.dataSource.filterPredicate = (data, filter) => {
-      const dataStr = data.symbol.name.toLowerCase() + data.symbol.lastDate.toLowerCase();
+      const dataStr = data.symbol.name.toLowerCase() + data.symbol.category.toLowerCase() + data.symbol.lastDate.toLowerCase();
       return dataStr.indexOf(filter) != -1;
     }
+
+    //you have to tell angular that you updated the content after ngAfterContentChecked
+    this.cdref.detectChanges();
   }
 
+
+  ngOnChanges() {
+    this.dataSource = new MatTableDataSource(this.portfolioSymbs)
+    this.totalCost = this.getTotalCost();
+    this.totalValue = this.getTotalValue()
+  }
 
   getPropertyByPath(obj: Object, pathString: string) {
     return pathString.split('.').reduce((o, i) => o[i], obj);
@@ -51,22 +56,15 @@ export class TableSymbolsPortfolioComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue;
+
+    //Actualizamos totales
+    this.totalCost = this.dataSource.filteredData.reduce((summ, v) => summ += v.cost, 0);
+    this.totalValue = this.dataSource.filteredData.reduce((summ, v) => summ += v.value, 0);
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
-
-  // applyFilter(event: Event) {
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   // this.dataSource.filter = filterValue.trim().toLowerCase();
-  //
-  //   this.dataSource.filterPredicate = (data, filterValue) => {
-  //     const dataStr = data.symbol.name.toLowerCase() + data.symbol.lastDate.toLowerCase();
-  //     return dataStr.indexOf(filterValue) != -1;
-  //   }
-
-  // this.dataSource = new MatTableDataSource(this.portfolioSymbs.filter(
-  //   (data: SymbolLot) => data.symbol.name.toLowerCase().includes(filterValue.toLowerCase())
-  // ))
-  // }
-
 
   isUpdated(updatedAt): boolean {
     if (updatedAt != null) {
@@ -76,7 +74,6 @@ export class TableSymbolsPortfolioComponent implements OnInit {
         return true
       }
     }
-
     return false
   }
 
@@ -86,9 +83,15 @@ export class TableSymbolsPortfolioComponent implements OnInit {
   }
   getTotalCost() {
     return this.portfolioSymbs.map(lot => lot.cost).reduce((acc, value) => acc + value, 0)
+
   }
   getTotalVariation() {
     return (this.getTotalValue() - this.getTotalCost()) / this.getTotalCost()
+  }
+
+
+  calculation() {
+    return this.dataSource.data.reduce((summ, v) => summ += v.cost, 0)
   }
 
   today() {

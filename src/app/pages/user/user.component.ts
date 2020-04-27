@@ -74,11 +74,12 @@ export class UserComponent implements OnInit {
       text: "Tou are traying to delete a Portfolio",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: 'aquamarine',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!'
     }).then((deleted) => {
-      if (deleted) {
+
+      if (deleted.value) {
         this.portfolioService.delete(portfolio).subscribe(() => this.loadPortfolios());
       }
     })

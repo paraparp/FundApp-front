@@ -14,6 +14,8 @@ export class HeaderComponent {
   }
   username: string = '';
 
+  title = "Fund  Manager"
+
   ngOnInit() {
 
 

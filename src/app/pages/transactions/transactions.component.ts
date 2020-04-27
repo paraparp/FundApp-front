@@ -29,21 +29,31 @@ export class TransactionsComponent implements OnInit {
   lots: Lot[]
   portfolio: Portfolio;
   dateGroup;
+  id;
+
 
   ngOnInit() {
-
     this.activatedRoute.paramMap.subscribe(params => {
-      let id = +params.get('id')
-      this.getPortfolio(id)
-      this.getLots(id)
+      this.id = +params.get('id')
+      this.getPortfolio(this.id)
+      this.getLots(this.id)
     })
 
   }
 
+  // ngAfterViewInit() {
+  //   console.log(this.id)
+  //   this.getPortfolio(this.id)
+  //   this.getLots(this.id)
+  //
+  // }
 
-  ngOnChanges() {
 
-  }
+  // ngOnChanges() {
+  //   this.getPortfolio(this.id)
+  //   this.getLots(this.id)
+  //   console.log(this.lots)
+  // }
 
   openDialog() {
 
@@ -55,21 +65,17 @@ export class TransactionsComponent implements OnInit {
     dialog.afterClosed().subscribe(newLot => {
       if (newLot.symbol) {
         newLot.idPortfolio = this.portfolio.id
-        this.lotService.edit(newLot).subscribe(newLot => {
-          // this.loadData()
-        })
+        this.lotService.save(newLot).subscribe(() => this.getLots(this.id))
       }
     });
   }
 
-  getLots(id) {
+  getPortfolio(id) {
     return this.portfolioService.getPortfolio(id).subscribe(portfolio => this.portfolio = portfolio)
   }
 
-  getPortfolio(id) {
+  getLots(id) {
     return this.lotService.getLotsByPortfolio(id).subscribe((lots: Lot[]) => this.lots = lots)
   }
-
-
 
 }

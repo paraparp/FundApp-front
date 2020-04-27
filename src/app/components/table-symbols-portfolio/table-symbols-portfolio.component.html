@@ -1,16 +1,21 @@
-<mat-form-field>
-  <mat-label>Search</mat-label>
+<div class="container">
+  <mat-form-field>
+    <mat-label>Search</mat-label>
 
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
 
-<table *ngIf="portfolioSymbs" mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8 fadeIn">
-
+<table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8 fadeIn">
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef mat-sort-header="symbol.name"> Name </th>
     <td mat-cell *matCellDef="let s">
-      <div class="mediumbold left"> {{s.symbol.name}}</div>
+      <div class="mediumbold left">
+        {{s.symbol.name}}
+
+        <span style="position: absolute" class="badge badge-pill" style="color: black" [ngStyle]="{'background-color': isUpdated(s.symbol.lastDate)? '#dcfce2' : '#fcdcdc'}"> {{s.symbol.lastDate}}</span>
+      </div>
       <div class="subline left">{{s.symbol.isin}} - {{s.symbol.category}} </div>
 
     </td>
@@ -18,11 +23,10 @@
   </ng-container>
 
   <ng-container matColumnDef="representation">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Represent </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="percentInPortfolio"> Represent </th>
     <td class="percentage" mat-cell *matCellDef="let s">
-      {{s.percentInPortfolio | percent:'1.2'}}
+      {{s.cost/totalCost | percent:'1.2'}}
       <mat-progress-bar color="warn" [value]="s.percentInPortfolio * 100"></mat-progress-bar>
-
     </td>
     <td mat-footer-cell *matFooterCellDef> </td>
   </ng-container>
@@ -42,33 +46,32 @@
   <ng-container matColumnDef="cost">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Cost </th>
     <td mat-cell *matCellDef="let s"> {{s.cost| currency:'EUR':'symbol-narrow'}} </td>
-    <td mat-footer-cell *matFooterCellDef>{{getTotalCost() | currency:'EUR':'symbol-narrow'}} </td>
+    <td mat-footer-cell *matFooterCellDef>{{totalCost | currency:'EUR':'symbol-narrow'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="value">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Value </th>
     <td mat-cell *matCellDef="let s"> {{s.value | currency:'EUR':'symbol-narrow'}} </td>
-    <td mat-footer-cell *matFooterCellDef> {{getTotalValue() | currency:'EUR':'symbol-narrow'}}</td>
+    <td mat-footer-cell *matFooterCellDef> {{totalValue | currency:'EUR':'symbol-narrow'}}</td>
   </ng-container>
 
   <ng-container matColumnDef="lastPrice">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Price </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="symbol.lastPrice"> Last Price </th>
     <td mat-cell *matCellDef="let s"> {{s.symbol.lastPrice}} </td>
     <td mat-footer-cell *matFooterCellDef> </td>
   </ng-container>
 
 
   <ng-container matColumnDef="variation">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Variation</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="percentVariation"> Variation</th>
     <td mat-cell class="mediumbold" *matCellDef="let s" [ngStyle]="{'background-color': s.percentVariation>0?  '#dcfce2' : '#fcdcdc'}">
       {{s.value - s.cost | currency:'EUR':'symbol-narrow'}}
       <div class="subline"> {{ s.percentVariation | percent:'1.2'}}</div>
       <mat-progress-bar color="green" [value]=" s.percentVariation * 100"></mat-progress-bar>
-
     </td>
     <td mat-footer-cell class="centered" *matFooterCellDef [ngStyle]="{'background-color': getTotalVariation()>0?  '#dcfce2' : '#fcdcdc'}">
-      {{getTotalValue()-getTotalCost()| currency:'EUR':'symbol-narrow'}} |
-      <span class="subline">{{ getTotalVariation() | percent:'1.2'}}</span>
+      {{totalValue-totalCost| currency:'EUR':'symbol-narrow'}} |
+      <span class="subline">{{ (totalValue-totalCost)/totalCost | percent:'1.2'}}</span>
     </td>
   </ng-container>
 
@@ -78,18 +81,19 @@
     <td mat-footer-cell *matFooterCellDef [ngStyle]="{'background-color': getTotalVariation()>0?  '#dcfce2' : '#fcdcdc'}">
       {{ getTotalVariation() | percent:'1.2'}}</td>
   </ng-container>
-
+  <!--
   <ng-container class="centered" matColumnDef="updated">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Update </th>
-    <td [ngStyle]="{'background-color': isUpdated(s.symbol.lastDate)? '#dcfce2' : '#fcdcdc'}" mat-cell *matCellDef="let s">
-      {{s.symbol.lastDate}}
+    <th mat-header-cell *matHeaderCellDef> Update </th>
+    <td mat-cell *matCellDef="let s">
+      <span class="badge badge-pill" style="color: black" [ngStyle]="{'background-color': isUpdated(s.symbol.lastDate)? '#dcfce2' : '#fcdcdc'}"> {{s.symbol.lastDate}}</span>
+
     </td>
     <td mat-footer-cell *matFooterCellDef>
       {{today() | date}}
     </td>
-  </ng-container>
+  </ng-container> -->
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-row *matRowDef="let row ; columns: displayedColumns;"></tr>
   <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
 </table>

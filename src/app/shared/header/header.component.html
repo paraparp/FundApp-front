@@ -1,38 +1,63 @@
 <div fxLayout="column" fxFlexFill>
   <mat-toolbar class="navbar-color mat-elevation-z6 p-3" fxLayout="row" fxLayoutAlign="start stretch" style="z-index: 2">
 
-    <button mat-button fxShow="true" fxHide.gt-sm="true">
-      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
-    </button>
 
-    <button mat-button routerLink="/user" routerLinkActive="router-link-active">
-      <mat-icon>home</mat-icon>
-    </button>
 
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px" class="pl-3">
-      <span class="text-sm-right">Gestor Fondos</span>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px" class="pl-3 fadeIn">
+      <button mat-button fxShow="true" fxHide.gt-sm="true">
+        <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+      </button>
+
+      <!-- <button mat-button routerLinkActive="router-link-active" fxShow="false" fxShow.gt-sm>
+        <mat-icon>home</mat-icon>
+      </button> -->
+
+      <div class="title">Fund<span class="light subcolor"> Manager</span></div>
+
     </div>
 
-    <span fxFlex></span>
+    <!-- <div fxFlex="20" id="today" class="text-center" routerLink="/user">
+      <span ng-show="title || false" class="title">{{ title }}</span>
+
+    </div> -->
+
+
+    <span class="fill-space"></span>
 
     <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-      <div *ngIf="auth.isUserLoggedIn()">
 
+      <div *ngIf="auth.isUserLoggedIn()" class="fadeIn">
 
-        <button mat-button routerLink="/user" routerLinkActive="router-link-active no-border">User</button>
-        <!-- <button mat-button routerLink="/watchlist" routerLinkActive="router-link-active no-border">Watchlist</button>
-        <button mat-button routerLink="/transactions" routerLinkActive="router-link-active no-border">Transactions</button> -->
-        <button mat-button routerLink="/symbols" routerLinkActive="active-link">Symbols</button>
+        <button mat-button routerLink="/user" routerLinkActive="router-link-active no-border" class="subcolor">Portfolios</button>
+        <button mat-button routerLink="/symbols" routerLinkActive="router-link-active no-border" class="subcolor">Symbols</button>
 
-        <button mat-raised-button routerLink="/login" routerLinkActive="router-link-active">
+        <button mat-stroked-button routerLink="/login" routerLinkActive="router-link-active">
           <i class="material-icons md-48">face</i>
           {{auth.usuario.username}}
         </button>
-        <button (click)="auth.logOut()" routerLink="/login" mat-button routerLink="/login" routerLinkActive="active-link">Logout </button>
+
+        <button mat-icon-button [matMenuTriggerFor]="matmenu">
+          <mat-icon>public</mat-icon>
+        </button>
+        <mat-menu #matmenu="matMenu">
+          <button mat-menu-item>
+            <!-- (click)="changeLanguage('en')" -->
+            <mat-icon>flag</mat-icon>
+            <span> English</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>flag</mat-icon>
+            <span> Español </span>
+          </button>
+        </mat-menu>
+
+        <button (click)="auth.logOut()" routerLink="/login" mat-button routerLinkActive="active-link"><i class="material-icons md-48">exit_to_app</i> </button>
+
       </div>
-      <div *ngIf="!auth.isUserLoggedIn()">
-        <button routerLink="/login" mat-button routerLink="/login" routerLinkActive="active-link">Log In </button>
-        <button routerLink="/login" mat-button routerLink="/login" routerLinkActive="active-link">Register </button>
+
+      <div *ngIf="!auth.isUserLoggedIn()" class="fadeIn subcolor">
+        <button routerLink="/login" mat-button routerLinkActive="active-link">Log In </button>
+        <button routerLink="/register" mat-button routerLinkActive="active-link">Register </button>
 
       </div>
     </div>
@@ -40,13 +65,26 @@
   </mat-toolbar>
 
   <mat-sidenav-container fxFlexFill class="example-container">
-    <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
-      <div fxLayout="column">
-        <a mat-button routerLink="/user">User</a>
-        <a mat-button routerLink="/watchlist">Watchlist</a>
-        <a mat-button routerLink="/transactions">Transactions</a>
+    <mat-sidenav (click)="sidenav.toggle()" color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxShow="true" fxShow.gt-sm>
 
+      <div *ngIf="auth.isUserLoggedIn()" fxLayout="column">
+
+        <button mat-raised-button routerLink="/login" routerLinkActive="router-link-active">
+          <i class="material-icons md-48">face</i>
+          {{auth.usuario.username}}
+        </button>
+        <a mat-button routerLink="/user">Portfolios</a>
+        <a mat-button routerLink="/symbols">Symbols</a>
+
+        <mat-divider></mat-divider>
+
+        <a mat-button (click)="auth.logOut()" routerLink="/login"> <i class="material-icons md-48">exit_to_app</i></a>
       </div>
+      <div *ngIf="!auth.isUserLoggedIn()" fxLayout="column">
+        <a mat-button routerLink="/login">Login</a>
+        <a mat-button routerLink="/register">Register</a>
+      </div>
+
     </mat-sidenav>
     <mat-sidenav-content fxFlexFill>
 
@@ -57,8 +95,8 @@
 
 
 </div>
-
-<!-- <div style="height: 100vh;">
+<!--
+<div style="height: 100vh;">
   <div class="navbar">
     <mat-toolbar color="primary" class="mat-elevation-z24 topo" [style.margin-bottom]="'24px'">
       <div fxShow="true" fxHide.gt-sm="true">
@@ -79,7 +117,7 @@
 
   </div>
   <mat-sidenav-container fxFlexFill class="example-container">
-    <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
+    <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false"  fxShow="false" fxShow.gt-sm>
       <div fxLayout="column">
         <a mat-button routerLink="/user">User</a>
         <a mat-button routerLink="/watchlist">Watchlist</a>

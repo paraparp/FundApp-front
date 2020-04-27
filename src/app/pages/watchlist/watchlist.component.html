@@ -1,21 +1,72 @@
 <mat-toolbar class="toolbar-color">
-  <span class="center">{{name}}</span>
+  <h2 class="light subcolor">Portfolios / {{name}}</h2>
+
+  <span class="fill-space"></span>
   <div class="mat-elevation-z4 button">
-    <button mat-stroked-button class="bar" [routerLink]="['/transactions/', portfolio?.id]">
-      View lots
+
+    <button mat-stroked-button class="bar" (click)="openDialog()">
+      New
     </button>
   </div>
 </mat-toolbar>
 
 
 
+<mat-spinner class="center" *ngIf="!portfolioSymbs"></mat-spinner>
 
-<mat-card>
-  <mat-spinner class="center" *ngIf="!portfolioSymbs"></mat-spinner>
-  <!-- Table with symbols of a portfolio -->
-  <app-table-symbols-portfolio *ngIf="portfolioSymbs" [portfolioSymbs]="portfolioSymbs"></app-table-symbols-portfolio>
-</mat-card>
 
-<mat-card>
-  <app-chart *ngIf="portfolioSymbs" [portfolioSymbs]="portfolioSymbs"></app-chart>
-</mat-card>
+<mat-tab-group mat-align-tabs="center">
+
+  <mat-tab label="Table">
+
+    <app-table-symbols-portfolio *ngIf="portfolioSymbs" [portfolioSymbs]="portfolioSymbs"></app-table-symbols-portfolio>
+
+  </mat-tab>
+
+  <mat-tab label="Charts">
+    <div class="container">
+      <app-chart *ngIf="portfolioSymbs" [portfolioSymbs]="portfolioSymbs"></app-chart>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Lots">
+    <div class="container">
+      <app-transactions></app-transactions>
+    </div>
+  </mat-tab>
+
+</mat-tab-group>
+
+
+
+<!-- <mat-accordion>
+
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Table
+      </mat-panel-title>
+      <mat-panel-description>
+        Portfolio's Symbols
+      </mat-panel-description>
+
+    </mat-expansion-panel-header>
+
+    <app-table-symbols-portfolio *ngIf="portfolioSymbs" [portfolioSymbs]="portfolioSymbs"></app-table-symbols-portfolio>
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Charts
+      </mat-panel-title>
+      <mat-panel-description>
+        Portfolio's Charts
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="container">
+      <app-chart *ngIf="portfolioSymbs" [portfolioSymbs]="portfolioSymbs"></app-chart>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion> -->

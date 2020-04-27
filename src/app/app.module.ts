@@ -21,6 +21,10 @@ import { AlertComponent } from './components/alert/alert.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
+import { MyTableComponent } from './test/my-table/my-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 
 
@@ -32,6 +36,7 @@ registerLocaleData(localePy, 'es');
   declarations: [
     AppComponent,
     AlertComponent,
+    MyTableComponent,
 
 
 
@@ -45,6 +50,9 @@ registerLocaleData(localePy, 'es');
     PagesModule,
     ServiceModule,
     BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
 
   ],
   providers: [

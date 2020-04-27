@@ -1,7 +1,10 @@
 <mat-card>
   <div class="mat-elevation-z10 ">
     <mat-toolbar class="toolbar-color  mb-2">
-      <span class="center">Symbols</span>
+      <h2 class="light subcolor">Portfolios</h2>
+
+      <span class="fill-space"></span>
+
       <div class="mat-elevation-z4 button">
         <button mat-stroked-button class="bar" (click)="openDialog()">
           Add symbol
@@ -12,9 +15,9 @@
   </div>
 </mat-card>
 
-<mat-card>
-  <app-table-symbols [symbols]="symbols"></app-table-symbols>
-</mat-card>
+
+<app-table-symbols [symbols]="symbols"></app-table-symbols>
+
 <!-- <mat-card>
 
 
