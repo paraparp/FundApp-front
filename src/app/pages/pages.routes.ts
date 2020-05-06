@@ -1,13 +1,16 @@
 import { PagesComponent } from './pages.component';
 import { Routes, RouterModule } from '@angular/router';
 import { WatchlistComponent } from './watchlist/watchlist.component';
-import { UserComponent } from './user/user.component';
+
 import { TransactionsComponent } from './transactions/transactions.component';
 import { SymbolsComponent } from './symbols/symbols.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 
 import { AuthGuardService } from '../services/auth-guard.service';
+import { PortfoliosComponent } from './portfolios/portfolios.component';
+import { TestComponent } from './test/test.component';
+import { Test2Component } from './test2/test2.component';
 
 
 const pagesRoutes: Routes = [
@@ -16,7 +19,7 @@ const pagesRoutes: Routes = [
     //canActivate: [LoginGuardGuard],
     children: [
       { path: 'watchlist', component: WatchlistComponent, data: { label: 'Portfolio' }, canActivate: [AuthGuardService] },
-      { path: 'user', component: UserComponent, data: { label: 'User' }, canActivate: [AuthGuardService] },
+      { path: 'portfolios', component: PortfoliosComponent, data: { label: 'Portfolios' }, canActivate: [AuthGuardService] },
       { path: 'transactions', component: TransactionsComponent, data: { label: 'Transactions' }, canActivate: [AuthGuardService] },
       { path: 'symbols', component: SymbolsComponent, data: { label: 'Symbols' }, canActivate: [AuthGuardService] },
       { path: 'login', component: LoginComponent, data: { label: 'Login' } },
@@ -24,6 +27,8 @@ const pagesRoutes: Routes = [
       { path: 'watchlist/:id', component: WatchlistComponent, data: { label: 'Portfolio' } },
       { path: 'symbols/:id', component: SymbolsComponent, data: { label: 'Portfolio' } },
       { path: 'transactions/:id', component: TransactionsComponent, data: { label: 'Transactions' } },
+      { path: 'test', component: TestComponent, data: { label: 'Test' } },
+      { path: 'test2', component: Test2Component, data: { label: 'Test2' } },
       { path: '', redirectTo: '/login', pathMatch: 'full' }
 
     ]

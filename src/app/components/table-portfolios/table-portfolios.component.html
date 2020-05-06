@@ -20,7 +20,7 @@
 
   <ng-container matColumnDef="variation">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Variation</th>
-    <td mat-cell class="mediumbold" *matCellDef="let portfolio" [ngStyle]="{'background-color': portfolio.variationPercent>0?  '#dcfce2' : '#fcdcdc'}">
+    <td mat-cell class="mediumbold" *matCellDef="let portfolio" [ngStyle]="{'background-color': portfolio.variationPercent>-0.01?  '#dcfce2' : '#fcdcdc'}">
       {{portfolio.variation | currency:'EUR':'symbol-narrow'}}
       <div class="subline"> {{portfolio.variationPercent | percent:'1.2'}}</div>
       <mat-progress-bar color="green" [value]=" portfolio.variationPercent * 100"></mat-progress-bar>
@@ -28,19 +28,16 @@
   </ng-container>
 
   <ng-container matColumnDef="list">
-    <th mat-header-cell *matHeaderCellDef>Status/Transactions</th>
+    <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let portfolio">
       <button [routerLink]="['/watchlist/', portfolio.id]" routerLinkActive="router-link-active no-border" mat-icon-button>
         <mat-icon>assessment</mat-icon>
-      </button>
-      <button [routerLink]="['/transactions/', portfolio.id]" routerLinkActive="router-link-active no-border" mat-icon-button>
-        <mat-icon>view_headline</mat-icon>
       </button>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="edit">
-    <th mat-header-cell *matHeaderCellDef>Edit/Delete</th>
+    <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let portfolio">
       <button mat-icon-button (click)="openDialog(portfolio)">
         <mat-icon>edit</mat-icon>

@@ -19,13 +19,14 @@ export class TableSymbolsPortfolioComponent {
   totalCost;
   totalValue;
 
-  displayedColumns = ['name', 'representation', 'volume', 'price', 'lastPrice', 'cost', 'value', 'variation'];
+  displayedColumns = ['name', 'representation', 'volume', 'price', 'lastPrice', 'cost', 'value', 'daily', 'variation'];
   dataSource: MatTableDataSource<SymbolLot>;
 
   constructor(private cdref: ChangeDetectorRef) { }
 
 
   ngAfterViewInit(): void {
+
     //Sort
     this.sort.sort(<MatSortable>{ id: 'percentInPortfolio', start: 'desc' });
     this.dataSource.sort = this.sort;
@@ -68,9 +69,9 @@ export class TableSymbolsPortfolioComponent {
 
   isUpdated(updatedAt): boolean {
     if (updatedAt != null) {
-      var yesterDay = new Date().getDate() - 1;
-      var day = updatedAt.split(" ")[1];
-      if (yesterDay == parseInt(day)) {
+      let yesterday = (d => new Date(d.setDate(d.getDate() - 1)))(new Date).getDate();
+      let day = updatedAt.split(" ")[1];
+      if (yesterday == parseInt(day)) {
         return true
       }
     }

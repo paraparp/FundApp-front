@@ -8,7 +8,7 @@ import { MaterialModule } from './material/material.module';
 import { PrimegnModule } from './primegn/primegn.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FooterComponent } from './footer/footer.component';
-
+import { NotFoundComponent } from './errors/not-found/not-found.component';
 
 @NgModule({
 
@@ -19,11 +19,13 @@ import { FooterComponent } from './footer/footer.component';
     MaterialModule,
     PrimegnModule,
 
+
   ],
   declarations: [
     HeaderComponent,
     BreadcrumbsComponent,
     FooterComponent,
+    NotFoundComponent
 
   ],
   exports: [

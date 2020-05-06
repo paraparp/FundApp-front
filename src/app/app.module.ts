@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, ErrorHandler } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
@@ -21,10 +21,15 @@ import { AlertComponent } from './components/alert/alert.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
-import { MyTableComponent } from './test/my-table/my-table.component';
+
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { SharedModule } from './shared/shared.module';
+import { ServerErrorInterceptor } from './shared/interceptors/server-error.interceptor';
+import { GlobalErrorHandler } from './shared/errors/global-error-handler.service';
+
+
 
 
 
@@ -36,7 +41,7 @@ registerLocaleData(localePy, 'es');
   declarations: [
     AppComponent,
     AlertComponent,
-    MyTableComponent,
+
 
 
 
@@ -48,6 +53,7 @@ registerLocaleData(localePy, 'es');
     FormsModule,
     ReactiveFormsModule,
     PagesModule,
+    SharedModule,
     ServiceModule,
     BrowserAnimationsModule,
     MatTableModule,
@@ -66,7 +72,11 @@ registerLocaleData(localePy, 'es');
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true }
+
   ],
   bootstrap: [AppComponent]
 

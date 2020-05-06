@@ -7,11 +7,26 @@ html, body {
   height: 100%;
 }
 
+.pages-container {
+  background-color: #eeeeee;
+  width: 100%;
+  height: 90%;
+  position: relative;
+  left: 0;
+  right: 0;
+}
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: white;
   min-height: 100%;
+}
+
+.main-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .subcolor {
@@ -21,10 +36,6 @@ body {
 .span-sub {
   color: aquamarine;
   background-color: black;
-}
-
-div.login-wrapper {
-  padding: 30px;
 }
 
 .navbar-color {
@@ -44,7 +55,7 @@ div.login-wrapper {
 }
 
 .toolbar-color {
-  background-color: #4d4d4d;
+  background-color: #333331;
   color: lightgrey;
 }
 
@@ -87,13 +98,6 @@ h3.section {
   justify-content: center;
 }
 
-/* .mat-stroked-button {
-  border: 1px ;
-  line-height: 34px;
-  color: aquamarine;
-  background-color: black;
-  ;
-} */
 mat-card-title,
 mat-card-content {
   display: flex;
@@ -103,6 +107,11 @@ mat-card-content {
 
 mat-option {
   color: blue;
+}
+
+.mat-column-name {
+  flex: 0 0 5% !important;
+  width: 35% !important;
 }
 
 :host {
@@ -121,9 +130,31 @@ mat-option {
 }
 
 /* ---------------------Button -------------------------- */
+/* .mat-stroked-button {
+  border: 1px solid aquamarine;
+  line-height: 34px;
+  color: aquamarine;
+  background-color: black;
+  ;
+} */
 button:hover {
   background-color: aquamarine;
-  color: white;
+  color: black;
+}
+
+/* button {
+  border: 1px solid aquamarine;
+  color: #333331;
+} */
+button.second:hover {
+  background-color: black;
+  color: aquamarine;
+}
+
+.top-title {
+  background-color: black;
+  border: none;
+  color: aquamarine;
 }
 
 button.bar {
@@ -153,11 +184,6 @@ div.register-option {
 }
 
 /* watchlist table */
-.example-container {
-  height: 400px;
-  overflow: auto;
-}
-
 table {
   width: 100%;
   table-layout: auto;
@@ -200,11 +226,20 @@ td.mat-footer-cell {
 
 th.mat-header-cell, td.mat-cell {
   text-align: center;
-  border: 1px solid #EEEEEE;
 }
 
 td.mat-cell {
   font-weight: 300 !important;
+}
+
+.badge-mini {
+  color: grey;
+  font-size: 50%;
+  margin: 10px
+}
+
+.badge-table {
+  color: white;
 }
 
 /* th.mat-sort-header {
@@ -212,12 +247,23 @@ td.mat-cell {
 } */
 tr.mat-row:hover {
   /* font-weight: bold; */
-  background-color: #f2f2f2;
+  background-color: #e6fff5;
+  /* #e6fff5 */
   cursor: pointer;
 }
 
 .percentage {
   font-size: 80%;
+}
+
+.error {
+  background-color: red;
+  color: white;
+}
+
+.error button {
+  background-color: orangered;
+  color: white;
 }
 
 /* --------------- FADEIN  ----------------------*/

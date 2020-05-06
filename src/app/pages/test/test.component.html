@@ -1,0 +1,96 @@
+<button type="button" (click)="show1()" class="btn btn-primary">SHOW</button>
+<div class="container chart">
+
+
+  <div *ngIf='show'>
+    <h1>yeah</h1>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div style="display: block">
+          <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [colors]="barChartColors" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="container company-change centered">
+  0.15 (+2.01%)
+
+</div>
+
+
+<div class="row">
+
+  <div class="col-sm-6">
+    <mat-card class="centered  p-1 m-2">
+      <div class="card-body">
+        <h2 class="card-title">The 10 Year-2 Year Treasury Yield Spread</h2>
+        <p>Indicator: > 0</p>
+        <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=qT0V&width=600&height=300" scrolling="no" frameborder="0" style="overflow:hidden; width:600px; height:350px;" allowTransparency="true" loading="lazy"></iframe>
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="col-sm-6">
+    <mat-card class="centered  p-1 m-2">
+      <div class="card-body">
+        <h2 class="card-title">The 10 Year-3 Month Treasury Yield Spread</h2>
+        <p>Indicator: > 0</p>
+        <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=qT15&width=600&height=300" scrolling="yes" frameborder="0" style="overflow:hidden; width:600px; height:350px;" allowTransparency="true" loading="lazy"></iframe>
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="col-sm-6">
+    <mat-card class="centered  p-1 m-2">
+      <div class="card-body">
+        <h2 class="card-title">Interest Rate in the United States</h2>
+        <p>Indicator: Down 30% from max</p>
+        <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=qT11&width=600&height=300" scrolling="no" frameborder="0" style="overflow:show; width:600px; height:350px;" allowTransparency="true" loading="lazy"></iframe>
+
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="col-sm-6">
+    <mat-card class="centered  p-1 m-2">
+      <div class="card-body">
+        <h2 class="card-title">VIX Volatility</h2>
+        <p>Indicator: > 40</p>
+        <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=qT1O&width=600&height=300" scrolling="no" frameborder="0" style="overflow:hidden; width:600px; height:350px;" allowTransparency="true" loading="lazy"></iframe>
+      </div>
+    </mat-card>
+  </div>
+  <div class="col-sm-6">
+    <mat-card class="centered  p-1 m-2">
+      <div class="card-body">
+        <h2 class="card-title">VIX Volatility</h2>
+        <button type="button" class="btn btn-primary"> <a href="http://schrts.co/vfVIDRaw">Chart</a></button>
+        <a href="http://schrts.co/vfVIDRaw"></a>
+        <p>Indicator: > 40</p>
+        <iframe src="http://schrts.co/vfVIDRaw" scrolling="no" frameborder="0" style="overflow:hidden; width:600px; height:350px;" allowTransparency="true" loading="lazy"></iframe>
+      </div>
+    </mat-card>
+  </div>
+
+
+  <div class="col-sm-6">
+    <mat-card class="centered  p-1 m-2">
+      <div class="card-body">
+        <h2 class="card-title">NYSI</h2>
+        <button type="button" class="btn btn-primary"> <a href="http://schrts.co/ATVSdPNm">Chart</a></button>
+        <a href="http://schrts.co/vfVIDRaw"></a>
+        <p>Indicator: > 40</p>
+        <iframe src="http://schrts.co/ATVSdPNm" scrolling="no" frameborder="0" style="overflow:hidden; width:600px; height:350px;" allowTransparency="true" loading="lazy"></iframe>
+      </div>
+    </mat-card>
+  </div>
+
+
+</div>

@@ -37,7 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
         if (e.status == 403) {
           Swal.fire('No tienes permisos', 'warning');
-          this.router.navigate(['/users']);
+          this.router.navigate(['/portfolios']);
         }
         return throwError(e);
       })

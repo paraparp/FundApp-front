@@ -4,9 +4,9 @@ import { Portfolio } from 'src/app/models/portfolio.model';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import { ActivatedRoute } from '@angular/router';
 import { SymbolLot } from 'src/app/models/symbol-lot.model';
-import { DialogComponent } from 'src/app/components/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { LotService } from 'src/app/services/lot.service';
+import { DialogComponent } from 'src/app/components/dialogs/dialog/dialog.component';
 
 @Component({
   selector: 'app-watchlist',
@@ -35,11 +35,10 @@ export class WatchlistComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
       this.id = +params.get('id')
-      this.getPortfolio(this.id);
-      this.getPortfolioSymbs(this.id);
     })
+    this.getPortfolio(this.id);
+    this.getPortfolioSymbs(this.id);
   }
-
 
 
   openDialog() {
@@ -50,7 +49,7 @@ export class WatchlistComponent implements OnInit {
       data: new Lot
     });
     dialog.afterClosed().subscribe(newLot => {
-      if (newLot.symbol) {
+      if (newLot != null) {
         newLot.idPortfolio = this.portfolio.id
         this.lotService.save(newLot).subscribe(() => this.getPortfolioSymbs(this.portfolio.id))
       }

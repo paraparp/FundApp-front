@@ -44,4 +44,15 @@ export class LotService {
         });
       }))
   }
+
+  delete(lot: Lot) {
+    let url = URL_SERVICIOS + '/lots/' + lot.id;
+    console.log(url)
+    return this.http.delete<Lot>(url).pipe(
+      map((resp: Lot) => {
+        this.snackBar.open('Lot ' + lot.symbol.name + ' deleted: OK!', 'Close', {
+          duration: 4000,
+        });
+      }))
+  }
 }

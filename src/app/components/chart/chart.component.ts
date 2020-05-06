@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { SymbolLot } from 'src/app/models/symbol-lot.model';
+import { Color } from 'ng2-charts';
 
 
 @Component({
@@ -20,25 +21,53 @@ export class ChartComponent {
   public barChartOptions: ChartOptions = {
     responsive: true
   };
-  public barChartType: ChartType = 'horizontalBar';
+  public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartData: ChartDataSets[]
   public barChartLabels: string[];
+  public barChartColors: Color[] = [
+    { backgroundColor: 'aquamarine' },
+    { backgroundColor: 'grey' },
+  ]
 
 
   ngOnChanges() {
 
     this.dataCost = this.portfolioSymbs.map(lot => lot.cost)
-    this.dataVariation = this.portfolioSymbs.map(lot => lot.value - lot.cost)
+    this.dataVariation = this.portfolioSymbs.map(lot => lot.variation)
     this.barChartLabels = this.portfolioSymbs.map(lot => lot.symbol.name)
 
     this.barChartData = [
-      { data: this.dataCost, label: 'Cost', stack: 'a' },
-      { data: this.dataVariation, label: 'Variation', stack: 'a' }
+      {
+        data: this.dataCost, label: 'Cost', stack: 'a',
+        // borderColor: '#393e46',
+        // borderWidth: 2,
+        // backgroundColor: 'grey'
+      },
+      {
+        data: this.dataVariation, label: 'Variation', stack: 'a',
+        // borderColor: '#41aaa8',
+        // borderWidth: 2,
+        // backgroundColor: 'aquamarine'
+      }
     ];
 
-  }
+    this.barChartColors = [
+      {
+        borderColor: '#8c8c8c',
+        borderWidth: 2,
+        backgroundColor: '#a6a6a6',
+        hoverBorderColor: "#666666",
+      },
+      {
+        borderColor: '#6feeb7',
+        borderWidth: 2,
+        backgroundColor: 'aquamarine',
+        hoverBorderColor: "#7fccb6",
+      },
+    ]
 
+  }
 
   // events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {

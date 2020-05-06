@@ -7,7 +7,7 @@ import { PAGES_ROUTES } from './pages.routes';
 
 import { TransactionsComponent } from './transactions/transactions.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
-import { UserComponent } from './user/user.component';
+
 
 import { MaterialModule } from '../shared/material/material.module';
 import { PrimegnModule } from '../shared/primegn/primegn.module';
@@ -19,17 +19,23 @@ import { SymbolsComponent } from './symbols/symbols.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 
-import { ModalComponent } from '../components/modal/modal.component';
-import { TableEditComponent } from '../components/table-edit/table-edit.component';
-import { DialogComponent } from '../components/dialog/dialog.component';
+
+import { TableEditComponent } from '../components/table-transactions/table-transactions.component';
+
 import { TableSymbolsPortfolioComponent } from '../components/table-symbols-portfolio/table-symbols-portfolio.component';
 import { ChartComponent } from '../components/chart/chart.component';
 import { ChartsModule } from 'ng2-charts';
 import { Chart2Component } from '../components/chart2/chart2.component';
 import { TableSymbolsComponent } from '../components/table-symbols/table-symbols.component';
 import { ContactComponent } from '../components/contact/contact.component';
-import { DialogSymbolComponent } from '../components/dialog-symbol/dialog-symbol.component';
+
 import { TablePortfoliosComponent } from '../components/table-portfolios/table-portfolios.component';
+import { PortfoliosComponent } from './portfolios/portfolios.component';
+import { DialogPortfolioComponent } from '../components/dialogs/dialog-portfolio/dialog-portfolio.component';
+import { DialogComponent } from '../components/dialogs/dialog/dialog.component';
+import { DialogSymbolComponent } from '../components/dialogs/dialog-symbol/dialog-symbol.component';
+import { TestComponent } from './test/test.component';
+import { Test2Component } from './test2/test2.component';
 
 
 
@@ -37,13 +43,13 @@ import { TablePortfoliosComponent } from '../components/table-portfolios/table-p
   declarations: [
     PagesComponent,
     WatchlistComponent,
-    UserComponent,
+    PortfoliosComponent,
     TransactionsComponent,
     SymbolsComponent,
     LoginComponent,
     RegisterComponent,
     ContactComponent,
-    ModalComponent,
+    DialogPortfolioComponent,
     TableEditComponent,
     DialogComponent,
     TableSymbolsPortfolioComponent,
@@ -52,6 +58,8 @@ import { TablePortfoliosComponent } from '../components/table-portfolios/table-p
     TableSymbolsComponent,
     DialogSymbolComponent,
     TablePortfoliosComponent,
+    TestComponent,
+    Test2Component,
 
   ],
   imports: [
@@ -68,14 +76,14 @@ import { TablePortfoliosComponent } from '../components/table-portfolios/table-p
   exports: [
 
     WatchlistComponent,
-    UserComponent,
-    SymbolsComponent
-
+    PortfoliosComponent,
+    SymbolsComponent,
+    PagesComponent
   ],
   providers: [],
   schemas: [],
   entryComponents: [
-    ModalComponent
+    DialogPortfolioComponent
   ]
 })
 export class PagesModule { }

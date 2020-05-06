@@ -1,14 +1,21 @@
 footer {
   padding: 8px 16px;
-  color: white;
-  background: #4d4d4d;
+  color: lightgrey;
+  background: #F0F0F0;
   margin-top: 2em;
   position: sticky;
   top: 100%;
-  font-size: 85%;
+  font-size: 70%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .footer-xs {
   text-align: center;
   padding-top: 1em;
+}
+
+mat-icon-button {
+  width: 10px;
+  height: 5px;
 }

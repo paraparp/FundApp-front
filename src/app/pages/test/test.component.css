@@ -1,0 +1,34 @@
+.company-change {
+  border-radius: 15px;
+  padding: 10px 15px;
+  /* font-size: .6em; */
+  font-weight: 700;
+  color: #2ecc71 !important;
+  background-color: #d6ffef;
+  margin-top: 11px;
+  margin-bottom: 11px;
+}
+
+.company-change {
+  border-radius: 15px;
+  padding: 10px 15px;
+  /* font-size: .6em; */
+  font-weight: 700;
+  color: #e74c3c !important;
+  background-color: #ffdede;
+  margin-top: 11px;
+  margin-bottom: 11px;
+}
+
+div.chart {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 876px;
+  height: 500px;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  padding: 0px;
+  margin: 0px;
+  border-width: 0px;
+}

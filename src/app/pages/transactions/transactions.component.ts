@@ -5,8 +5,9 @@ import { LotService } from 'src/app/services/lot.service';
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import { ActivatedRoute } from '@angular/router';
 import { Portfolio } from 'src/app/models/portfolio.model';
-import { DialogComponent } from 'src/app/components/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/components/dialogs/dialog/dialog.component';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -31,44 +32,46 @@ export class TransactionsComponent implements OnInit {
   dateGroup;
   id;
 
-
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
       this.id = +params.get('id')
-      this.getPortfolio(this.id)
-      this.getLots(this.id)
     })
 
+    this.getPortfolio(this.id)
+    this.getLots(this.id)
   }
 
-  // ngAfterViewInit() {
-  //   console.log(this.id)
-  //   this.getPortfolio(this.id)
-  //   this.getLots(this.id)
-  //
-  // }
 
-
-  // ngOnChanges() {
-  //   this.getPortfolio(this.id)
-  //   this.getLots(this.id)
-  //   console.log(this.lots)
-  // }
-
-  openDialog() {
-
+  openDialog(row: Lot) {
     const dialog = this._dialog.open(DialogComponent, {
-      width: "450px",
-      disableClose: true,
-      data: new Lot
+      width: "450px", disableClose: true, data: row
     });
-    dialog.afterClosed().subscribe(newLot => {
-      if (newLot.symbol) {
-        newLot.idPortfolio = this.portfolio.id
-        this.lotService.save(newLot).subscribe(() => this.getLots(this.id))
+    dialog.afterClosed().subscribe(editedLot => {
+      if (editedLot) {
+        this.lotService.edit(editedLot).subscribe(() => this.getLots(this.id))
       }
     });
   }
+
+  delete(lot: Lot) {
+
+    Swal.fire({
+      title: 'Sure?',
+      text: "You are traying to delete a Lot",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'aquamarine',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((deleted) => {
+      if (deleted.value) {
+        this.lotService.delete(lot).subscribe(() => this.getLots(this.id));
+      }
+    })
+  }
+
+
+
 
   getPortfolio(id) {
     return this.portfolioService.getPortfolio(id).subscribe(portfolio => this.portfolio = portfolio)

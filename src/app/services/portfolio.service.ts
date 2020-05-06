@@ -50,7 +50,6 @@ export class PortfolioService {
     let url = URL_SERVICIOS + '/portfolios/' + portfolio.id;
     return this.http.delete(url).pipe(
       map((resp: any) => {
-
         this.snackBar.open('Porfolio ' + portfolio.name + ' deleted: OK!', 'Close', {
           duration: 4000,
         });

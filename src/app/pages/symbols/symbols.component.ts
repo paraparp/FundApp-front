@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Lot } from 'src/app/models/lot.model';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogSymbolComponent } from 'src/app/components/dialog-symbol/dialog-symbol.component';
+
 import { SymbolsService } from 'src/app/services/symbols.service';
 import { Symb } from 'src/app/models/symbol.model';
+import { DialogSymbolComponent } from 'src/app/components/dialogs/dialog-symbol/dialog-symbol.component';
 
 
 @Component({

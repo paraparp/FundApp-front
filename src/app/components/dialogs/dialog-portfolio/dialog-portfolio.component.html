@@ -1,0 +1,49 @@
+<mat-card-title class="h-center">Portfolio</mat-card-title>
+
+<mat-divider></mat-divider>
+
+<mat-card-content>
+
+  <form [formGroup]="pForm">
+
+    <div class="form-group">
+      <div class="col-xs-12">
+        <mat-form-field>
+          <input matInput [(ngModel)]="portfolio.name" class="form-control" formControlName="name" placeholder="Name">
+          <mat-error>
+            <span *ngIf="!pForm.get('name').valid && pForm.get('name').touched">Introduce un nombre</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-xs-12">
+        <mat-form-field>
+          <input matInput [(ngModel)]="portfolio.description" class="form-control" formControlName="description" placeholder="Description">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-card-actions>
+
+      <div class="form-group">
+        <div class="col-xs-12">
+          <button (click)="savePortfolio()" [disabled]="!pForm.valid" mat-stroked-button mat-dialog-close class="btn-block ">Save</button>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <div class="col-xs-12">
+          <button type="submint" mat-stroked-button mat-dialog-close (click)="onNoClick()" class="btn-block second">
+            Cancel
+          </button>
+        </div>
+      </div>
+
+    </mat-card-actions>
+
+  </form>
+
+</mat-card-content>

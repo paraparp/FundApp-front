@@ -1,43 +1,16 @@
-/* .centered {
-  align-items: center;
-  justify-content: center;
+img {
+  border-radius: 8px;
+  max-height: 80px;
+  height: auto;
 }
 
-.mat-stroked-button {
-  border: 1px solid currentColor;
-  line-height: 34px;
-  background: #FFF7FA;
+div.login-wrapper {
+  background-color: white;
+  margin: 0;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
 }
-
-mat-card-title,
-mat-card-content {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-}
-
-:host {
-  display: flex;
-  justify-content: center;
-  margin: 50px 0px;
-}
-
-.mat-form-field {
-  width: 100%;
-  min-width: 100px;
-}
-
-.button {
-  display: flex;
-  justify-content: flex;
-}
-
-.login-wrapper .form {
-  min-width: 100%;
-  max-width: 300px;
-  width: 100%;
-}
-
-div.register-option {
-  font-size: 80%;
-} */

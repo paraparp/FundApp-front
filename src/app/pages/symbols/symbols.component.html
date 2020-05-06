@@ -1,22 +1,21 @@
-<mat-card>
-  <div class="mat-elevation-z10 ">
-    <mat-toolbar class="toolbar-color  mb-2">
-      <h2 class="light subcolor">Portfolios</h2>
+<mat-toolbar class="toolbar-color">
+  <h2 class="light subcolor">Symbols</h2>
 
-      <span class="fill-space"></span>
+  <span class="fill-space"></span>
 
-      <div class="mat-elevation-z4 button">
-        <button mat-stroked-button class="bar" (click)="openDialog()">
-          Add symbol
-        </button>
-      </div>
-
-    </mat-toolbar>
+  <div class="mat-elevation-z4 button">
+    <button mat-stroked-button class="bar" (click)="openDialog()">
+      Add symbol
+    </button>
   </div>
-</mat-card>
+
+</mat-toolbar>
 
 
-<app-table-symbols [symbols]="symbols"></app-table-symbols>
+<div class="container p-5">
+  <app-table-symbols [symbols]="symbols"></app-table-symbols>
+</div>
+
 
 <!-- <mat-card>
 

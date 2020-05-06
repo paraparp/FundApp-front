@@ -8,5 +8,8 @@ export class Symb {
   lastPrice: number;
   lastDate: string
   category: any;
-
+  location: string
+  type: string
+  dailyChange: number;
+  dailyChangePercent: number;
 }

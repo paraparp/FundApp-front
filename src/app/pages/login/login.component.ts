@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
     if (this.auth.isUserLoggedIn()) {
-      this.router.navigate(["/user"]);
+      this.router.navigate(["/portfolios"]);
     }
 
     this.loginform = new FormGroup({
@@ -32,19 +32,21 @@ export class LoginComponent implements OnInit {
   }
 
   login(user: User): void {
+
+
+    this.router.navigate(["/portfolios"]);
     this.auth.login(user).subscribe(resp => {
 
       this.auth.guardarUser(resp.access_token);
       this.auth.guardarToken(resp.access_token);
       user = this.auth.usuario;
 
-      this.router.navigate(["/user"]);
+      this.router.navigate(["/portfolios"]);
     }, err => {
       if (err.status == 400)
         this.loginInvalido = true;
 
     })
   }
-
 
 }
