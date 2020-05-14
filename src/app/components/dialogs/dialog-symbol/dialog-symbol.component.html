@@ -1,5 +1,5 @@
 <div class="container">
-
+  <h2 class="centered"> Symbol Finder</h2>
   <mat-form-field>
     <mat-label>Search</mat-label>
     <input matInput placeholder="Search by ISIN" [(ngModel)]="value">
@@ -25,13 +25,13 @@
     <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
   </div>
 
-  <button *ngIf="exist" (click)="save()" mat-raised-button color="accent" class="btn-block">
+  <button *ngIf="exist" (click)="save()" mat-raised-button class="btn-block">
     Add Symbol : {{value}}
   </button>
-  <button *ngIf="!exist" mat-stroked-button (click)="search(value)" color="accent" class="btn-block">
+  <button *ngIf="!exist" mat-stroked-button (click)="search(value)" class="btn-block">
     Search
   </button>
-  <button mat-stroked-button (click)="save()" color="accent" class="btn-block">
+  <button mat-stroked-button (click)="save()" class="btn-block">
     Close
   </button>
 

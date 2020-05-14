@@ -15,7 +15,7 @@ export class TableSymbolsComponent {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  displayedColumns = ['name', 'category', 'type', 'location'];
+  displayedColumns = ['name', 'category', 'type', 'location', 'yearAgo'];
   dataSource: MatTableDataSource<Symb>;
 
   constructor() { }
@@ -33,4 +33,21 @@ export class TableSymbolsComponent {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  styleObject(type): Object {
+
+
+    switch (type) {
+      case "Bond":
+        return { 'background-color': 'grey' }
+
+      case "Real State":
+        return { 'background-color': 'orange' }
+
+      default:
+        return { 'background-color': 'black' }
+    }
+
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Lot } from 'src/app/models/lot.model';
 import { Portfolio } from 'src/app/models/portfolio.model';
 import { PortfolioService } from 'src/app/services/portfolio.service';
@@ -6,7 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { SymbolLot } from 'src/app/models/symbol-lot.model';
 import { MatDialog } from '@angular/material/dialog';
 import { LotService } from 'src/app/services/lot.service';
-import { DialogComponent } from 'src/app/components/dialogs/dialog/dialog.component';
+import { DialogTransactionComponent } from 'src/app/components/dialogs/dialog-transaction/dialog-transaction.component';
+import { TransactionsComponent } from '../transactions/transactions.component';
 
 @Component({
   selector: 'app-watchlist',
@@ -23,6 +24,8 @@ export class WatchlistComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
   ) { }
 
+  @Output()
+  updateLots = new EventEmitter();
 
   name = ''
   portfolio: Portfolio;
@@ -31,6 +34,8 @@ export class WatchlistComponent implements OnInit {
   panelOpenState = true;
   id: number;
 
+  @ViewChild('transaction')
+  private transaction: TransactionsComponent;
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -41,22 +46,19 @@ export class WatchlistComponent implements OnInit {
   }
 
 
-  openDialog() {
 
-    const dialog = this._dialog.open(DialogComponent, {
-      width: "450px",
-      disableClose: true,
-      data: new Lot
+  openDialog() {
+    const dialog = this._dialog.open(DialogTransactionComponent, {
+      width: "450px", disableClose: true, data: null
     });
     dialog.afterClosed().subscribe(newLot => {
       if (newLot != null) {
         newLot.idPortfolio = this.portfolio.id
         this.lotService.save(newLot).subscribe(() => this.getPortfolioSymbs(this.portfolio.id))
+        this.transaction.getLots(this.id);
       }
     });
   }
-
-
 
   getPortfolio(id) {
     this.portfolioService.getPortfolio(id).subscribe(portfolio => {
@@ -70,6 +72,10 @@ export class WatchlistComponent implements OnInit {
   }
 
 
+  filterTable(filter) {
+    this.portfolioService.getPortfolioSymbsByBroker(this.id, filter).subscribe(resp => this.portfolioSymbs = resp)
+    console.log(this.portfolioSymbs.length)
+  }
 
   currentlyOpenedItemIndex = -1;
 

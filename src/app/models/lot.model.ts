@@ -12,7 +12,7 @@ export class Lot {
   price: number;
   currency: string = 'EUR';
   broker: string;
-  date: Date;
+  date: Date = new Date();
   cost: number = 0.0;
 
 }

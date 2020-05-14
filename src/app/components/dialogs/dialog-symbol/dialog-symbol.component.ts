@@ -1,6 +1,5 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { DialogComponent } from '../dialog/dialog.component';
 import { SymbolsService } from 'src/app/services/symbols.service';
 
 @Component({
@@ -17,7 +16,7 @@ export class DialogSymbolComponent implements OnInit {
   searching = false;
 
   constructor(
-    private dialogRef: MatDialogRef<DialogComponent>,
+    private dialogRef: MatDialogRef<DialogSymbolComponent>,
     private symbService: SymbolsService,
   ) { }
 

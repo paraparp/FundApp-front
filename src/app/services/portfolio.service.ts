@@ -34,7 +34,11 @@ export class PortfolioService {
 
     return this.http.get<SymbolLot[]>(url)
   }
+  getPortfolioSymbsByBroker(id: number, broker: string) {
+    let url = URL_SERVICIOS + '/portfolios/watchlist/' + id + "/" + broker;
 
+    return this.http.get<SymbolLot[]>(url)
+  }
   save(portfolio: Portfolio) {
     let url = URL_SERVICIOS + '/portfolios/';
     return this.http.post<Portfolio>(url, portfolio).pipe(

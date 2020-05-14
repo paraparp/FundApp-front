@@ -1,5 +1,4 @@
-<button type="button" (click)="show1()" class="btn btn-primary">SHOW</button>
-<div class="container chart">
+<div class="container chart m-5">
 
 
   <div *ngIf='show'>
@@ -25,14 +24,31 @@
 </div>
 
 
+
+<div class="container">
+  <div class="btn-group">
+    <button type="button" (click)="show1()" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Action
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Separated link</a>
+    </div>
+  </div>
+
+  <button type="button" (click)="show1()" class="btn btn-primary">SHOW</button>
+</div>
 <div class="row">
 
   <div class="col-sm-6">
     <mat-card class="centered  p-1 m-2">
       <div class="card-body">
-        <h2 class="card-title">The 10 Year-2 Year Treasury Yield Spread</h2>
-        <p>Indicator: > 0</p>
-        <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=qT0V&width=600&height=300" scrolling="no" frameborder="0" style="overflow:hidden; width:600px; height:350px;" allowTransparency="true" loading="lazy"></iframe>
+        <h2 class="card-title">Unemployment Level</h2>
+        <p>Stop Decreasing = Stock markets up</p>
+        <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=qURp&width=600&height=300" scrolling="yes" frameborder="0" style="overflow:hidden; width:600px; height:350px;" allowTransparency="true" loading="lazy"></iframe>
       </div>
     </mat-card>
   </div>

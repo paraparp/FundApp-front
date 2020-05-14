@@ -1,4 +1,4 @@
-<mat-toolbar class="toolbar-color ">
+<mat-toolbar class="toolbar-color fadeIn ">
   <h2 class="light subcolor">Portfolios / {{name}}</h2>
 
   <span class="fill-space"></span>
@@ -11,16 +11,16 @@
 </mat-toolbar>
 
 
-<div class="p-3">
+<div class="p-3 fadeIn">
 
-  <mat-spinner class="center group-centered " *ngIf="!portfolioSymbs"></mat-spinner>
+  <mat-spinner class="center-hv" *ngIf="!portfolioSymbs"></mat-spinner>
 
   <div class="group-centered p-2" *ngIf="portfolioSymbs">
-    <mat-tab-group mat-align-tabs="center">
+    <mat-tab-group mat-align-tabs="center" animationDuration="1000ms">
       <div class="p-5">
 
         <mat-tab label="Table">
-          <app-table-symbols-portfolio [portfolioSymbs]="portfolioSymbs"></app-table-symbols-portfolio>
+          <app-table-symbols-portfolio [portfolioSymbs]="portfolioSymbs" (filterTable)="filterTable($event)"></app-table-symbols-portfolio>
         </mat-tab>
       </div>
 
@@ -32,7 +32,7 @@
 
       <mat-tab label="Lots ">
         <div class="container p-2">
-          <app-transactions></app-transactions>
+          <app-transactions #transaction></app-transactions>
         </div>
       </mat-tab>
 
@@ -40,34 +40,3 @@
   </div>
 
 </div>
-<!-- <mat-accordion>
-
-  <mat-expansion-panel expanded>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Table
-      </mat-panel-title>
-      <mat-panel-description>
-        Portfolio's Symbols
-      </mat-panel-description>
-
-    </mat-expansion-panel-header>
-
-    <app-table-symbols-portfolio *ngIf="portfolioSymbs" [portfolioSymbs]="portfolioSymbs"></app-table-symbols-portfolio>
-  </mat-expansion-panel>
-
-
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Charts
-      </mat-panel-title>
-      <mat-panel-description>
-        Portfolio's Charts
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div class="container">
-      <app-chart *ngIf="portfolioSymbs" [portfolioSymbs]="portfolioSymbs"></app-chart>
-    </div>
-  </mat-expansion-panel>
-</mat-accordion> -->

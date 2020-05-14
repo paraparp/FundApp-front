@@ -37,8 +37,6 @@ export class PortfoliosComponent implements OnInit {
   ngOnInit() {
     this.user = this.auth.usuario;
     this.loadPortfolios();
-
-
   }
 
   loadPortfolios() {
@@ -49,10 +47,7 @@ export class PortfoliosComponent implements OnInit {
 
 
   openDialog(portfolioTab: Portfolio): void {
-
-    console.log(portfolioTab)
     const dialogRef = this.dialog.open(DialogPortfolioComponent, {
-
       data: { portfolio: portfolioTab }
     });
     //NEW
@@ -66,7 +61,6 @@ export class PortfoliosComponent implements OnInit {
     }
     //EDIT
     else {
-
       dialogRef.afterClosed().subscribe((editedPortfolio: Portfolio) => {
         if (editedPortfolio != null) {
           this.portfolioService.edit(editedPortfolio).subscribe(() => this.loadPortfolios());

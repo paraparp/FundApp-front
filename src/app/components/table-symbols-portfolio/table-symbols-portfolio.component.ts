@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
 
 import { SymbolLot } from 'src/app/models/symbol-lot.model';
 import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { SymbolsService } from 'src/app/services/symbols.service';
 
 @Component({
   selector: 'app-table-symbols-portfolio',
@@ -15,14 +16,20 @@ export class TableSymbolsPortfolioComponent {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() public portfolioSymbs: SymbolLot[];
+  @Output()
+  filterTable = new EventEmitter();
+
 
   totalCost;
   totalValue;
 
-  displayedColumns = ['name', 'representation', 'volume', 'price', 'lastPrice', 'cost', 'value', 'daily', 'variation'];
+  displayedColumns = ['name', 'representation', 'volume', 'price', 'lastPrice', 'daily', 'cost', 'value', 'variation'];
   dataSource: MatTableDataSource<SymbolLot>;
+  types;
 
-  constructor(private cdref: ChangeDetectorRef) { }
+  option
+
+  constructor(private cdref: ChangeDetectorRef, private symbolService: SymbolsService) { }
 
 
   ngAfterViewInit(): void {
@@ -42,6 +49,14 @@ export class TableSymbolsPortfolioComponent {
 
     //you have to tell angular that you updated the content after ngAfterContentChecked
     this.cdref.detectChanges();
+
+
+    this.getTypes();
+  }
+
+  onFilterTable(filter: String) {
+    console.log(filter)
+    this.filterTable.emit(filter);
   }
 
 
@@ -55,8 +70,15 @@ export class TableSymbolsPortfolioComponent {
     return pathString.split('.').reduce((o, i) => o[i], obj);
   }
 
+  getTypes() {
+    this.symbolService.getTypes().subscribe(resp => this.types = resp)
+  }
+
+  brokers = ["MyInvestor", "Openbank"]
+
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue;
+    console.log(filterValue)
+    this.dataSource.filter = filterValue.toLowerCase();
 
     //Actualizamos totales
     this.totalCost = this.dataSource.filteredData.reduce((summ, v) => summ += v.cost, 0);

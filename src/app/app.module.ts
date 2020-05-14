@@ -41,11 +41,6 @@ registerLocaleData(localePy, 'es');
   declarations: [
     AppComponent,
     AlertComponent,
-
-
-
-
-
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../config/config';
 
@@ -22,6 +21,16 @@ export class SymbolsService {
     return this.http.get<Symb[]>(url)
   }
 
+  getManagers() {
+    let url = URL_SERVICIOS + '/symbols/managers';
+    console.log(url)
+    return this.http.get<Symb[]>(url)
+  }
+  getTypes() {
+    let url = URL_SERVICIOS + '/symbols/types';
+    console.log(url)
+    return this.http.get<Symb[]>(url)
+  }
   searchByIsin(isin: string) {
     let url = URL_SERVICIOS + '/symbols/search/' + isin;
     console.log(url)

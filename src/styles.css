@@ -7,6 +7,48 @@ html, body {
   height: 100%;
 }
 
+* {
+  /* font-family: 'Nunito', sans-serif; */
+  /* font-family: Roboto, "Helvetica Neue", sans-serif; */
+}
+
+body {
+  margin: 0;
+  background-color: white;
+  min-height: 100%;
+}
+
+.change-up {
+  color: #2ecc71 !important;
+  background-color: #d6ffef;
+}
+
+.change-down {
+  color: #e74c3c !important;
+  background-color: #ffdede;
+}
+
+.center-hv {
+  margin: 0;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+}
+
+.change {
+  border-radius: 10px;
+  padding: 5px 15px;
+  font-size: .7em;
+  font-weight: 500;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+  text-justify: center
+}
+
 .pages-container {
   background-color: #eeeeee;
   width: 100%;
@@ -14,13 +56,6 @@ html, body {
   position: relative;
   left: 0;
   right: 0;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: white;
-  min-height: 100%;
 }
 
 .main-wrapper {
@@ -130,13 +165,25 @@ mat-option {
 }
 
 /* ---------------------Button -------------------------- */
-/* .mat-stroked-button {
-  border: 1px solid aquamarine;
+button.bt-primary {
+  border: 2px solid aquamarine;
   line-height: 34px;
-  color: aquamarine;
-  background-color: black;
-  ;
-} */
+  /* color: aquamarine; */
+  /* background-color: black; */
+}
+
+button.bt-primary:hover {
+  background-color: aquamarine;
+  color: black;
+}
+
+button.bt-secondary {
+  border: 2px solid grey;
+  line-height: 34px;
+  /* color: aquamarine; */
+  /* background-color: black; */
+}
+
 button:hover {
   background-color: aquamarine;
   color: black;
@@ -147,8 +194,8 @@ button:hover {
   color: #333331;
 } */
 button.second:hover {
-  background-color: black;
-  color: aquamarine;
+  background-color: grey;
+  color: black;
 }
 
 .top-title {
@@ -234,7 +281,7 @@ td.mat-cell {
 
 .badge-mini {
   color: grey;
-  font-size: 50%;
+  font-size: 65%;
   margin: 10px
 }
 
@@ -264,6 +311,14 @@ tr.mat-row:hover {
 .error button {
   background-color: orangered;
   color: white;
+}
+
+/* input */
+/* .mat-form-field-outline {
+  color: aquamarine !important;
+} */
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: aquamarine !important;
 }
 
 /* --------------- FADEIN  ----------------------*/

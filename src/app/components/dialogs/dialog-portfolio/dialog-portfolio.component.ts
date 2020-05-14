@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Portfolio } from 'src/app/models/portfolio.model';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -11,34 +11,39 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class DialogPortfolioComponent implements OnInit {
 
-  portfolio: Portfolio;
-
   constructor(
+    private readonly formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<DialogPortfolioComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-  }
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) { }
 
   pForm: FormGroup;
+  portfolio: Portfolio;
+
 
   ngOnInit() {
 
     this.pForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      description: new FormControl('')
+      description: new FormControl('', Validators.maxLength(256))
     });
 
     if (this.data.portfolio != null) {
-      this.portfolio = this.data.portfolio;
+      this.portfolio = this.data.portfolio
+      this.pForm = this.formBuilder.group(this.portfolio)
     } else {
       this.portfolio = new Portfolio();
     }
+
   }
 
-  onNoClick(): void {
+  closeDialog(): void {
     this.dialogRef.close(null);
   }
 
-  savePortfolio(): void {
+  save(pform): void {
+    this.portfolio.name = pform.name;
+    this.portfolio.description = pform.description;
     this.dialogRef.close(this.portfolio);
   }
 

@@ -1,0 +1,69 @@
+<mat-card-title> Transaction</mat-card-title>
+<h3 *ngIf="lot.symbol">{{lot.symbol.name}}</h3>
+<form [formGroup]="tForm">
+
+
+  <div class="row">
+    <div class="col">
+
+      <mat-form-field *ngIf="!lot.symbol">
+        <mat-select formControlName="symbol" placeholder="Symbol">
+          <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+          <mat-option>
+            <ngx-mat-select-search [formControl]="symbolFilteringCtrl" [searching]="searching" placeholderLabel="Find symbol..." noEntriesFoundLabel="'no matching symbol found'"></ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let symbol of filteredSymbols | async" [value]="symbol">
+            {{symbol.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- <mat-form-field>
+        <input class="yourClass" placeholder="search " (keyup)="onKey($event.target.value)">
+        <mat-select *ngIf="lot.id" placeholder="Symbol" [(value)]="lot.symbol.id">
+
+          <mat-option style="color: black" *ngFor="let symbol of symbols" [value]="symbol.id" required>
+            {{ symbol.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <mat-form-field>
+        <input matInput type="number" formControlName="price" placeholder="Price" required>
+      </mat-form-field>
+    </div>
+
+    <div class="col">
+      <mat-form-field>
+        <input matInput type="number" formControlName="volume" placeholder="Volume" required>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" [formControl]="date" placeholder="Date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker color="aquamarine"></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="col">
+      <mat-form-field>
+        <input matInput formControlName="broker" placeholder="Broker">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div mat-dialog-actions class="py-3">
+    <button mat-button (click)="closeDialog()">Close</button>
+    <button mat-button (click)="save(tForm.value)" [disabled]="!tForm.valid">Ok</button>
+  </div>
+
+</form>

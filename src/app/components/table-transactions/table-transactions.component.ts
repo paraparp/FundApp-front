@@ -6,8 +6,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Lot } from 'src/app/models/lot.model';
 import { LotService } from 'src/app/services/lot.service';
 import { MatSort } from '@angular/material/sort';
-import { DialogComponent } from '../dialogs/dialog/dialog.component';
-
 
 @Component({
   selector: 'app-table-transactions',
@@ -24,7 +22,7 @@ export class TableEditComponent {
   @Output()
   dialog = new EventEmitter();
 
-  displayedColumns = ["name", "price", "volume", "cost", "broker", "date", 'edit'];
+  displayedColumns = ["name", "price", "volume", "cost", "change", "broker", "date", 'edit'];
   dataSource: MatTableDataSource<Lot>;
 
   constructor(private _dialog: MatDialog, private lotService: LotService) {
@@ -50,13 +48,17 @@ export class TableEditComponent {
     return pathString.split('.').reduce((o, i) => o[i], obj);
   }
 
-
   onDelete(lot: Lot) {
-    console.log(lot)
     this.delete.emit(lot);
   }
+
   openDialog(lot: Lot) {
     this.dialog.emit(lot);
+  }
+
+
+  calculateVariation(lot: Lot) {
+    return (lot.symbol.lastPrice - lot.price) / lot.price
   }
 
 

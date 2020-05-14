@@ -32,11 +32,11 @@ import { ContactComponent } from '../components/contact/contact.component';
 import { TablePortfoliosComponent } from '../components/table-portfolios/table-portfolios.component';
 import { PortfoliosComponent } from './portfolios/portfolios.component';
 import { DialogPortfolioComponent } from '../components/dialogs/dialog-portfolio/dialog-portfolio.component';
-import { DialogComponent } from '../components/dialogs/dialog/dialog.component';
 import { DialogSymbolComponent } from '../components/dialogs/dialog-symbol/dialog-symbol.component';
 import { TestComponent } from './test/test.component';
 import { Test2Component } from './test2/test2.component';
-
+import { DialogTransactionComponent } from '../components/dialogs/dialog-transaction/dialog-transaction.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 
 @NgModule({
@@ -51,7 +51,7 @@ import { Test2Component } from './test2/test2.component';
     ContactComponent,
     DialogPortfolioComponent,
     TableEditComponent,
-    DialogComponent,
+    DialogTransactionComponent,
     TableSymbolsPortfolioComponent,
     ChartComponent,
     Chart2Component,
@@ -60,6 +60,7 @@ import { Test2Component } from './test2/test2.component';
     TablePortfoliosComponent,
     TestComponent,
     Test2Component,
+
 
   ],
   imports: [
@@ -70,8 +71,8 @@ import { Test2Component } from './test2/test2.component';
     MaterialModule,
     PrimegnModule,
     TableModule,
-    ChartsModule
-
+    ChartsModule,
+    NgxMatSelectSearchModule
   ],
   exports: [
 

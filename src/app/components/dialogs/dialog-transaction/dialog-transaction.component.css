@@ -1,0 +1,15 @@
+mat-option {
+  color: black
+}
+
+.mat-datepicker-toggle {
+  color: aquamarine;
+}
+
+input {
+  color: black
+}
+
+::ng-deep .mat-select-placeholder {
+  color: aquamarine;
+}

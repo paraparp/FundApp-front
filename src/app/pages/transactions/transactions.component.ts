@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Lot } from 'src/app/models/lot.model';
 import { LotService } from 'src/app/services/lot.service';
@@ -6,8 +6,9 @@ import { PortfolioService } from 'src/app/services/portfolio.service';
 import { ActivatedRoute } from '@angular/router';
 import { Portfolio } from 'src/app/models/portfolio.model';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from 'src/app/components/dialogs/dialog/dialog.component';
 import Swal from 'sweetalert2';
+import { DialogTransactionComponent } from 'src/app/components/dialogs/dialog-transaction/dialog-transaction.component';
+
 
 
 @Component({
@@ -17,6 +18,7 @@ import Swal from 'sweetalert2';
 
 })
 export class TransactionsComponent implements OnInit {
+  brokerSymbs: import("c:/Users/rodrigo.paraparpriet/Desktop/Proyectos/GestorFondos/src/app/models/symbol-lot.model").SymbolLot[];
 
   constructor(
     private _dialog: MatDialog,
@@ -31,8 +33,10 @@ export class TransactionsComponent implements OnInit {
   portfolio: Portfolio;
   dateGroup;
   id;
+  brokers = ["MyInvestor", "Openbank"]
 
   ngOnInit() {
+
     this.activatedRoute.paramMap.subscribe(params => {
       this.id = +params.get('id')
     })
@@ -43,7 +47,7 @@ export class TransactionsComponent implements OnInit {
 
 
   openDialog(row: Lot) {
-    const dialog = this._dialog.open(DialogComponent, {
+    const dialog = this._dialog.open(DialogTransactionComponent, {
       width: "450px", disableClose: true, data: row
     });
     dialog.afterClosed().subscribe(editedLot => {
@@ -69,7 +73,6 @@ export class TransactionsComponent implements OnInit {
       }
     })
   }
-
 
 
 
