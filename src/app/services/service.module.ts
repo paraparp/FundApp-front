@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ImportXMLService } from './import-xml.service';
 import { UsuarioService } from './usuario.service';
 import { AuthenticationService } from './authentication.service';
+import { MorningstarService } from './morningstar.service';
 
 
 
@@ -17,6 +18,7 @@ import { AuthenticationService } from './authentication.service';
     ImportXMLService,
     UsuarioService,
     AuthenticationService,
+    MorningstarService
   ]
 })
 export class ServiceModule { }

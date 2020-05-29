@@ -5,6 +5,8 @@ import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SymbolsService } from 'src/app/services/symbols.service';
+import { PortfolioService } from 'src/app/services/portfolio.service';
+import { Portfolio } from 'src/app/models/portfolio.model';
 
 @Component({
   selector: 'app-table-symbols-portfolio',
@@ -16,6 +18,7 @@ export class TableSymbolsPortfolioComponent {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() public portfolioSymbs: SymbolLot[];
+  @Input() public portfolio: Portfolio;
   @Output()
   filterTable = new EventEmitter();
 
@@ -28,8 +31,9 @@ export class TableSymbolsPortfolioComponent {
   types;
 
   option
+  brokers: Portfolio;
 
-  constructor(private cdref: ChangeDetectorRef, private symbolService: SymbolsService) { }
+  constructor(private cdref: ChangeDetectorRef, private portfolioService: PortfolioService) { }
 
 
   ngAfterViewInit(): void {
@@ -51,7 +55,7 @@ export class TableSymbolsPortfolioComponent {
     this.cdref.detectChanges();
 
 
-    this.getTypes();
+
   }
 
   onFilterTable(filter: String) {
@@ -64,17 +68,27 @@ export class TableSymbolsPortfolioComponent {
     this.dataSource = new MatTableDataSource(this.portfolioSymbs)
     this.totalCost = this.getTotalCost();
     this.totalValue = this.getTotalValue()
+
+
+
+    this.getTypes(this.portfolio.id);
+
+    this.getBrokers(this.portfolio.id);
+
   }
 
   getPropertyByPath(obj: Object, pathString: string) {
     return pathString.split('.').reduce((o, i) => o[i], obj);
   }
 
-  getTypes() {
-    this.symbolService.getTypes().subscribe(resp => this.types = resp)
+  getTypes(idPortfolio) {
+    this.portfolioService.getTypes(idPortfolio).subscribe(resp => this.types = resp)
   }
 
-  brokers = ["MyInvestor", "Openbank"]
+  getBrokers(idPortfolio) {
+    this.portfolioService.getBrokers(idPortfolio).subscribe(resp => this.brokers = resp)
+  }
+
 
   applyFilter(filterValue: string) {
     console.log(filterValue)

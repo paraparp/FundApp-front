@@ -37,6 +37,8 @@ import { TestComponent } from './test/test.component';
 import { Test2Component } from './test2/test2.component';
 import { DialogTransactionComponent } from '../components/dialogs/dialog-transaction/dialog-transaction.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { Test3Component } from './test3/test3.component';
+import { HistoricalChartComponent } from '../components/historical-chart/historical-chart.component';
 
 
 @NgModule({
@@ -55,11 +57,13 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     TableSymbolsPortfolioComponent,
     ChartComponent,
     Chart2Component,
+    HistoricalChartComponent,
     TableSymbolsComponent,
     DialogSymbolComponent,
     TablePortfoliosComponent,
     TestComponent,
     Test2Component,
+    Test3Component,
 
 
   ],

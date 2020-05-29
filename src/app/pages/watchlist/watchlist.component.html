@@ -20,13 +20,16 @@
       <div class="p-5">
 
         <mat-tab label="Table">
-          <app-table-symbols-portfolio [portfolioSymbs]="portfolioSymbs" (filterTable)="filterTable($event)"></app-table-symbols-portfolio>
+          <app-table-symbols-portfolio [portfolioSymbs]="portfolioSymbs" [portfolio]="portfolio" (filterTable)="filterTable($event)"></app-table-symbols-portfolio>
         </mat-tab>
       </div>
 
       <mat-tab label="Charts">
         <div class="container p-2">
           <app-chart [portfolioSymbs]="portfolioSymbs"></app-chart>
+        </div>
+        <div class="container p-2">
+          <app-historical-chart [historicalValue]="historicalValue"></app-historical-chart>
         </div>
       </mat-tab>
 

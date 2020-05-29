@@ -33,6 +33,7 @@ export class WatchlistComponent implements OnInit {
   portfolioSymbs: SymbolLot[];
   panelOpenState = true;
   id: number;
+  historicalValue;
 
   @ViewChild('transaction')
   private transaction: TransactionsComponent;
@@ -43,8 +44,19 @@ export class WatchlistComponent implements OnInit {
     })
     this.getPortfolio(this.id);
     this.getPortfolioSymbs(this.id);
+
+
+
+
+    this.getHistorical(this.id).then(resp => {
+      this.historicalValue = resp
+      console.log(this.historicalValue)
+    })
   }
 
+  async getItem(id) {
+    return await this.portfolioService.getPortfolioHistoricalCost(id).toPromise();
+  }
 
 
   openDialog() {
@@ -60,6 +72,14 @@ export class WatchlistComponent implements OnInit {
     });
   }
 
+  getHistorical(id) {
+    return this.portfolioService.getPortfolioHistoricalCost(id).toPromise()
+
+
+  }
+
+
+
   getPortfolio(id) {
     this.portfolioService.getPortfolio(id).subscribe(portfolio => {
       this.portfolio = portfolio;
@@ -73,7 +93,7 @@ export class WatchlistComponent implements OnInit {
 
 
   filterTable(filter) {
-    this.portfolioService.getPortfolioSymbsByBroker(this.id, filter).subscribe(resp => this.portfolioSymbs = resp)
+    this.portfolioService.getPortfolioSymbsByBrokerAndType(this.id, filter, '').subscribe(resp => this.portfolioSymbs = resp)
     console.log(this.portfolioSymbs.length)
   }
 

@@ -1,25 +1,51 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
+import { PortfolioService } from 'src/app/services/portfolio.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-test2',
   templateUrl: './test2.component.html',
   styleUrls: ['./test2.component.css']
 })
-export class Test2Component {
-  name = 'Angular   6';
+export class Test2Component implements OnInit {
+
+
   canvas: any;
   ctx: any;
   @ViewChild('mychart') mychart;
   @ViewChild('data') data;
   rowDataIR: any;
   rowData: any;
-  constructor(private http: HttpClient) { }
 
-  ngAfterViewInit() {
+  historicalData: any;
+
+  constructor(private http: HttpClient, private portfolioService: PortfolioService) {
+
+
+
+  }
+
+
+  ngOnInit(): void {
+    this.getHistorical()
+
+
+    setTimeout(() => { this.getHistorical() }, 1000);
+    setTimeout(() => { this.getGraph() }, 2000);
+  }
+
+  getGraph() {
+
+
+
     this.canvas = this.mychart.nativeElement;
     this.ctx = this.canvas.getContext('2d');
+
+
+
+    console.log(this.historicalData)
 
     let myChart = new Chart(this.ctx, {
       type: 'line',
@@ -29,68 +55,29 @@ export class Test2Component {
           label: 'Höhenlinie',
           backgroundColor: "rgba(255, 99, 132,0.4)",
           borderColor: "rgb(255, 99, 132)",
-          fill: true,
+          fill: false,
           data: [
-            { x: 1, y: 2 },
-            { x: 2500, y: 2.5 },
-            { x: 3000, y: 5 },
-            { x: 3400, y: 2.75 },
-            { x: 3600, y: 4.75 },
-            { x: 5200, y: 6 },
-            { x: 6000, y: 9 },
-            { x: 7100, y: 6 },
-          ],
-        }, {
-          label: 'Höhenlinie',
-          backgroundColor: "aquamarine",
-          borderColor: "aquamarine",
-          fill: true,
-          data: [
-            { x: 1, y: 2 },
-            { x: 2500, y: 21.5 },
-            { x: 3000, y: 5 },
-            { x: 3400, y: 21.75 },
-            { x: 3600, y: 4.75 },
-            { x: 5200, y: 61 },
-            { x: 6000, y: 9 },
-            { x: 7100, y: 6 },
+            this.historicalData
           ],
         }]
-      },
-      options: {
-        legend: { display: false },
-        tooltips: {
-          position: 'average', // 'nearest',
-          mode: 'index',
-          intersect: false,
-        },
-        responsive: true,
-        title: {
-          display: true,
-          text: 'Höhenlinie'
-        },
-        scales: {
-          xAxes: [{
-            type: 'linear',
-            position: 'bottom',
-
-            scaleLabel: {
-              labelString: 'Länge',
-              display: true,
-            }
-          }],
-          yAxes: [{
-            type: 'linear',
-
-            scaleLabel: {
-              labelString: 'Höhe',
-              display: true
-            }
-          }]
-        }
       }
+
     });
   }
+
+
+
+  getHistorical() {
+
+    this.portfolioService.getPortfolioHistoricalCost(4).subscribe((resp: any) => {
+      this.historicalData = resp.map(data => { return data.y })
+    }
+    )
+
+
+  }
+
+
 
 
   getY10M03(url: string) {

@@ -67,9 +67,9 @@
 
 
     <ng-container matColumnDef="representation">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="percentInPortfolio"> Represent </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="lastPercentInPortfolio"> Represent </th>
       <td class="percentage" mat-cell *matCellDef="let s">
-        {{s.cost/totalCost | percent:'1.2'}}
+        {{s.lastPercentInPortfolio| percent:'1.2'}}
         <mat-progress-bar color="warn" [value]="s.percentInPortfolio * 100"></mat-progress-bar>
       </td>
       <td mat-footer-cell *matFooterCellDef> </td>

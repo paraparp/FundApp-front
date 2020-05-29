@@ -1,7 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-
+import { Component, Input } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { SymbolLot } from 'src/app/models/symbol-lot.model';
 import { Color } from 'ng2-charts';
 
 
@@ -30,12 +28,12 @@ export class ChartComponent {
     { backgroundColor: 'grey' },
   ]
 
-
   ngOnChanges() {
 
     this.dataCost = this.portfolioSymbs.map(lot => lot.cost)
     this.dataVariation = this.portfolioSymbs.map(lot => lot.variation)
     this.barChartLabels = this.portfolioSymbs.map(lot => lot.symbol.name)
+
 
     this.barChartData = [
       {

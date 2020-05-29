@@ -11,6 +11,7 @@ import { AuthGuardService } from '../services/auth-guard.service';
 import { PortfoliosComponent } from './portfolios/portfolios.component';
 import { TestComponent } from './test/test.component';
 import { Test2Component } from './test2/test2.component';
+import { Test3Component } from './test3/test3.component';
 
 
 const pagesRoutes: Routes = [
@@ -29,6 +30,7 @@ const pagesRoutes: Routes = [
       { path: 'transactions/:id', component: TransactionsComponent, data: { label: 'Transactions' } },
       { path: 'test', component: TestComponent, data: { label: 'Test' } },
       { path: 'test2', component: Test2Component, data: { label: 'Test2' } },
+      { path: 'test3', component: Test3Component, data: { label: 'Test3' } },
       { path: '', redirectTo: '/login', pathMatch: 'full' }
 
     ]

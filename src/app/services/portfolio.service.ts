@@ -23,6 +23,22 @@ export class PortfolioService {
     return this.http.get<Portfolio>(url)
   }
 
+  getPortfolioHistoricalCost(id: number) {
+    let url = URL_SERVICIOS + '/portfolios/' + id + '/lots/cost';
+
+    return this.http.get(url)
+  }
+
+  getTypes(idPortfolio: number) {
+    let url = URL_SERVICIOS + '/portfolios/' + idPortfolio + "/types";
+    return this.http.get<Portfolio>(url)
+  }
+
+  getBrokers(idPortfolio: number) {
+
+    let url = URL_SERVICIOS + '/portfolios/' + idPortfolio + "/brokers";
+    return this.http.get<Portfolio>(url)
+  }
 
   getPortfolioByUser(idUser: number) {
     let url = URL_SERVICIOS + '/portfolios/user/' + idUser;
@@ -34,8 +50,10 @@ export class PortfolioService {
 
     return this.http.get<SymbolLot[]>(url)
   }
-  getPortfolioSymbsByBroker(id: number, broker: string) {
-    let url = URL_SERVICIOS + '/portfolios/watchlist/' + id + "/" + broker;
+  getPortfolioSymbsByBrokerAndType(id: number, broker: string, type: string) {
+    let url = URL_SERVICIOS + '/portfolios/watchlist/' + id + "?broker=" + broker + "&/type=" + type;
+
+    console.log(url)
 
     return this.http.get<SymbolLot[]>(url)
   }
