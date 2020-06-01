@@ -39,6 +39,10 @@ import { DialogTransactionComponent } from '../components/dialogs/dialog-transac
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { Test3Component } from './test3/test3.component';
 import { HistoricalChartComponent } from '../components/historical-chart/historical-chart.component';
+import { ApexchartsModule } from '../shared/apexcharts/apexcharts.module';
+import { ApexchartComponent } from '../components/apexchart/apexchart.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+
 
 
 @NgModule({
@@ -64,6 +68,7 @@ import { HistoricalChartComponent } from '../components/historical-chart/histori
     TestComponent,
     Test2Component,
     Test3Component,
+    ApexchartComponent
 
 
   ],
@@ -76,7 +81,8 @@ import { HistoricalChartComponent } from '../components/historical-chart/histori
     PrimegnModule,
     TableModule,
     ChartsModule,
-    NgxMatSelectSearchModule
+    ApexchartsModule,
+    NgApexchartsModule
   ],
   exports: [
 

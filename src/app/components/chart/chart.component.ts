@@ -19,14 +19,11 @@ export class ChartComponent {
   public barChartOptions: ChartOptions = {
     responsive: true
   };
-  public barChartType: ChartType = 'bar';
+  public barChartType: ChartType = 'horizontalBar';
   public barChartLegend = true;
   public barChartData: ChartDataSets[]
   public barChartLabels: string[];
-  public barChartColors: Color[] = [
-    { backgroundColor: 'aquamarine' },
-    { backgroundColor: 'grey' },
-  ]
+  public barChartColors: Color[];
 
   ngOnChanges() {
 
@@ -52,14 +49,15 @@ export class ChartComponent {
 
     this.barChartColors = [
       {
-        borderColor: '#8c8c8c',
-        borderWidth: 2,
+        // borderColor: '#8c8c8c',
+        borderWidth: 1,
         backgroundColor: '#a6a6a6',
         hoverBorderColor: "#666666",
+
       },
       {
-        borderColor: '#6feeb7',
-        borderWidth: 2,
+        // borderColor: '#6feeb7',
+        borderWidth: 1,
         backgroundColor: 'aquamarine',
         hoverBorderColor: "#7fccb6",
       },

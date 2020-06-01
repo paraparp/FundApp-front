@@ -34,6 +34,7 @@ import { GlobalErrorHandler } from './shared/errors/global-error-handler.service
 
 
 
+
 // registrar los locales con el nombre que quieras utilizar a la hora de proveer
 registerLocaleData(localePy, 'es');
 

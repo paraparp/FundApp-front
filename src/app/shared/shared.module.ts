@@ -9,6 +9,7 @@ import { PrimegnModule } from './primegn/primegn.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FooterComponent } from './footer/footer.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ApexchartsModule } from './apexcharts/apexcharts.module';
 
 @NgModule({
 
@@ -18,6 +19,7 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
     FlexLayoutModule,
     MaterialModule,
     PrimegnModule,
+    ApexchartsModule
 
 
   ],

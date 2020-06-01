@@ -10,72 +10,71 @@ import { Color } from 'ng2-charts';
 export class HistoricalChartComponent implements OnInit {
 
   @Input() public historicalValue: any;
+  percentGain: any;
   constructor() { }
 
   dataVariation;
   dataCost;
+  dataCostBond;
   cost;
   show: boolean = false;;
 
   public barChartOptions: ChartOptions = {
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [{
+        stacked: true,
+      }]
+    },
+    tooltips: {
+      mode: 'x'
+    }
   };
   public barChartType: ChartType = 'line';
   public barChartLegend = true;
   public barChartData: ChartDataSets[]
   public barChartLabels: string[];
-  public barChartColors: Color[] = [
-    { backgroundColor: 'aquamarine' },
-    { backgroundColor: 'grey' },
-  ]
+  public barChartColors: Color[];
 
-  showbt() {
-    this.show = true;
-    this.dataCost = this.historicalValue.map(data => data.totalCost)
-    this.dataVariation = this.historicalValue.map(data => data.totalGain)
-    this.barChartLabels = this.historicalValue.map(data => data.date)
-  }
+
   ngOnChanges() {
 
     if (this.historicalValue != null && this.historicalValue.length > 0) {
-      this.dataCost = this.historicalValue.map(data => data.totalCost)
-      this.dataVariation = this.historicalValue.map(data => data.totalGain)
-      this.barChartLabels = this.historicalValue.map(data => data.date)
+      this.dataCost = this.historicalValue.map(data => Math.floor(data.totalCost - data.bondPercent))
+      this.dataCostBond = this.historicalValue.map(data => Math.floor(data.bondPercent))
+      this.dataVariation = this.historicalValue.map(data => Math.floor(data.totalGain - data.totalCost))
+      this.percentGain = this.historicalValue.map(data =>
+        ((data.totalGain - data.totalCost) / data.totalCost) * 100)
+
 
       this.show = true;
+
+      this.barChartData = [
+        {
+          data: this.dataCost, label: 'Equity', stack: 'a',
+          borderColor: '#333333',
+          backgroundColor: '#555555',
+          pointBackgroundColor: "#333333"
+        },
+        {
+          data: this.dataCostBond, label: 'Bond', stack: 'a',
+          borderColor: '#8c8c8c',
+          backgroundColor: '#a6a6a6',
+          pointBackgroundColor: '#8c8c8c'
+        },
+        {
+          data: this.dataVariation, label: 'Gain', stack: 'a',
+          borderColor: '#7fccb6',
+          backgroundColor: 'aquamarine',
+          pointBackgroundColor: '#7fccb6'
+        },
+        {
+          data: this.percentGain, label: 'Percent',
+
+        },
+      ];
+      this.barChartLabels = this.historicalValue.map(data => data.date);
     }
-
-    this.barChartData = [
-
-      {
-        data: this.dataVariation, label: 'Variation', stack: 'a',
-        // borderColor: '#41aaa8',
-        // borderWidth: 2,
-        // backgroundColor: 'aquamarine'
-      },
-      {
-        data: this.dataCost, label: 'Cost', stack: 'a',
-        // borderColor: '#393e46',
-        // borderWidth: 2,
-        // backgroundColor: 'grey'
-      },
-    ];
-
-    this.barChartColors = [
-
-      {
-        borderColor: '#6feeb7',
-        borderWidth: 2,
-        backgroundColor: 'aquamarine',
-        hoverBorderColor: "#7fccb6",
-      },
-      {
-        borderColor: '#8c8c8c',
-        borderWidth: 2,
-        backgroundColor: '#a6a6a6',
-        hoverBorderColor: "#666666",
-      },
-    ]
 
   }
 
