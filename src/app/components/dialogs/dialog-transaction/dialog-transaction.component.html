@@ -10,7 +10,7 @@
         <mat-select formControlName="symbol" placeholder="Symbol">
           <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
           <mat-option>
-            <ngx-mat-select-search [formControl]="symbolFilteringCtrl" [searching]="searching" placeholderLabel="Find symbol..." noEntriesFoundLabel="'no matching symbol found'"></ngx-mat-select-search>
+            <ngx-mat-select-search ngDefaultControl [formControl]="symbolFilteringCtrl" [searching]="searching" placeholderLabel="Find symbol..." noEntriesFoundLabel="'no matching symbol found'"></ngx-mat-select-search>
           </mat-option>
           <mat-option *ngFor="let symbol of filteredSymbols | async" [value]="symbol">
             {{symbol.name}}

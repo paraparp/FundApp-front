@@ -68,7 +68,10 @@ export class PortfoliosComponent implements OnInit {
       });
     }
   }
+  xrayUrl(idPortfolio: string) {
 
+    this.portfolioService.getPortfolioXrayMorningStar(idPortfolio).subscribe(url => window.open(url, '_blank'))
+  }
 
   delete(portfolio: Portfolio) {
 

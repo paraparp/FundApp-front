@@ -13,5 +13,5 @@
 </mat-toolbar>
 
 <div class="group-centered p-5">
-  <app-table-portfolios [portfolios]="portfolios" (delete)="delete($event)" (dialog)="openDialog($event)"> </app-table-portfolios>
+  <app-table-portfolios [portfolios]="portfolios" (delete)="delete($event)" (dialog)="openDialog($event)" (generateXray)="xrayUrl($event)"> </app-table-portfolios>
 </div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICIOS } from '../config/config';
 import { Portfolio } from '../models/portfolio.model';
 
@@ -8,6 +8,8 @@ import { catchError, map } from 'rxjs/operators';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SymbolLot } from '../models/symbol-lot.model';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,6 @@ import { SymbolLot } from '../models/symbol-lot.model';
 export class PortfolioService {
 
   constructor(private router: Router, private http: HttpClient, private snackBar: MatSnackBar) { }
-
 
   getPortfolio(id: number) {
     let url = URL_SERVICIOS + '/portfolios/' + id;
@@ -28,7 +29,10 @@ export class PortfolioService {
 
     return this.http.get(url)
   }
-
+  getPortfolioXrayMorningStar(id: string): Observable<string> {
+    let url = URL_SERVICIOS + '/portfolios/' + id + '/xray';
+    return this.http.get(url, { responseType: 'text' })
+  }
   getTypes(idPortfolio: number) {
     let url = URL_SERVICIOS + '/portfolios/' + idPortfolio + "/types";
     return this.http.get<Portfolio>(url)

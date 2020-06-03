@@ -25,15 +25,34 @@
       </div>
 
       <mat-tab label="Charts">
-        <div class="container p-2">
-          <app-chart [portfolioSymbs]="portfolioSymbs"></app-chart>
+
+        <div class="container p-4">
+          <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+              <mat-expansion-panel-header>Symbol Chart</mat-expansion-panel-header>
+              <div class="container p-2">
+                <app-chart [portfolioSymbs]="portfolioSymbs"></app-chart>
+              </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>Historial Portfolio Evolution</mat-expansion-panel-header>
+              <div class="container p-2">
+                <app-historical-chart [historicalValue]="historicalValue"></app-historical-chart>
+              </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>Historial Portfolio Evolution Apex</mat-expansion-panel-header>
+              <div class="container p-2">
+                <app-apexchart [historicalValue]="historicalValue">yeah</app-apexchart>
+              </div>
+            </mat-expansion-panel>
+
+          </mat-accordion>
         </div>
-        <div class="container p-2">
-          <app-historical-chart [historicalValue]="historicalValue"></app-historical-chart>
-        </div>
-        <div class="container p-2">
-          <app-apexchart [historicalValue]="historicalValue">yeah</app-apexchart>
-        </div>
+
+
 
       </mat-tab>
 

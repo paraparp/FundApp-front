@@ -21,6 +21,8 @@ export class TablePortfoliosComponent {
   delete = new EventEmitter();
   @Output()
   dialog = new EventEmitter();
+  @Output()
+  generateXray = new EventEmitter();
 
   displayedColumns = ['name', 'cost', 'value', 'variation', 'list', 'edit'];
 
@@ -32,6 +34,9 @@ export class TablePortfoliosComponent {
     this.dataSource.paginator = this.paginator
   }
 
+  generatePortfolioXrayUrl(portfolio: Portfolio) {
+    this.generateXray.emit(portfolio.id);
+  }
 
   onDelete(portfolio: Portfolio) {
     this.delete.emit(portfolio);

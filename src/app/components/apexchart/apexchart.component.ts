@@ -73,7 +73,8 @@ export class ApexchartComponent implements OnDestroy {
     this.chartOptions = {
       chart: {
         type: "area",
-        stacked: true
+        stacked: true,
+        height: 'auto'
       },
       series: [
         {
@@ -89,6 +90,9 @@ export class ApexchartComponent implements OnDestroy {
           data: this.dataVariation
         }
       ],
+      // dataLabels: {
+      //   enabled: false
+      // },
       // xaxis: {
       //   type: "datetime",
       //   categories: this.barChartLabels

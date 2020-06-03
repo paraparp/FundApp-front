@@ -24,10 +24,6 @@
       {{portfolio.variation | currency:'EUR':'symbol-narrow'}}
       <div class="subline"> {{portfolio.variationPercent | percent:'1.2'}}</div>
       <mat-progress-bar color="green" [value]=" portfolio.variationPercent * 100"></mat-progress-bar>
-
-
-
-
     </td>
   </ng-container>
 
@@ -36,6 +32,9 @@
     <td mat-cell *matCellDef="let portfolio">
       <button [routerLink]="['/watchlist/', portfolio.id]" routerLinkActive="router-link-active no-border" mat-icon-button>
         <mat-icon>assessment</mat-icon>
+      </button>
+      <button mat-icon-button (click)="generatePortfolioXrayUrl(portfolio)">
+        XRay
       </button>
     </td>
   </ng-container>

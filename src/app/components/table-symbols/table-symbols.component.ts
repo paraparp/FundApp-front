@@ -24,6 +24,9 @@ export class TableSymbolsComponent {
     this.dataSource = new MatTableDataSource(this.symbols)
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator
+
+
+
   }
 
   applyFilter(event: Event) {
