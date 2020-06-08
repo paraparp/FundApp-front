@@ -18,7 +18,7 @@ export class SymbolsComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
     private symbolService: SymbolsService,
-    private msService: MorningstarService
+
   ) { }
 
   lots: Lot[]
@@ -26,8 +26,8 @@ export class SymbolsComponent implements OnInit {
 
   ngOnInit() {
     this.getSymbols();
-    this.msService.getSymbs2('IE00B03HCZ61').subscribe((resp: any) => console.log(resp.items[0].fields[38]))
   }
+
 
   getSymbols() {
     this.symbolService.getSymbs().subscribe(

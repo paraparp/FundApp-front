@@ -24,11 +24,13 @@ export class HistoricalChartComponent implements OnInit {
     scales: {
       yAxes: [{
         stacked: true,
-      }]
+      },]
     },
     tooltips: {
-      mode: 'x'
-    }
+      mode: 'index',
+      intersect: false
+    },
+
   };
   public barChartType: ChartType = 'line';
   public barChartLegend = true;
@@ -51,27 +53,34 @@ export class HistoricalChartComponent implements OnInit {
 
       this.barChartData = [
         {
+          data: this.dataVariation, label: 'Gain',
+          borderColor: '#7fccb6',
+          backgroundColor: 'aquamarine',
+          pointBackgroundColor: '#7fccb6',
+          lineTension: 0, fill: true, pointRadius: 1, type: 'line'
+        },
+        {
           data: this.dataCost, label: 'Equity', stack: 'a',
           borderColor: '#333333',
           backgroundColor: '#555555',
-          pointBackgroundColor: "#333333"
+          pointBackgroundColor: "#333333",
+          lineTension: 0,
+          fill: true,
+          pointRadius: 1,
+
         },
         {
           data: this.dataCostBond, label: 'Bond', stack: 'a',
           borderColor: '#8c8c8c',
           backgroundColor: '#a6a6a6',
-          pointBackgroundColor: '#8c8c8c'
+          pointBackgroundColor: '#8c8c8c',
+          lineTension: 0, fill: true, pointRadius: 1,
         },
-        {
-          data: this.dataVariation, label: 'Gain', stack: 'a',
-          borderColor: '#7fccb6',
-          backgroundColor: 'aquamarine',
-          pointBackgroundColor: '#7fccb6'
-        },
-        {
-          data: this.percentGain, label: 'Percent',
 
-        },
+        // {
+        //   data: this.percentGain, label: 'Percent',
+        //
+        // },
       ];
       this.barChartLabels = this.historicalValue.map(data => data.date);
     }

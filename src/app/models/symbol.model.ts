@@ -12,4 +12,8 @@ export class Symb {
   type: string
   dailyChange: number;
   dailyChangePercent: number;
+  oneYear: number;
+  fiveYears: number;
+  charges: number;
+  ytd: number;
 }

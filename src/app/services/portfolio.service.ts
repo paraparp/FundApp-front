@@ -8,7 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SymbolLot } from '../models/symbol-lot.model';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 
 @Injectable({
@@ -31,7 +31,14 @@ export class PortfolioService {
   }
   getPortfolioXrayMorningStar(id: string): Observable<string> {
     let url = URL_SERVICIOS + '/portfolios/' + id + '/xray';
-    return this.http.get(url, { responseType: 'text' })
+    return this.http.get(url, { responseType: 'text' }).pipe(
+      catchError(e => {
+        if (e.status != 500 && e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+
+        return throwError("Error generating url");
+      }));
   }
   getTypes(idPortfolio: number) {
     let url = URL_SERVICIOS + '/portfolios/' + idPortfolio + "/types";

@@ -3,6 +3,7 @@ import { Symb } from 'src/app/models/symbol.model';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MorningstarService } from 'src/app/services/morningstar.service';
 
 @Component({
   selector: 'app-table-symbols',
@@ -15,18 +16,33 @@ export class TableSymbolsComponent {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  displayedColumns = ['name', 'category', 'type', 'location', 'yearAgo'];
+  displayedColumns = ['name', 'charges', 'category', 'type', 'location', 'ytd', 'yearAgo', 'fiveYears'];
   dataSource: MatTableDataSource<Symb>;
 
-  constructor() { }
+  constructor(private msService: MorningstarService
+  ) { }
 
   ngOnChanges() {
-    this.dataSource = new MatTableDataSource(this.symbols)
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator
+
+    if (this.symbols !== undefined) {
+
+      this.symbols.forEach(symb => this.msService.getSymbolInfoFromBack(symb.isin).subscribe((resp: any) => {
+        symb.oneYear = resp[0].ReturnM12 / 100
+        symb.ytd = resp[0].ReturnM0 / 100
+        symb.fiveYears = resp[0].ReturnM60 / 100
+        symb.charges = resp[0].OngoingCharge / 100
+
+      }))
 
 
 
+      console.log(this.symbols)
+      this.dataSource = new MatTableDataSource(this.symbols)
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator
+
+
+    }
   }
 
   applyFilter(event: Event) {
@@ -37,20 +53,19 @@ export class TableSymbolsComponent {
     }
   }
 
+  get1Year(isin: string) {
+    return
+  }
+
   styleObject(type): Object {
-
-
     switch (type) {
       case "Bond":
         return { 'background-color': 'grey' }
-
       case "Real State":
         return { 'background-color': 'orange' }
-
       default:
         return { 'background-color': 'black' }
     }
-
   }
 
 }

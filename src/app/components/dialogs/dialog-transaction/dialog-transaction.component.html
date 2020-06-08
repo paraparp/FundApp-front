@@ -6,9 +6,25 @@
   <div class="row">
     <div class="col">
 
+
       <mat-form-field *ngIf="!lot.symbol">
-        <mat-select formControlName="symbol" placeholder="Symbol">
-          <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Search symbols</mat-label>
+          <input [formControl]="symbolFilteringCtrl" matInput value="Sushi">
+        </mat-form-field>
+
+        <mat-select formControlName="symbol" placeholder="Pick a symbol">
+
+          <mat-option *ngFor="let symbol of filteredSymbols | async" [value]="symbol">
+            {{symbol.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field *ngIf="!lot.symbol">
+        <mat-select formControlName="symbol" placeholder="Symbol" #singleSelect>
           <mat-option>
             <ngx-mat-select-search ngDefaultControl [formControl]="symbolFilteringCtrl" [searching]="searching" placeholderLabel="Find symbol..." noEntriesFoundLabel="'no matching symbol found'"></ngx-mat-select-search>
           </mat-option>
@@ -17,16 +33,6 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-
-      <!-- <mat-form-field>
-        <input class="yourClass" placeholder="search " (keyup)="onKey($event.target.value)">
-        <mat-select *ngIf="lot.id" placeholder="Symbol" [(value)]="lot.symbol.id">
-
-          <mat-option style="color: black" *ngFor="let symbol of symbols" [value]="symbol.id" required>
-            {{ symbol.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field> -->
 
     </div>
   </div>

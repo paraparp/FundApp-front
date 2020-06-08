@@ -27,7 +27,13 @@ export class MorningstarService {
     return this.http.get(url);
 
   }
+  getSymbolInfoFromBack(isin: string) {
+    let url = `http://localhost:8080/fundapp/symbols/msinfo/${isin}`
+    console.log(url)
+    let num;
+    return this.http.get(url)
 
+  }
   getHistorical(msCode) {
     let url = `http://tools.morningstar.es/api/rest.svc/timeseries_price/2nhcdckzon?startdate=2019-01-01&id=${msCode}&frequency=weekly&outputType=JSON&enddate=2999-12-30`
     console.log(url)

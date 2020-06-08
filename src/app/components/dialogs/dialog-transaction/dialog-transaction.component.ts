@@ -1,11 +1,12 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Lot } from 'src/app/models/lot.model';
 import { SymbolsService } from 'src/app/services/symbols.service';
 import { Symb } from 'src/app/models/symbol.model';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { of, ReplaySubject, Subject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
 import { map, takeUntil, filter, tap, } from 'rxjs/operators';
+import { MatSelect } from '@angular/material/select';
 
 
 @Component({
@@ -22,9 +23,10 @@ export class DialogTransactionComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public lot: Lot
   ) { }
 
+  @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 
-
-  public symbolFilteringCtrl: FormControl = new FormControl();
+  public symbolFilteringCtrl2: FormControl = new FormControl('');
+  public symbolFilteringCtrl: FormControl = new FormControl('');
   public searching: boolean = false;
   public filteredSymbols: ReplaySubject<Symb[]> = new ReplaySubject<Symb[]>(1);
   protected _onDestroy = new Subject<void>();
@@ -42,7 +44,10 @@ export class DialogTransactionComponent implements OnInit {
   }
 
   getSymbols() {
-    return this.symbolService.getSymbs().subscribe(resp => this.symbols = resp)
+    return this.symbolService.getSymbs().subscribe(resp => {
+      this.symbols = resp
+      this.filteredSymbols.next(resp);
+    })
   }
 
   filter() {
@@ -55,7 +60,12 @@ export class DialogTransactionComponent implements OnInit {
           if (!this.symbols) {
             return [];
           }
-          return this.symbols.filter(symbol => symbol.name.toLowerCase().indexOf(search) > -1);
+          return this.symbols.filter(symbol =>
+            (
+              // symbol.isin.toLowerCase().indexOf(search.toLowerCase()) ||
+              symbol.name.toLowerCase().indexOf(search.toLowerCase())
+            )
+            > -1, );
         })
       )
       .subscribe(filteredSymbols => {

@@ -68,7 +68,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     TestComponent,
     Test2Component,
     Test3Component,
-    ApexchartComponent
+    ApexchartComponent,
 
 
   ],
@@ -82,7 +82,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     TableModule,
     ChartsModule,
     ApexchartsModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    NgxMatSelectSearchModule
   ],
   exports: [
 
