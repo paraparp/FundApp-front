@@ -29,15 +29,13 @@ export class TableSymbolsPortfolioComponent {
   displayedColumns = ['name', 'representation', 'volume', 'price', 'lastPrice', 'daily', 'cost', 'value', 'variation'];
   dataSource: MatTableDataSource<SymbolLot>;
   types;
-
-  option
-  brokers: Portfolio;
+  option;
+  brokers;
+  filterT = new TableFilter();
 
   constructor(private cdref: ChangeDetectorRef, private portfolioService: PortfolioService) { }
 
-
   ngAfterViewInit(): void {
-
     //Sort
     this.sort.sort(<MatSortable>{ id: 'percentInPortfolio', start: 'desc' });
     this.dataSource.sort = this.sort;
@@ -50,17 +48,21 @@ export class TableSymbolsPortfolioComponent {
       const dataStr = data.symbol.name.toLowerCase() + data.symbol.category.toLowerCase() + data.symbol.lastDate.toLowerCase();
       return dataStr.indexOf(filter) != -1;
     }
-
     //you have to tell angular that you updated the content after ngAfterContentChecked
     this.cdref.detectChanges();
-
-
-
   }
 
-  onFilterTable(filter: String) {
-    console.log(filter)
-    this.filterTable.emit(filter);
+  onFilterTable(option: string, value: string) {
+
+    console.log('f', value)
+    if (option === 'broker')
+      this.filterT.broker = value
+
+    if (option === 'type')
+      this.filterT.type = value
+
+    this.filterTable.emit(this.filterT);
+
   }
 
 
@@ -69,12 +71,8 @@ export class TableSymbolsPortfolioComponent {
     this.totalCost = this.getTotalCost();
     this.totalValue = this.getTotalValue()
 
-
-
     this.getTypes(this.portfolio.id);
-
     this.getBrokers(this.portfolio.id);
-
   }
 
   getPropertyByPath(obj: Object, pathString: string) {
@@ -91,7 +89,6 @@ export class TableSymbolsPortfolioComponent {
 
 
   applyFilter(filterValue: string) {
-    console.log(filterValue)
     this.dataSource.filter = filterValue.toLowerCase();
 
     //Actualizamos totales
@@ -114,7 +111,6 @@ export class TableSymbolsPortfolioComponent {
     return false
   }
 
-
   getTotalValue() {
     return this.portfolioSymbs.map(lot => lot.value).reduce((acc, value) => acc + value, 0)
   }
@@ -135,4 +131,12 @@ export class TableSymbolsPortfolioComponent {
     return new Date();
   }
 
+}
+
+export class TableFilter {
+
+  contructor(broker: string, type: string) { }
+
+  broker: string = '';
+  type: string = ''
 }

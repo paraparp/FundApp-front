@@ -37,6 +37,13 @@ export class SymbolsService {
     return this.http.get<Symb>(url)
   }
 
+  getPriceByDate(isin: string, date: string) {
+
+    let url = URL_SERVICIOS + '/symbols/' + isin + '/price?date=' + date;
+    console.log(url)
+    return this.http.get<number>(url)
+  }
+
 
   edit(symbol: Symb) {
     let url = URL_SERVICIOS + '/symbols/';

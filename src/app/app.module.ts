@@ -11,7 +11,7 @@ import { PagesModule } from './pages/pages.module';
 // importar locales
 import localePy from '@angular/common/locales/es-PY';
 
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, DatePipe } from '@angular/common';
 
 import { ServiceModule } from './services/service.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -73,7 +73,8 @@ registerLocaleData(localePy, 'es');
     },
 
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
-    { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
+    DatePipe
 
   ],
   bootstrap: [AppComponent]

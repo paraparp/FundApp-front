@@ -12,8 +12,8 @@
 
       <mat-form-field appearance="outline">
         <mat-select>
-          <mat-option (click)="onFilterTable('')" value="null">All</mat-option>
-          <mat-option (click)="onFilterTable(broker)" *ngFor="let broker of brokers" value="broker">{{broker}}</mat-option>
+          <mat-option (click)="onFilterTable('broker','')" value="null">All</mat-option>
+          <mat-option (click)="onFilterTable( 'broker', broker)" *ngFor="let broker of brokers" value="broker">{{broker}}</mat-option>
         </mat-select>
         <mat-label>
           Select broker
@@ -23,8 +23,8 @@
     <div class="col-sm-2">
       <mat-form-field appearance="outline">
         <mat-select>
-          <mat-option>-- None --</mat-option>
-          <mat-option (click)="onFilterTable(type)" *ngFor="let type of types" value="type">{{type}}</mat-option>
+          <mat-option (click)="onFilterTable('type','')" value="null">All</mat-option>
+          <mat-option (click)="onFilterTable('type', type)" *ngFor="let type of types" value="type">{{type}}</mat-option>
         </mat-select>
         <mat-label>
           Select Type

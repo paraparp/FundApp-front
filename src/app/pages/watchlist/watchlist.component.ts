@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LotService } from 'src/app/services/lot.service';
 import { DialogTransactionComponent } from 'src/app/components/dialogs/dialog-transaction/dialog-transaction.component';
 import { TransactionsComponent } from '../transactions/transactions.component';
+import { TableFilter } from 'src/app/components/table-symbols-portfolio/table-symbols-portfolio.component';
 
 @Component({
   selector: 'app-watchlist',
@@ -45,9 +46,6 @@ export class WatchlistComponent implements OnInit {
     this.getPortfolio(this.id);
     this.getPortfolioSymbs(this.id);
 
-
-
-
     this.getHistorical(this.id).then(resp => {
       this.historicalValue = resp
       console.log(this.historicalValue)
@@ -74,11 +72,7 @@ export class WatchlistComponent implements OnInit {
 
   getHistorical(id) {
     return this.portfolioService.getPortfolioHistoricalCost(id).toPromise()
-
-
   }
-
-
 
   getPortfolio(id) {
     this.portfolioService.getPortfolio(id).subscribe(portfolio => {
@@ -91,11 +85,11 @@ export class WatchlistComponent implements OnInit {
     this.portfolioService.getPortfolioSymbs(id).subscribe(resp => this.portfolioSymbs = resp)
   }
 
-
-  filterTable(filter) {
-    this.portfolioService.getPortfolioSymbsByBrokerAndType(this.id, filter, '').subscribe(resp => this.portfolioSymbs = resp)
-    console.log(this.portfolioSymbs.length)
+  filterTable(filter: TableFilter) {
+    this.portfolioService.getPortfolioSymbsByBrokerAndType(this.id, filter.broker, filter.type).subscribe(resp => this.portfolioSymbs = resp)
   }
+
+
 
   currentlyOpenedItemIndex = -1;
 

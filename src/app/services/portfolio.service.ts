@@ -62,7 +62,7 @@ export class PortfolioService {
     return this.http.get<SymbolLot[]>(url)
   }
   getPortfolioSymbsByBrokerAndType(id: number, broker: string, type: string) {
-    let url = URL_SERVICIOS + '/portfolios/watchlist/' + id + "?broker=" + broker + "&/type=" + type;
+    let url = URL_SERVICIOS + '/portfolios/watchlist/' + id + "/filters?broker=" + broker + "&type=" + type;
 
     console.log(url)
 

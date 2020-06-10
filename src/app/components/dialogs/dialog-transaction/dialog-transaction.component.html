@@ -7,7 +7,7 @@
     <div class="col">
 
 
-      <mat-form-field *ngIf="!lot.symbol">
+      <!-- <mat-form-field *ngIf="!lot.symbol">
 
         <mat-form-field class="example-full-width">
           <mat-label>Search symbols</mat-label>
@@ -20,7 +20,7 @@
             {{symbol.name}}
           </mat-option>
         </mat-select>
-      </mat-form-field>
+      </mat-form-field> -->
 
 
       <mat-form-field *ngIf="!lot.symbol">
@@ -54,9 +54,9 @@
   <div class="row">
     <div class="col">
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" [formControl]="date" placeholder="Date">
+        <input matInput #ref [matDatepicker]="picker" [formControl]="date" placeholder="Date" (dateInput)="OnDateChange($event.value)" disabled>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker color="aquamarine"></mat-datepicker>
+        <mat-datepicker #picker color="aquamarine" disabled="false"></mat-datepicker>
       </mat-form-field>
     </div>
 

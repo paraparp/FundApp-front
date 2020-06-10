@@ -8,6 +8,8 @@ import { ReplaySubject, Subject } from 'rxjs';
 import { map, takeUntil, filter, tap, } from 'rxjs/operators';
 import { MatSelect } from '@angular/material/select';
 
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-dialog-transaction',
@@ -20,12 +22,11 @@ export class DialogTransactionComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private symbolService: SymbolsService,
     public dialogRef: MatDialogRef<DialogTransactionComponent>,
+    private datePipe: DatePipe,
     @Inject(MAT_DIALOG_DATA) public lot: Lot
   ) { }
 
-  @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 
-  public symbolFilteringCtrl2: FormControl = new FormControl('');
   public symbolFilteringCtrl: FormControl = new FormControl('');
   public searching: boolean = false;
   public filteredSymbols: ReplaySubject<Symb[]> = new ReplaySubject<Symb[]>(1);
@@ -33,7 +34,7 @@ export class DialogTransactionComponent implements OnInit {
   public symbols: Symb[];
   public tForm: FormGroup;
   public date;
-
+  priceDate;
 
   ngOnInit() {
 
@@ -41,12 +42,43 @@ export class DialogTransactionComponent implements OnInit {
     this.getSymbols();
 
     this.filter();
+
+    // this.tForm.controls['date'].valueChanges.subscribe(change => { this.setPriceOnChange(), console.log("change") })
+    this.tForm.controls['symbol'].valueChanges.subscribe(change => this.setPriceOnChange(null))
+  }
+
+  OnDateChange(value) {
+    this.setPriceOnChange(value)
+  }
+
+  setPriceOnChange(date) {
+    if (this.symbol != null) {
+      this.priceDate = this.getPriceByDate(this.symbol.isin, date);
+      setTimeout(() => {
+        this.tForm.patchValue({
+          price: this.priceDate
+        });
+      }, 1500);
+    }
+  }
+
+  get symbol() {
+    return this.tForm.get('symbol').value;
+  }
+  get dateF() {
+    return;
+  }
+
+  getPriceByDate(isin, date) {
+    let dateT = this.datePipe.transform(new Date(date), "yyyy-MM-dd");
+    this.symbolService.getPriceByDate(isin, dateT).subscribe(resp => this.priceDate = resp)
   }
 
   getSymbols() {
     return this.symbolService.getSymbs().subscribe(resp => {
       this.symbols = resp
       this.filteredSymbols.next(resp);
+
     })
   }
 
@@ -61,16 +93,15 @@ export class DialogTransactionComponent implements OnInit {
             return [];
           }
           return this.symbols.filter(symbol =>
-            (
-              // symbol.isin.toLowerCase().indexOf(search.toLowerCase()) ||
-              symbol.name.toLowerCase().indexOf(search.toLowerCase())
-            )
-            > -1, );
+            ((symbol.name.toLowerCase().indexOf(search.toLowerCase()) > -1)
+              ||
+              symbol.isin.toLowerCase().indexOf(search.toLowerCase()) > -1))
         })
       )
       .subscribe(filteredSymbols => {
         this.searching = false;
         this.filteredSymbols.next(filteredSymbols);
+
       },
         error => {
           this.searching = false;
