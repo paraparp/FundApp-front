@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Lot } from 'src/app/models/lot.model';
 import { LotService } from 'src/app/services/lot.service';
@@ -18,7 +18,6 @@ import { DialogTransactionComponent } from 'src/app/components/dialogs/dialog-tr
 
 })
 export class TransactionsComponent implements OnInit {
-  brokerSymbs: import("c:/Users/rodrigo.paraparpriet/Desktop/Proyectos/GestorFondos/src/app/models/symbol-lot.model").SymbolLot[];
 
   constructor(
     private _dialog: MatDialog,
@@ -27,7 +26,7 @@ export class TransactionsComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) { }
 
-
+  brokerSymbs;
   lot: Lot = new Lot();
   lots: Lot[]
   portfolio: Portfolio;

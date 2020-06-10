@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Lot } from 'src/app/models/lot.model';
 import { SymbolsService } from 'src/app/services/symbols.service';
@@ -78,7 +78,6 @@ export class DialogTransactionComponent implements OnInit {
     return this.symbolService.getSymbs().subscribe(resp => {
       this.symbols = resp
       this.filteredSymbols.next(resp);
-
     })
   }
 
