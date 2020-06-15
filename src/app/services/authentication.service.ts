@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { URL_SERVICIOS_OAUTH } from '../config/config';
 import { User } from '../models/user.model';
 
 
@@ -73,7 +73,7 @@ export class AuthenticationService {
 
   login(user: User): Observable<any> {
 
-    let url = 'http://localhost:8080/oauth/token';
+    let url = URL_SERVICIOS_OAUTH + '/oauth/token';
 
     let credenciales = btoa('gestorfondos' + ':' + '12345')
     let httpHeaders = new HttpHeaders({
