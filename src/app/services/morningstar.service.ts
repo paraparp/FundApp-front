@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { URL_SERVICIOS } from '../config/config';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class MorningstarService {
 
   }
   getSymbolInfoFromBack(isin: string) {
-    let url = `http://localhost:8080/fundapp/symbols/msinfo/${isin}`
+    let url = URL_SERVICIOS + `/symbols/msinfo/${isin}`
     console.log(url)
     let num;
     return this.http.get(url)
@@ -40,10 +41,5 @@ export class MorningstarService {
     return this.http.get(url);
   }
 
-  getHistoricalIsin() {
-    let url = 'http://tools.morningstar.es/api/rest.svc/timeseries_price/2nhcdckzon?id=IE00B03HCZ61&idtype=Isin&outputType=jSON'
 
-    console.log(url)
-    return this.http.get(url);
-  }
 }

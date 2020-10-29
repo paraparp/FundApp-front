@@ -1,9 +1,10 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { Symb } from 'src/app/models/symbol.model';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { MorningstarService } from 'src/app/services/morningstar.service';
+
+import { MorningstarService } from '@service/morningstar.service';
+import { Symb } from '@model/symbol.model';
 
 @Component({
   selector: 'app-table-symbols',

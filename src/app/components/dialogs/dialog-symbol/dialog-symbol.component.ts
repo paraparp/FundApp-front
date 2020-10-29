@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { SymbolsService } from 'src/app/services/symbols.service';
+import { SymbolsService } from '@service/symbols.service';
 
 @Component({
   selector: 'app-dialog-symbol',

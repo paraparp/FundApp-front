@@ -1,16 +1,16 @@
-
 import { Component, OnInit } from '@angular/core';
-
-
-import { User } from 'src/app/models/user.model';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { Portfolio } from 'src/app/models/portfolio.model';
-
 import { MatDialog } from '@angular/material/dialog';
-import { PortfolioService } from 'src/app/services/portfolio.service';
-import Swal from 'sweetalert2';
-import { DialogPortfolioComponent } from 'src/app/components/dialogs/dialog-portfolio/dialog-portfolio.component';
 import { HttpClient } from '@angular/common/http';
+
+import Swal from 'sweetalert2';
+
+import { User } from '@model/user.model';
+import { Portfolio } from '@model/portfolio.model';
+
+import { PortfolioService } from '@service/portfolio.service';
+import { AuthenticationService } from '@service/authentication.service';
+
+import { DialogPortfolioComponent } from '@component/dialogs/dialog-portfolio/dialog-portfolio.component';
 
 
 

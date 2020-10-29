@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, FormGroupDirective, NgForm } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsuarioService } from 'src/app/services/usuario.service';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { User } from 'src/app/models/user.model';
+
+import { UsuarioService } from '@service/usuario.service';
+import { AuthenticationService } from '@service/authentication.service';
+
+import { User } from '@model/user.model';
 
 
 @Component({

@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Lot } from 'src/app/models/lot.model';
 import { MatDialog } from '@angular/material/dialog';
 
-import { SymbolsService } from 'src/app/services/symbols.service';
-import { Symb } from 'src/app/models/symbol.model';
-import { DialogSymbolComponent } from 'src/app/components/dialogs/dialog-symbol/dialog-symbol.component';
-import { MorningstarService } from 'src/app/services/morningstar.service';
-
+import { SymbolsService } from '@service/symbols.service';
+import { Symb } from '@model/symbol.model';
+import { Lot } from '@model/lot.model';
+import { DialogSymbolComponent } from '@component/dialogs/dialog-symbol/dialog-symbol.component';
 
 @Component({
   selector: 'app-symbols',

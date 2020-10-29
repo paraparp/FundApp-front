@@ -1,4 +1,4 @@
-export const URL_SERVICIOS = 'https://fundmanagerbeta.herokuapp.com/fundapp';
-export const URL_SERVICIOS_OAUTH = 'https://fundmanagerbeta.herokuapp.com';
+export const URL_SERVICIOS = 'http://localhost:8080/fundapp';
+export const URL_SERVICIOS_OAUTH = 'http://localhost:8080';
 //   https://fundmanagerbeta.herokuapp.com/
 //    'http://localhost:8080/fundapp'

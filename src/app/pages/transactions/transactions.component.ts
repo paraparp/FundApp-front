@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Lot } from 'src/app/models/lot.model';
-import { LotService } from 'src/app/services/lot.service';
-import { PortfolioService } from 'src/app/services/portfolio.service';
-import { ActivatedRoute } from '@angular/router';
-import { Portfolio } from 'src/app/models/portfolio.model';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+
 import Swal from 'sweetalert2';
-import { DialogTransactionComponent } from 'src/app/components/dialogs/dialog-transaction/dialog-transaction.component';
+
+import { Portfolio } from '@model/portfolio.model';
+import { Lot } from '@model/lot.model';
+
+import { LotService } from '@service/lot.service';
+import { PortfolioService } from '@service/portfolio.service';
+
+import { DialogTransactionComponent } from '@component/dialogs/dialog-transaction/dialog-transaction.component';
 
 
 

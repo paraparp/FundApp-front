@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Symb } from '../models/symbol.model';
+import { Symb } from '@model/symbol.model';
 
 @Injectable({
   providedIn: 'root'

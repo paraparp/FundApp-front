@@ -1,15 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Lot } from 'src/app/models/lot.model';
-import { SymbolsService } from 'src/app/services/symbols.service';
-import { Symb } from 'src/app/models/symbol.model';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { ReplaySubject, Subject } from 'rxjs';
-import { map, takeUntil, filter, tap, } from 'rxjs/operators';
-import { MatSelect } from '@angular/material/select';
-
 import { DatePipe } from '@angular/common';
 
+import { ReplaySubject, Subject } from 'rxjs';
+import { map, takeUntil, filter, tap, } from 'rxjs/operators';
+
+import { Lot } from '@model/lot.model';
+import { Symb } from '@model/symbol.model';
+
+import { SymbolsService } from '@service/symbols.service';
 
 @Component({
   selector: 'app-dialog-transaction',

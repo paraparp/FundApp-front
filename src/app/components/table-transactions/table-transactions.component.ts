@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Lot } from 'src/app/models/lot.model';
-import { LotService } from 'src/app/services/lot.service';
-import { MatSort } from '@angular/material/sort';
+import { Lot } from '@model/lot.model';
+import { LotService } from '@service/lot.service';
+
 
 @Component({
   selector: 'app-table-transactions',
@@ -25,7 +26,7 @@ export class TableEditComponent {
   displayedColumns = ["name", "price", "volume", "cost", "change", "broker", "date", 'edit'];
   dataSource: MatTableDataSource<Lot>;
 
-  constructor(private _dialog: MatDialog, private lotService: LotService) {
+  constructor() {
   }
 
   ngOnChanges(): void {

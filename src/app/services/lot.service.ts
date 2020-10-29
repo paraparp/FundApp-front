@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { URL_SERVICIOS } from '../config/config';
 
+import { map } from 'rxjs/operators';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Lot } from '../models/lot.model';
-import { map } from 'rxjs/operators';
+import { Lot } from '@model/lot.model';
+import { URL_SERVICIOS } from '../config/config';
 
 @Injectable({
   providedIn: 'root'

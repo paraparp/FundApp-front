@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { URL_SERVICIOS } from '../config/config';
-
-
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Symb } from '../models/symbol.model';
+
 import { map } from 'rxjs/operators';
+
+import { Symb } from '@model/symbol.model';
+
+import { URL_SERVICIOS } from '../config/config';
 
 @Injectable({
   providedIn: 'root'

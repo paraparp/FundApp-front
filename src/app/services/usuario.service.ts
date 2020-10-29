@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
-import { URL_SERVICIOS } from '../config/config';
-import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+
+import Swal from 'sweetalert2'
+
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { User } from '../models/user.model';
+
+import { User } from '@model/user.model';
+import { URL_SERVICIOS } from '../config/config';
+
 
 @Injectable({
   providedIn: 'root'

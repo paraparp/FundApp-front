@@ -2,6 +2,13 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths":{
+      "@page/*":["src/app/pages/*"],
+      "@model/*":["src/app/models/*"],
+      "@service/*":["src/app/services/*"],
+      "@component/*":["src/app/components/*"],
+      "@shared/*":["src/app/shared/*"]
+    },
     "downlevelIteration": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

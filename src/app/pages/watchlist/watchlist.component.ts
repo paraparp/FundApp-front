@@ -1,14 +1,18 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { Lot } from 'src/app/models/lot.model';
-import { Portfolio } from 'src/app/models/portfolio.model';
-import { PortfolioService } from 'src/app/services/portfolio.service';
-import { ActivatedRoute } from '@angular/router';
-import { SymbolLot } from 'src/app/models/symbol-lot.model';
 import { MatDialog } from '@angular/material/dialog';
-import { LotService } from 'src/app/services/lot.service';
-import { DialogTransactionComponent } from 'src/app/components/dialogs/dialog-transaction/dialog-transaction.component';
-import { TransactionsComponent } from '../transactions/transactions.component';
-import { TableFilter } from 'src/app/components/table-symbols-portfolio/table-symbols-portfolio.component';
+import { ActivatedRoute } from '@angular/router';
+
+import { Lot } from '@model/lot.model';
+import { Portfolio } from '@model/portfolio.model';
+import { SymbolLot } from '@model/symbol-lot.model';
+
+import { PortfolioService } from '@service/portfolio.service';
+import { LotService } from '@service/lot.service';
+
+import { DialogTransactionComponent } from '@component/dialogs/dialog-transaction/dialog-transaction.component';
+import { TableFilter } from '@component/table-symbols-portfolio/table-symbols-portfolio.component';
+
+import { TransactionsComponent } from '@page/transactions/transactions.component';
 
 @Component({
   selector: 'app-watchlist',
@@ -86,7 +90,9 @@ export class WatchlistComponent implements OnInit {
   }
 
   filterTable(filter: TableFilter) {
+
     this.portfolioService.getPortfolioSymbsByBrokerAndType(this.id, filter.broker, filter.type).subscribe(resp => this.portfolioSymbs = resp)
+
   }
 
 

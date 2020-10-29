@@ -4,7 +4,7 @@ import {
 } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthenticationService } from '@service/authentication.service';
 
 /** Pass untouched request through to the next request handler. */
 @Injectable()

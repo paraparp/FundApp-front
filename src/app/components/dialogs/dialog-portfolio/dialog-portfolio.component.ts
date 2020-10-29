@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Portfolio } from 'src/app/models/portfolio.model';
+import { Portfolio } from '@model/portfolio.model';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 

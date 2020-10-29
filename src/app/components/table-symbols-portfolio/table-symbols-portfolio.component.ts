@@ -1,12 +1,11 @@
-import { Component, OnInit, Input, ViewChild, ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
-
-import { SymbolLot } from 'src/app/models/symbol-lot.model';
+import { Component, Input, ViewChild, ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
 import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { SymbolsService } from 'src/app/services/symbols.service';
-import { PortfolioService } from 'src/app/services/portfolio.service';
-import { Portfolio } from 'src/app/models/portfolio.model';
+
+import { PortfolioService } from '@service/portfolio.service';
+import { Portfolio } from '@model/portfolio.model';
+import { SymbolLot } from '@model/symbol-lot.model';
 
 @Component({
   selector: 'app-table-symbols-portfolio',
@@ -15,8 +14,8 @@ import { Portfolio } from 'src/app/models/portfolio.model';
 })
 export class TableSymbolsPortfolioComponent {
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @Input() public portfolioSymbs: SymbolLot[];
   @Input() public portfolio: Portfolio;
   @Output()
@@ -36,25 +35,20 @@ export class TableSymbolsPortfolioComponent {
   constructor(private cdref: ChangeDetectorRef, private portfolioService: PortfolioService) { }
 
   ngAfterViewInit(): void {
-    //Sort
-    this.sort.sort(<MatSortable>{ id: 'percentInPortfolio', start: 'desc' });
-    this.dataSource.sort = this.sort;
-    this.dataSource.sortingDataAccessor = (data, sortHeaderId: string) => {
-      return this.getPropertyByPath(data, sortHeaderId);
-    };
 
-    //Filter
+
+    this.chargedata()
+
+  }
+
+  filterData() {
     this.dataSource.filterPredicate = (data, filter) => {
       const dataStr = data.symbol.name.toLowerCase() + data.symbol.category.toLowerCase() + data.symbol.lastDate.toLowerCase();
       return dataStr.indexOf(filter) != -1;
     }
-    //you have to tell angular that you updated the content after ngAfterContentChecked
-    this.cdref.detectChanges();
   }
 
   onFilterTable(option: string, value: string) {
-
-    console.log('f', value)
     if (option === 'broker')
       this.filterT.broker = value
 
@@ -62,17 +56,35 @@ export class TableSymbolsPortfolioComponent {
       this.filterT.type = value
 
     this.filterTable.emit(this.filterT);
-
   }
 
 
   ngOnChanges() {
+    this.chargedata()
+  }
+
+  chargedata() {
+
+
     this.dataSource = new MatTableDataSource(this.portfolioSymbs)
     this.totalCost = this.getTotalCost();
     this.totalValue = this.getTotalValue()
 
     this.getTypes(this.portfolio.id);
     this.getBrokers(this.portfolio.id);
+
+    //Sort
+    this.dataSource.sort = this.sort;
+    this.dataSource.sortingDataAccessor = (data, sortHeaderId: string) => {
+      return this.getPropertyByPath(data, sortHeaderId);
+    };
+    if (this.sort != undefined)
+      this.sort.sort(<MatSortable>{ id: 'percentInPortfolio', start: 'desc' });
+
+    //Filter
+    this.filterData();
+    //you have to tell angular that you updated the content after ngAfterContentChecked
+    this.cdref.detectChanges();
   }
 
   getPropertyByPath(obj: Object, pathString: string) {

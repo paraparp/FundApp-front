@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
+
+import { User } from '@model/user.model';
 import { URL_SERVICIOS_OAUTH } from '../config/config';
-import { User } from '../models/user.model';
+
 
 
 @Injectable({
@@ -17,6 +20,7 @@ export class AuthenticationService {
   constructor(public router: Router, public http: HttpClient) { }
 
   public get usuario(): User {
+
 
     if (this._user != null) {
       return this._user;
@@ -39,10 +43,9 @@ export class AuthenticationService {
 
   }
 
-
-
   guardarUser(accessToken: any) {
     let payload = this.obtenerDatosToken(accessToken)
+    console.log("payload " + payload)
     this._user = new User();
     this._user.id = payload.id;
     this._user.username = payload.user_name;
@@ -50,19 +53,15 @@ export class AuthenticationService {
     this._user.lastname = payload.lastname;
     this._user.email = payload.email;
     this._user.roles = payload.authorities;
+
     sessionStorage.setItem('user', JSON.stringify(this._user));
-
-
   }
-
-
 
   guardarToken(accessToken: any) {
     this._token = accessToken;
     sessionStorage.setItem('token', accessToken);
     console.log(this._token)
   }
-
 
   obtenerDatosToken(accessToken: string): any {
     if (accessToken != null) {
@@ -75,7 +74,7 @@ export class AuthenticationService {
 
     let url = URL_SERVICIOS_OAUTH + '/oauth/token';
 
-    let credenciales = btoa('gestorfondos' + ':' + '12345')
+    let credenciales = btoa('fundapp' + ':' + '12345')
     let httpHeaders = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': 'Basic ' + credenciales

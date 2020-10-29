@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core'
-
-//Angular Material Components
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTableModule } from '@angular/cdk/table';
 
+//Angular Material Components
 import { MatCardModule } from '@angular/material/card'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatChipsModule } from '@angular/material/chips'
@@ -80,7 +79,10 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle'
     MatTooltipModule,
     MatTreeModule,
     CdkTableModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
 
   ],
   exports: [
@@ -122,7 +124,10 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle'
     MatTooltipModule,
     MatTreeModule,
     CdkTableModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [MatDatepickerModule]
 })

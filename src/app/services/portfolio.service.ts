@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { URL_SERVICIOS } from '../config/config';
-import { Portfolio } from '../models/portfolio.model';
+import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { catchError, map } from 'rxjs/operators';
-
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SymbolLot } from '../models/symbol-lot.model';
 import { Observable, throwError } from 'rxjs';
+
+import { SymbolLot } from '@model/symbol-lot.model';
+import { Portfolio } from '@model/portfolio.model';
+import { URL_SERVICIOS } from '../config/config';
 
 
 @Injectable({
@@ -58,7 +58,7 @@ export class PortfolioService {
 
   getPortfolioSymbs(id: number) {
     let url = URL_SERVICIOS + '/portfolios/watchlist/' + id;
-
+    console.log(url)
     return this.http.get<SymbolLot[]>(url)
   }
   getPortfolioSymbsByBrokerAndType(id: number, broker: string, type: string) {

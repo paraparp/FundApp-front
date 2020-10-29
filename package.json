@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "prod": "ng build --prod --base-href=\"./\""
+    "prod": "ng build --prod --base-href=\"./\"",
+    "build:prod": "ng build --target production --build-optimizer --vendor-chunk"
   },
   "private": true,
   "dependencies": {

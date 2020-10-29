@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MorningstarService } from 'src/app/services/morningstar.service';
+import { MorningstarService } from '@service/morningstar.service';
 
 @Component({
   selector: 'app-test3',
@@ -14,15 +14,8 @@ export class Test3Component implements OnInit {
   ngOnInit(): void {
 
 
-    this.getSymbol()
   }
 
-  getSymbol() {
 
-    let msCode;
-    // this.msService.getSymbs2().subscribe(resp => msCode = resp.rows[0].SecId)
-
-    this.msService.getHistoricalIsin().subscribe(resp => console.log(resp));
-  }
 
 }

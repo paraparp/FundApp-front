@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import {
   HttpEvent, HttpInterceptor, HttpHandler, HttpRequest
 } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { Observable, throwError } from 'rxjs';
-
 import { catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
+
 import Swal from 'sweetalert2';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+
+import { AuthenticationService } from '@service/authentication.service';
 
 /** Pass untouched request through to the next request handler. */
 @Injectable()
@@ -19,11 +20,8 @@ export class AuthInterceptor implements HttpInterceptor {
     private auth: AuthenticationService
   ) { }
 
-
   intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
-
-
 
     return next.handle(req).pipe(
       catchError(e => {

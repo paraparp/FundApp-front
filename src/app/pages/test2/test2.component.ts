@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
-import { PortfolioService } from 'src/app/services/portfolio.service';
+import { PortfolioService } from '@service/portfolio.service';
 import { map } from 'rxjs/operators';
 
 @Component({

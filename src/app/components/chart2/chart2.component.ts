@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { SymbolLot } from 'src/app/models/symbol-lot.model';
-import { Lot } from 'src/app/models/lot.model';
+import { SymbolLot } from '@model/symbol-lot.model';
+import { Lot } from '@model/lot.model';
 
 
 @Component({
